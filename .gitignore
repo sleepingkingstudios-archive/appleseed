@@ -1,0 +1,17 @@
+# Ignore OS-specific files.
+.DS_Store
+
+# Ignore local configuration files.
+/.rspec
+/.ruby-gemset
+/.ruby-version
+
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+
+# Ignore local reference files.
+/routes.txt

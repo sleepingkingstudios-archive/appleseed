@@ -1,0 +1,37 @@
+// app/asset/stylesheets/application.scss
+
+@import "foundation_and_overrides";
+
+/*******************************
+ ** HEADER AND TOP NAVIGATION **
+ *******************************/
+
+body > header {
+  h1 {
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  nav > ul.small-block-grid-4 > li {
+    padding-bottom: 0;
+  }
+
+  hr {
+    margin-top: 0;
+  }
+}
+
+/*********************
+ ** TEXT DECORATION **
+ *********************/
+
+hr:after {
+  content: ' ';
+  // Display
+  display: block;
+  border-top: 1px solid #666;
+  margin: 0 10px;
+  // Positioning
+  position: relative;
+  top: 2px;
+}

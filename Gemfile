@@ -27,3 +27,14 @@ group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
+
+### Testing ###
+group :test do
+  gem 'rspec-rails',                 '~> 2.14.0'
+  gem 'rspec-sleeping_king_studios', '>= 1.0.0.rc.3'
+  gem 'fuubar',                      '~> 1.2.1'
+  gem 'factory_girl_rails',          '~> 4.2.0'
+  # gem 'database_cleaner',            '~> 1.2.0'
+
+  gem 'pry',                         '~> 0.9.12'
+end # group

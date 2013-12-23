@@ -11,7 +11,7 @@ $header-font-family: Futura, "Trebuchet MS", "Helvetica Neue", "Helvetica", Helv
 
 body > header {
   h1 {
-    margin-bottom: 0;
+    margin-bottom: rem-calc(5);
     text-align: center;
     // Font Styles
     font-family: $header-font-family;
@@ -22,17 +22,21 @@ body > header {
  ** TOP/SIDEBAR NAVIGATION **
  ****************************/
 
-body > header h1 {
-  color: #f36 !important;
+#sidebar nav {
+  ul > li {
+    padding-bottom: 0px;
+
+    text-align: center;
+  }
+
+  & > hr { margin-top: 0px; }
 }
 
-@media #{$small-only} {
-  
-}
+@media #{$large-up} {
+  #sidebar nav {
+    ul > li { text-align: left; }
 
-@media #{$medium-up} {
-  #sidebar nav > ul {
-    @include block-grid(4);
+    & > hr { margin-top: rem-calc(20); }
   }
 }
 

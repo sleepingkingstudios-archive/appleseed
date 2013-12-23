@@ -163,7 +163,7 @@ $medium-up: "#{$screen} and (min-width:#{lower-bound($medium-range)})";
 // $block-grid-default-spacing: rem-calc(20);
 
 // Enables media queries for block-grid classes. Set to false if writing semantic HTML.
-// $block-grid-media-queries: true;
+$block-grid-media-queries: true;
 
 // Breadcrumbs
 

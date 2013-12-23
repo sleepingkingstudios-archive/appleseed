@@ -23,21 +23,13 @@
     .row
       #sidebar.small-12.large-4.columns
         %hr.show-for-medium-up
-        %nav
-          %ul
-            %li
-              = link_to :root do
-                %h4.text-center Home
-            %li
-              = link_to :root do
-                %h4.text-center Articles
-            %li
-              = link_to :root do
-                %h4.text-center Blog
-            %li
-              = link_to :root do
-                %h4.text-center About
-          %hr
+        
+        = render :partial => 'shared/navigation'
+
       .small-12.large-8.columns
         %hr.show-for-medium-up
+
         = yield
+
+      .small-12.columns
+        = render :partial => 'shared/footer'

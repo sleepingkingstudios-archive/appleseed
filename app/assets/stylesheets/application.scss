@@ -1,37 +1,64 @@
 // app/asset/stylesheets/application.scss
 
 @import "foundation_and_overrides";
+@import "foundation/components/visibility";
 
-/*******************************
- ** HEADER AND TOP NAVIGATION **
- *******************************/
+$header-font-family: Futura, "Trebuchet MS", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+
+/**********************
+ ** HEADER AND TITLE **
+ **********************/
 
 body > header {
   h1 {
     margin-bottom: 0;
     text-align: center;
+    // Font Styles
+    font-family: $header-font-family;
   }
+}
 
-  nav > ul.small-block-grid-4 > li {
-    padding-bottom: 0;
-  }
+/****************************
+ ** TOP/SIDEBAR NAVIGATION **
+ ****************************/
 
-  hr {
-    margin-top: 0;
+body > header h1 {
+  color: #f36 !important;
+}
+
+@media #{$small-only} {
+  
+}
+
+@media #{$medium-up} {
+  #sidebar nav > ul {
+    @include block-grid(4);
   }
+}
+
+/**************
+ ** HEADINGS **
+ **************/
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $header-font-family;
 }
 
 /*********************
  ** TEXT DECORATION **
  *********************/
 
-hr:after {
-  content: ' ';
-  // Display
-  display: block;
-  border-top: 1px solid #666;
-  margin: 0 10px;
-  // Positioning
-  position: relative;
-  top: 2px;
+hr {
+  border-top: 2px solid #333;
+
+  &:after {
+    content: ' ';
+    // Display
+    display: block;
+    border-top: 1px solid #666;
+    margin: 0 10px;
+    // Positioning
+    position: relative;
+    top: 2px;
+  }
 }

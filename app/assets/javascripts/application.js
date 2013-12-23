@@ -3,6 +3,4 @@
 //= require foundation
 //= require_tree .
 
-$(document).ready(function(){
-  $(document).foundation();
-}); // end ready
+$(function(){ $(document).foundation(); });

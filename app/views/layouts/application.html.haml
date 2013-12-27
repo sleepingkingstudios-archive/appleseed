@@ -1,6 +1,9 @@
 !!! 5
 %html{ lang: 'en' }
   %head
+    -# @font-face declarations at the top for loading purposes.
+    = stylesheet_link_tag "foundation-icons"
+
     %meta{ :charset => "utf-8" }
 
     -# Set the viewport width to device width for mobile
@@ -11,7 +14,6 @@
     = stylesheet_link_tag "application"
     = yield(:stylesheets)
 
-    = javascript_include_tag "vendor/custom.modernizr"
     = javascript_include_tag "application"
     = yield(:javascripts)
 
@@ -28,6 +30,8 @@
 
       .small-12.large-8.columns
         %hr.show-for-medium-up
+
+        = render :partial => 'shared/notices'
 
         = yield
 

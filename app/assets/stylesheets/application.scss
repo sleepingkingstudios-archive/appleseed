@@ -3,7 +3,7 @@
 @import "foundation_and_overrides";
 @import "foundation/components/visibility";
 
-$header-font-family: Futura, "Trebuchet MS", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$header-font-family: Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic, "Apple Gothic", AppleGothic, "URW Gothic L", "Avant Garde", sans-serif;
 
 /**********************
  ** HEADER AND TITLE **
@@ -65,4 +65,12 @@ hr {
     position: relative;
     top: 2px;
   }
+}
+
+/***********
+ ** FORMS **
+ ***********/
+
+form.new_user {
+  margin-top: rem-calc(20);
 }

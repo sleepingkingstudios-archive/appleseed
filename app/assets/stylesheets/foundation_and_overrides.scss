@@ -2,6 +2,10 @@
 // FOUNDATION SETTINGS
 //
 
+// Disable loading web font from fonts.googleapis.com; major (and pointless!)
+// performance bottleneck on slow connections.
+$include-open-sans: false;
+
 // Uncomment to use rem-calc() in your settings
 // @import "foundation/functions";
 

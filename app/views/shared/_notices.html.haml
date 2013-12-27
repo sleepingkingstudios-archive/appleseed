@@ -1,0 +1,22 @@
+-# app/views/shared/_notices.html.haml
+
+- if current_user
+  %p
+    %i.fi-torso
+    %em You are currently signed in as
+    = succeed '.' do
+      = current_user.email
+    %span.right
+      = link_to destroy_user_session_path, :method => :delete do
+        %i.fi-arrow-right
+        Sign Out
+
+- unless flash[:alert].blank?
+  .alert-box.warning{ :data => { :alert => true } }
+    = flash[:alert]
+    = link_to '&times;'.html_safe, '#', :class => 'close'
+
+- unless flash[:notice].blank?
+  .alert-box{ :data => { :alert => true } }
+    = flash[:notice]
+    = link_to '&times;'.html_safe, '#', :class => 'close'

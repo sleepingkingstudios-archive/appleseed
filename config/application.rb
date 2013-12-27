@@ -24,5 +24,10 @@ module Appleseed
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    # Remove the standard behavior for fields with errors.
+    config.action_view.field_error_proc = Proc.new do |html_tag, instance|
+      html_tag
+    end # field error proc
   end
 end

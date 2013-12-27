@@ -1,29 +1,39 @@
 !!! 5
-/ paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
-/[if lt IE 7 ] <html class=\"ie6\" lang=\"en\">
-/[if IE 7 ]    <html class=\"ie7\" lang=\"en\">
-/[if IE 8 ]    <html class=\"ie8\" lang=\"en\">
-/[if IE 9 ]    <html class=\"ie9\" lang=\"en\">
-/[if (gt IE 9)|!(IE)] <!--> <html lang=\"en\">
+%html{ lang: 'en' }
+  %head
+    -# @font-face declarations at the top for loading purposes.
+    = stylesheet_link_tag "foundation-icons"
 
-%head
-  %meta{ :charset => "utf-8" }
+    %meta{ :charset => "utf-8" }
 
-  -# Set the viewport width to device width for mobile
-  %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
+    -# Set the viewport width to device width for mobile
+    %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
 
-  %title= content_for?(:title) ? yield(:title) : "Sleeping King Studios"
+    %title= content_for?(:title) ? yield(:title) : "Sleeping King Studios"
 
-  = stylesheet_link_tag "application"
-  = yield(:stylesheets)
+    = stylesheet_link_tag "application"
+    = yield(:stylesheets)
 
-  = javascript_include_tag "vendor/custom.modernizr"
-  = javascript_include_tag "application"
-  = yield(:javascripts)
+    = javascript_include_tag "application"
+    = yield(:javascripts)
 
-  = csrf_meta_tag
+    = csrf_meta_tag
 
-%body
-  = render :partial => 'shared/header'
+  %body
+    = render :partial => 'shared/header'
 
-  = yield
+    .row
+      #sidebar.small-12.large-4.columns
+        %hr.show-for-medium-up
+        
+        = render :partial => 'shared/navigation'
+
+      .small-12.large-8.columns
+        %hr.show-for-medium-up
+
+        = render :partial => 'shared/notices'
+
+        = yield
+
+      .small-12.columns
+        = render :partial => 'shared/footer'

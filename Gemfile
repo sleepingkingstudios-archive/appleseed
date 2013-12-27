@@ -8,6 +8,7 @@ gem 'rails', '4.0.2'
 ### Datastore ###
 gem 'mongoid',  '~> 4.0.0.alpha1', github: 'mongoid/mongoid'
 gem 'bson_ext', '~> 1.5.1'
+gem 'devise',   '~> 3.2.2'
 
 ### Assets ###
 gem 'haml-rails',        '~> 0.4'
@@ -16,7 +17,7 @@ gem 'coffee-rails',      '~> 4.0.0'
 gem 'jquery-rails',      '~> 3.0.4'
 gem 'uglifier',          '>= 1.3.0' # Compressor for JavaScript assets
 gem 'compass-rails',     '~> 1.1.2'
-gem 'zurb-foundation',   '~> 4.0.0'
+gem 'foundation-rails',  '~> 5.0.2'
 
 ### Support ###
 # gem 'debugger', group: [:development, :test]

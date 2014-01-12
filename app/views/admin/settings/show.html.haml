@@ -1,0 +1,28 @@
+-# app/views/admin/settings/index.html.haml
+
+%h1 Settings
+
+= form_for admin_settings_path, :method => :patch do |form|
+  %fieldset
+    %legend Title
+
+    %p The title is displayed at the top of each page and in the browser tab.
+
+    = string_setting_tag :title, :placeholder => 'Appleseed CMS'
+
+  %fieldset
+    %legend User Registration
+
+    .clearfix
+      = hidden_setting_tag  :allow_user_registration?, nil, :id => nil
+      = boolean_setting_tag :allow_user_registration?
+      = setting_label_tag   :allow_user_registration?, 'Allow User Registration?'
+      / = link_to '#', :data => { :toggle => 'allow-user-registration' } do
+      /   %i.fi-info
+
+    %p.allow-user-registration
+      If false, prevents new users from registering via the
+      = succeed('.') do
+        = link_to 'registration form', new_user_registration_path
+
+  = form.submit 'Update Settings', :class => 'button'

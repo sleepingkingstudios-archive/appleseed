@@ -28,7 +28,11 @@ gem 'foundation-rails',  '~> 5.0.2'
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
-end
+end # group
+
+group :development, :test do
+  gem 'pry', '~> 0.9.12'
+end # group
 
 ### Testing ###
 group :test do
@@ -37,6 +41,4 @@ group :test do
   gem 'fuubar',                      '~> 1.2.1'
   gem 'factory_girl_rails',          '~> 4.2.0'
   gem 'database_cleaner',            '~> 1.2.0'
-
-  gem 'pry',                         '~> 0.9.12'
 end # group

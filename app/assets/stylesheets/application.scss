@@ -71,6 +71,39 @@ hr {
  ** FORMS **
  ***********/
 
+.button {
+  &.thin {
+    padding: 0.5rem 1.25rem;
+  }
+}
+
 form.new_user {
   margin-top: rem-calc(20);
+}
+
+/************
+ ** TABLES **
+ ************/
+
+table {
+  &.full-width {
+    width: 100%;
+  }
+
+  td.action-icon {
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+
+    a {
+      // Display
+      display: block;
+      height: 0px;
+      // Positioning
+      position: relative;
+      top: -0.75rem;
+      // Typography
+      font-size: 1.5rem;
+    }
+  }
 }

@@ -4,7 +4,12 @@ en:
   admin:
     blog:
       edit: 'Edit Blog'
-      new: 'Create Blog'
+      failure:
+        blog_already_exists: '%{icon:alert} A blog already exists.'
+      new:
+        breadcrumb: 'Create Blog'
+        submit: 'Create Blog'
+        title: 'Create Blog'
       resource_not_found: 'There are no blogs created.'
     breadcrumb: 'Admin'
     settings:
@@ -13,9 +18,11 @@ en:
     breadcrumb: 'Blog'
     post_count: 'Post Count'
     title: 'Title'
-  home:
-    breadcrumb: 'Home'
   devise:
     failure:
       registration_closed: '%{icon:alert} User registration is currently closed.'
       unauthorized_action: '%{icon:alert} You are not authorized to perform that action.'
+  home:
+    breadcrumb: 'Home'
+  shared:
+    cancel: 'Cancel'

@@ -4,19 +4,23 @@
 
 - if @blog
   %p
-    %strong
-      = succeed(':') do
-        = I18n.t 'blog.title'
-    = @blog.title
+    .row
+      %strong.small-3.columns
+        = succeed(':') do
+          = I18n.t 'blog.title'
+      %span.small-9.columns
+        = @blog.title
     %br
-    %strong
-      = succeed(':') do
-        = I18n.t 'blog.post_count'
-    = 0
+    .row
+      %strong.small-3.columns
+        = succeed(':') do
+          = I18n.t 'blog.post_count'
+      %span.small-9.columns
+        = 0
 
-  = link_to I18n.t('admin.blog.edit'), '#', :class => 'button radius thin'
+  = link_to I18n.t('admin.blog.edit'), '#', :class => 'button radius'
 - else
   %p
     %i.fi-alert
     = I18n.t 'admin.blog.resource_not_found'
-  = link_to I18n.t('admin.blog.new'), '#', :class => 'button radius'
+  = link_to I18n.t('admin.blog.new.submit'), new_admin_blog_path, :class => 'button radius'

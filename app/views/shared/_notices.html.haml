@@ -13,10 +13,10 @@
 
 - unless flash[:alert].blank?
   .alert-box.warning{ :data => { :alert => true } }
-    = flash[:alert]
+    = render_flash flash[:alert]
     = link_to '&times;'.html_safe, '#', :class => 'close'
 
 - unless flash[:notice].blank?
   .alert-box{ :data => { :alert => true } }
-    = flash[:notice]
+    = render_flash flash[:notice]
     = link_to '&times;'.html_safe, '#', :class => 'close'

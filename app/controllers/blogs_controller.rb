@@ -5,7 +5,7 @@ class BlogsController < ApplicationController
 
   # GET /blog
   def show
-    @breadcrumbs << ['Blog']
+    @breadcrumbs << [I18n.t('blog.breadcrumb')]
     
     if @blog
       render :show

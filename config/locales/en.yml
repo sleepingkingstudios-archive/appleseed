@@ -1,6 +1,13 @@
 # config/locales/en.yml
 
 en:
+  admin:
+    settings:
+      breadcrumb: 'Settings'
+  blog:
+    breadcrumb: 'Blog'
+  home:
+    breadcrumb: 'Home'
   devise:
     failure:
       registration_closed: 'User registration is currently closed.'

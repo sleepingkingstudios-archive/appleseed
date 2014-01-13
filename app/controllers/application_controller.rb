@@ -15,6 +15,6 @@ class ApplicationController < ActionController::Base
   end # method authenticate_user
 
   def initialize_breadcrumbs
-    @breadcrumbs = [['Home', root_path]]
+    @breadcrumbs = [[I18n.t('home.breadcrumb'), root_path]]
   end # method initialize_breadcrumbs
 end # controller

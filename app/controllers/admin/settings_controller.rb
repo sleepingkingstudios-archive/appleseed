@@ -6,12 +6,12 @@ class Admin::SettingsController < ApplicationController
 
   # GET /admin/settings
   def show
-    @breadcrumbs << ['Settings']
+    @breadcrumbs << [I18n.t('admin.settings.breadcrumb')]
   end # action show
 
   # POST /admin/settings
   def update
-    @breadcrumbs << ['Settings']
+    @breadcrumbs << [I18n.t('admin.settings.breadcrumb')]
 
     result = @settings.inject(true) do |memo, setting|
       if params['settings'].has_key? setting.name

@@ -1,0 +1,8 @@
+-# app/views/shared/_breadcrumbs.html.haml
+
+- unless @breadcrumbs.blank?
+  %p.text-center
+    - @breadcrumbs.each_with_index do |(name, path), index|
+      - if index > 0
+        %i.fi-arrow-right
+      = path.blank? ? name : link_to(name, path)

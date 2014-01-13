@@ -5,10 +5,14 @@ class Admin::SettingsController < ApplicationController
   before_action :load_resources, :only => %i(show update)
 
   # GET /admin/settings
-  def show; end
+  def show
+    @breadcrumbs << ['Settings']
+  end # action show
 
   # POST /admin/settings
   def update
+    @breadcrumbs << ['Settings']
+
     result = @settings.inject(true) do |memo, setting|
       if params['settings'].has_key? setting.name
         binding.pry if setting.name =~ /allow/
@@ -22,7 +26,7 @@ class Admin::SettingsController < ApplicationController
     else
       render :show
     end # if-else
-  end # action
+  end # action update
 
   private
 

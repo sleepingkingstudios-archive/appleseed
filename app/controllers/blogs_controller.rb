@@ -5,6 +5,8 @@ class BlogsController < ApplicationController
 
   # GET /blog
   def show
+    @breadcrumbs << ['Blog']
+    
     if @blog
       render :show
     else

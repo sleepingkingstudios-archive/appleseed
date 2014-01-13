@@ -4,13 +4,13 @@ require 'spec_helper'
 
 RSpec.describe Admin::SettingsController do
   describe "GET /" do
-    before(:each) { get :show }
+    def perform_action
+      get :show
+    end # method perform_action
 
-    it 'responds with 302 found' do
+    it 'responds with 302 found and renders the home template' do
+      perform_action
       expect(response.status).to be == 302
-    end # it
-
-    it 'renders the home template' do
       expect(response).to redirect_to :root
     end # it
   end # describe

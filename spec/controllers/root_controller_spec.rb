@@ -8,13 +8,9 @@ RSpec.describe RootController do
       get :home
     end # method perform_request
 
-    it 'responds with 200 ok' do
+    it 'responds with 200 ok and renders the home template' do
       perform_request
       expect(response.status).to be == 200
-    end # it
-
-    it 'renders the home template' do
-      perform_request
       expect(response).to render_template 'home'
     end # it
   end # describe

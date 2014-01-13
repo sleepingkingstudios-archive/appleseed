@@ -17,13 +17,9 @@ RSpec.describe Admin::Users::RegistrationsController do
         allow(Setting).to receive(:fetch).and_return(true)
       end # before each
 
-      it 'responds with 200 ok' do
+      it 'responds with 200 ok and renders the new template' do
         perform_request
         expect(response.status).to be == 200
-      end # it
-
-      it 'renders the new template' do
-        perform_request
         expect(response).to render_template 'devise/registrations/new'
       end # it
     end # context
@@ -34,13 +30,9 @@ RSpec.describe Admin::Users::RegistrationsController do
       end # before each
 
       context 'and no registered users' do
-        it 'responds with 200 ok' do
+        it 'responds with 200 ok and renders the new template' do
           perform_request
           expect(response.status).to be == 200
-        end # it
-
-        it 'renders the new template' do
-          perform_request
           expect(response).to render_template 'devise/registrations/new'
         end # it
       end # context
@@ -48,13 +40,9 @@ RSpec.describe Admin::Users::RegistrationsController do
       context 'with one registered user' do
         before(:each) { FactoryGirl.create :user }
 
-        it 'responds with 302 redirect' do
-          perform_request
-          expect(response.status).to be == 302
-        end # it
-
         it 'redirects to :root' do
           perform_request
+          expect(response.status).to be == 302
           expect(response).to redirect_to :root
         end # it
       end # context
@@ -74,13 +62,9 @@ RSpec.describe Admin::Users::RegistrationsController do
       end # before each
 
       context 'with an invalid user' do
-        it 'responds with 200 ok' do
+        it 'responds with 200 ok and renders the new template' do
           perform_request
           expect(response.status).to be == 200
-        end # it
-
-        it 'renders the new template' do
-          perform_request
           expect(response).to render_template 'devise/registrations/new'
         end # it
       end # context
@@ -88,13 +72,9 @@ RSpec.describe Admin::Users::RegistrationsController do
       context 'with a valid user' do
         let(:data) { { :user => FactoryGirl.attributes_for(:user) } }
 
-        it 'responds with 302 redirect' do
-          perform_request
-          expect(response.status).to be == 302
-        end # it
-
         it 'redirects to :root' do
           perform_request
+          expect(response.status).to be == 302
           expect(response).to redirect_to :root
         end # it
       end # context
@@ -107,13 +87,9 @@ RSpec.describe Admin::Users::RegistrationsController do
 
       context 'and no registered users' do
         context 'with an invalid user' do
-          it 'responds with 200 ok' do
+          it 'responds with 200 ok and renders the new template' do
             perform_request
             expect(response.status).to be == 200
-          end # it
-
-          it 'renders the new template' do
-            perform_request
             expect(response).to render_template 'devise/registrations/new'
           end # it
         end # context
@@ -121,13 +97,9 @@ RSpec.describe Admin::Users::RegistrationsController do
         context 'with a valid user' do
           let(:data) { { :user => FactoryGirl.attributes_for(:user) } }
 
-          it 'responds with 302 redirect' do
-            perform_request
-            expect(response.status).to be == 302
-          end # it
-
           it 'redirects to :root' do
             perform_request
+            expect(response.status).to be == 302
             expect(response).to redirect_to :root
           end # it
         end # context
@@ -136,13 +108,9 @@ RSpec.describe Admin::Users::RegistrationsController do
       context 'with one registered user' do
         before(:each) { FactoryGirl.create :user }
 
-        it 'responds with 302 redirect' do
-          perform_request
-          expect(response.status).to be == 302
-        end # it
-
         it 'redirects to :root' do
           perform_request
+          expect(response.status).to be == 302
           expect(response).to redirect_to :root
         end # it
       end # context

@@ -1,7 +1,6 @@
 # app/controllers/admin/blogs_controller.rb
 
-class Admin::BlogsController < ApplicationController
-  before_action :authenticate_user!
+class Admin::BlogsController < Admin::AdminController
   before_action :load_resource, :only => %i(show)
 
   # GET /admin/blog

@@ -6,6 +6,7 @@ en:
       edit: 'Edit Blog'
       new: 'Create Blog'
       resource_not_found: 'There are no blogs created.'
+    breadcrumb: 'Admin'
     settings:
       breadcrumb: 'Settings'
   blog:

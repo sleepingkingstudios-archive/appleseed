@@ -1,7 +1,6 @@
 # app/controllers/admin/settings_controller.rb
 
-class Admin::SettingsController < ApplicationController
-  before_action :authenticate_user!
+class Admin::SettingsController < Admin::AdminController
   before_action :update_breadcrumbs
   before_action :load_resources, :only => %i(show update)
 

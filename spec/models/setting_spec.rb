@@ -24,6 +24,14 @@ RSpec.describe Setting do
     end # each
   end # describe
 
+  describe '::cache' do
+    it { expect(described_class).to have_reader(:cache) }
+
+    it 'returns a hash with with_indifferent_access' do
+      expect(described_class.cache).to be_a ActiveSupport::HashWithIndifferentAccess
+    end # describe
+  end # describe
+
   describe '::fetch' do
     let(:name) { 'More Magic' }
 
@@ -64,11 +72,10 @@ RSpec.describe Setting do
 
     describe 'with a cached value' do
       let(:value) { true }
+      let(:cache) { { name => value }.with_indifferent_access }
 
       before(:each) do
-        Setting.instance_variable_set :@cached_values, {
-          name => value
-        } # end hash
+        allow(Setting).to receive(:cache).and_return(cache)
       end # before each
 
       it 'returns the value' do
@@ -85,6 +92,24 @@ RSpec.describe Setting do
     end # describe
   end # describe
 
+  describe '::purge_cache!' do
+    it { expect(described_class).to respond_to(:purge_cache!).with(0).arguments }
+
+    context 'with cached values' do
+      before(:each) do
+        described_class.store :foo, 'foo'
+        described_class.store :bar, 'bar'
+        described_class.store :baz, 'baz'
+      end # before each
+
+      it 'removes the cached values' do
+        expect {
+          described_class.purge_cache!
+        }.to change(described_class, :cache).to({})
+      end # it
+    end # context
+  end # describe
+
   describe '::store' do
     let(:name)  { 'More Magic' }
     let(:value) { true }
@@ -95,7 +120,7 @@ RSpec.describe Setting do
       expect {
         described_class.store name, value
       }.to change {
-        described_class.fetch name
+        described_class.cache[name]
       }.to(value)
     end # it
   end # describe

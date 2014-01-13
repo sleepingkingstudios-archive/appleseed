@@ -6,25 +6,30 @@ class Setting
   TYPES                = %w(Boolean String)
   BOOLEAN_TRUE_STRINGS = %w(true 1)
 
-  def self.fetch name, default = nil
-    @cached_values ||= {}
-    unless @cached_values.has_key? name
-      setting = where(:name => name).first
+  class << self
+    def cache
+      @cached_values ||= {}.with_indifferent_access
+    end # class method cached_values
 
-      @cached_values[name] = setting.value unless setting.nil?
-    end # if
+    def fetch name, default = nil
+      values = cache
+      unless values.has_key? name
+        setting = where(:name => name).first
 
-    if !default.nil? && @cached_values[name].blank?
-      default
-    else
-      @cached_values[name]
-    end # if-else
-  end # class method fetch
+        values[name] = setting.value unless setting.nil?
+      end # if
 
-  def self.store name, value
-    @cached_values ||= {}
-    @cached_values[name] = value
-  end # class method store
+      values[name].blank? && !default.nil? ? default : values[name]
+    end # class method fetch
+
+    def purge_cache!
+      @cached_values = {}.with_indifferent_access
+    end # class method purge_cache!
+
+    def store name, value
+      cache[name] = value
+    end # class method store
+  end # metaclass
 
   field :name,  :type => String
   field :type,  :type => String

@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_user!
-    unless current_user
-      flash[:alert] = 'You are not authorized to perform that action.'
+    unless user_signed_in?
+      flash[:alert] = I18n.t 'devise.failure.unauthorized_action'
       redirect_to :root
     end # unless
   end # method authenticate_user

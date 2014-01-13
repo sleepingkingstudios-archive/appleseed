@@ -3,5 +3,5 @@
 en:
   devise:
     failure:
-      registration_closed: 'User registration is currently closed.'
-      unauthorized_action: 'You are not authorized to perform that action.'
+      registration_closed: '%{icon:alert} User registration is currently closed.'
+      unauthorized_action: '%{icon:alert} You are not authorized to perform that action.'

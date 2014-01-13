@@ -7,5 +7,7 @@ Appleseed::Application.routes.draw do
     resource :settings, :only => %i(show update)
   end # namespace
 
+  resource :blog, :only => %i(show)
+
   root 'root#home'
 end # routes

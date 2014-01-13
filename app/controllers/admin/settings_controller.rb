@@ -2,17 +2,14 @@
 
 class Admin::SettingsController < ApplicationController
   before_action :authenticate_user!
+  before_action :update_breadcrumbs
   before_action :load_resources, :only => %i(show update)
 
   # GET /admin/settings
-  def show
-    @breadcrumbs << [I18n.t('admin.settings.breadcrumb')]
-  end # action show
+  def show; end
 
   # POST /admin/settings
   def update
-    @breadcrumbs << [I18n.t('admin.settings.breadcrumb')]
-
     result = @settings.inject(true) do |memo, setting|
       if params['settings'].has_key? setting.name
         binding.pry if setting.name =~ /allow/
@@ -33,4 +30,8 @@ class Admin::SettingsController < ApplicationController
   def load_resources
     @settings = Setting.all.to_a
   end # method load_resources
+
+  def update_breadcrumbs
+    @breadcrumbs << [I18n.t('admin.settings.breadcrumb')]
+  end # method update_breadcrumbs
 end # controller

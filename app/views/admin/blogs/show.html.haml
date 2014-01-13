@@ -1,0 +1,22 @@
+-# app/views/admin/blogs/show.html.haml
+
+%h1 Admin Blog
+
+- if @blog
+  %p
+    %strong
+      = succeed(':') do
+        = I18n.t 'blog.title'
+    = @blog.title
+    %br
+    %strong
+      = succeed(':') do
+        = I18n.t 'blog.post_count'
+    = 0
+
+  = link_to I18n.t('admin.blog.edit'), '#', :class => 'button radius thin'
+- else
+  %p
+    %i.fi-alert
+    = I18n.t 'admin.blog.resource_not_found'
+  = link_to I18n.t('admin.blog.new'), '#', :class => 'button radius'

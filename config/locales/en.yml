@@ -2,10 +2,16 @@
 
 en:
   admin:
+    blog:
+      edit: 'Edit Blog'
+      new: 'Create Blog'
+      resource_not_found: 'There are no blogs created.'
     settings:
       breadcrumb: 'Settings'
   blog:
     breadcrumb: 'Blog'
+    post_count: 'Post Count'
+    title: 'Title'
   home:
     breadcrumb: 'Home'
   devise:

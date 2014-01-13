@@ -4,6 +4,8 @@ Appleseed::Application.routes.draw do
   end # scope
 
   namespace :admin do
+    resource :blog, :only => %i(show)
+
     resource :settings, :only => %i(show update)
   end # namespace
 

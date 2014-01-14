@@ -48,8 +48,19 @@ RSpec.describe BlogPost do
     end # context
   end # describe
 
+  describe '#blog' do
+    it { expect(instance).to respond_to(:blog) }
+    it { expect(instance.blog).to be_a Blog }
+  end # describe
+
   describe 'validation' do
     it { expect(instance).to be_valid }
+
+    describe 'blog must be present' do
+      let(:attributes) { super().merge :blog => nil }
+
+      it { expect(instance).to have_errors.on(:blog).with_message('can\'t be blank') }
+    end # describe
 
     describe 'content type must be present' do
       let(:attributes) { super().merge :content_type => nil }

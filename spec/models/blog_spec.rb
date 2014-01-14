@@ -10,6 +10,11 @@ RSpec.describe Blog do
     it { expect(instance).to have_property(:title) }
   end # describe
 
+  describe '#posts' do
+    it { expect(instance).to respond_to(:posts).with(0).arguments }
+    it { expect(instance.posts).to be_a Array }
+  end # describe
+
   describe 'validation' do
     it { expect(instance).to be_valid }
 

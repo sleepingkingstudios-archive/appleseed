@@ -5,11 +5,14 @@ class BlogPost
 
   CONTENT_TYPES = %w(plain)
 
+  belongs_to :blog
+
   field :title, :type => String
 
   field :content,      :type => String
   field :content_type, :type => String
 
+  validates :blog, :presence => true
   validates :title, :presence => true
   validates :content_type, :presence => true,
     :inclusion => { :in => CONTENT_TYPES }

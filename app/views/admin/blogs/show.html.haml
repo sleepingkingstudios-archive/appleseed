@@ -21,7 +21,7 @@
         = succeed(':') do
           = I18n.t 'blog.post_count'
       %span.small-9.columns
-        = 0
+        = @blog.posts.count
 
   = link_to render_with_icon(I18n.t 'admin.blog.edit.submit'), edit_admin_blog_path, :class => 'button radius thin'
   = link_to render_with_icon(I18n.t 'admin.blog.delete.submit'), '#', :id => 'open-confirm-delete-modal-link', :class => 'button radius thin alert hide', :data => { :"reveal-id" => 'confirm-delete-modal' }

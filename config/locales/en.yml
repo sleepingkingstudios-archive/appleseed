@@ -5,6 +5,10 @@ en:
     blog:
       delete:
         action: 'delete Blog'
+        confirm:
+          body: 'Are you sure you want to delete blog %{title}? This will delete all blog posts and data associated with this blog.'
+          title: 'Delete Blog'
+          warning: 'This cannot be undone!'
         submit: '%{icon:skull} Delete Blog'
         success: '%{icon:skull} Blog successfully deleted.'
       edit:
@@ -38,3 +42,4 @@ en:
     breadcrumb: 'Home'
   shared:
     cancel: 'Cancel'
+    warning: 'Warning'

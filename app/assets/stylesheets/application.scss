@@ -2,8 +2,13 @@
 
 @import "foundation_and_overrides";
 @import "foundation/components/visibility";
+@import "admin/blogs";
 
 $header-font-family: Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic, "Apple Gothic", AppleGothic, "URW Gothic L", "Avant Garde", sans-serif;
+
+.hide {
+  display: none;
+}
 
 /**********************
  ** HEADER AND TITLE **
@@ -64,6 +69,12 @@ hr {
     // Positioning
     position: relative;
     top: 2px;
+  }
+}
+
+p, span {
+  &.alert {
+    color: #ea2f10;
   }
 }
 

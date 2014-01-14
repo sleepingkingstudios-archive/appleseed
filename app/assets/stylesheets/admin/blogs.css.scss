@@ -1,0 +1,13 @@
+// app/assets/stylesheets/admin/blogs.css.scss 
+
+#confirm-delete-modal {
+  @include reveal-modal-base(
+    $base-style:true,
+    $width:60%
+  );
+  @include reveal-modal-style();
+
+  a.close-reveal-modal {
+    @include reveal-close();
+  }
+}

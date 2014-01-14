@@ -1,0 +1,13 @@
+#confirm-delete-modal{ :data => { :reveal => true } }
+  %h2= I18n.t('admin.blog.delete.confirm.title')
+  %p= I18n.t('admin.blog.delete.confirm.body', :title => blog.title)
+  %p.alert
+    %strong
+      = succeed(':') do
+        = I18n.t('shared.warning')
+    = I18n.t('admin.blog.delete.confirm.warning')
+  = link_to '#', :class => 'close-reveal-modal' do
+    %i.fi-x
+  .text-right
+    = link_to I18n.t('shared.cancel'), '#', :id => 'cancel-delete-blog-link', :class => 'button radius thin secondary'
+    = link_to render_with_icon(I18n.t 'admin.blog.delete.submit'), '#', :id => 'confirm-delete-blog-link', :class => 'button radius thin alert'

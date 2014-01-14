@@ -19,7 +19,7 @@
 
     = csrf_meta_tag
 
-  %body
+  %body{ :class => yield(:body_class) }
     = render :partial => 'shared/header'
 
     .row

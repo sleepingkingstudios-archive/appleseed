@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Setting do
+RSpec.describe Blog do
   let(:attributes) { {} }
   let(:instance) { FactoryGirl.build :blog, attributes }
 

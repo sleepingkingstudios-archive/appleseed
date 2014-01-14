@@ -1,0 +1,13 @@
+-# app/views/admin/pages/index.html.haml
+
+%h1= I18n.t('admin.index.control_panel')
+
+%h2= I18n.t('admin.blog.breadcrumb')
+%p.clearfix
+  = I18n.t('admin.index.blog.description')
+  %span.right= link_to render_with_icon(I18n.t 'admin.index.blog.link'), admin_blog_path
+
+%h2= I18n.t('admin.settings.breadcrumb')
+%p.clearfix
+  = I18n.t('admin.index.settings.description')
+  %span.right= link_to render_with_icon(I18n.t 'admin.index.settings.link'), admin_settings_path

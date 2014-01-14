@@ -8,6 +8,6 @@ class Admin::AdminController < ApplicationController
   def initialize_breadcrumbs
     super
 
-    @breadcrumbs << [I18n.t('admin.breadcrumb')]
+    @breadcrumbs << [I18n.t('admin.breadcrumb'), admin_path]
   end # method initialize_breadcrumbs
 end # controller

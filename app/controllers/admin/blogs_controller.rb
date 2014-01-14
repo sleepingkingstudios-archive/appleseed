@@ -75,12 +75,12 @@ class Admin::BlogsController < Admin::AdminController
   def breadcrumbs_for action
     case action
     when :show
-      @breadcrumbs << [I18n.t('blog.breadcrumb')]
+      @breadcrumbs << [I18n.t('admin.blog.breadcrumb')]
     when :new
-      @breadcrumbs << [I18n.t('blog.breadcrumb'), admin_blog_path]
+      @breadcrumbs << [I18n.t('admin.blog.breadcrumb'), admin_blog_path]
       @breadcrumbs << [I18n.t('admin.blog.new.breadcrumb')]
     when :edit
-      @breadcrumbs << [I18n.t('blog.breadcrumb'), admin_blog_path]
+      @breadcrumbs << [I18n.t('admin.blog.breadcrumb'), admin_blog_path]
       @breadcrumbs << [I18n.t('admin.blog.edit.breadcrumb')]
     end # case
   end # method breadcrumbs_for

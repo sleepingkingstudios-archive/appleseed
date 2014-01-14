@@ -13,5 +13,5 @@ Appleseed::Application.routes.draw do
 
   resource :blog, :only => %i(show)
 
-  root 'root#home'
+  root 'pages#index'
 end # routes

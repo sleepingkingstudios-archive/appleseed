@@ -39,6 +39,22 @@ RSpec.describe Admin::BlogsController do
         expect_behavior 'authenticates the user', described_class, :only => :update
       end # context
     end # describe
+
+    describe 'DELETE /admin/blog' do
+      context 'with no existing blog' do
+        it 'redirects to root' do
+          delete :destroy
+          expect(response.status).to be == 302
+          expect(response).to redirect_to :root
+        end # it
+      end # context
+
+      context 'with an existing blog' do
+        before(:each) { FactoryGirl.create :blog }
+
+        expect_behavior 'authenticates the user', described_class, :only => :destroy
+      end # context
+    end # describe
   end # context
 
   context 'with an authenticated user' do
@@ -174,6 +190,36 @@ RSpec.describe Admin::BlogsController do
           }.to change {
             blog.title
           }.to(title)
+        end # it
+      end # context
+    end # describe
+
+    describe 'DELETE /admin/blog' do
+      def perform_action
+        delete :destroy
+      end # method perform_action
+
+      context 'with no existing blog' do
+        it 'redirects to the admin blog path' do
+          perform_action
+          expect(response.status).to be == 302
+          expect(response).to redirect_to admin_blog_path
+        end # it
+      end # context
+
+      context 'with an existing blog' do
+        let!(:blog) { FactoryGirl.create :blog }
+
+        it 'redirects to the admin blog path' do
+          perform_action
+          expect(response.status).to be == 302
+          expect(response).to redirect_to admin_blog_path
+        end # it
+
+        it 'destroys the blog' do
+          expect {
+            perform_action
+          }.to change(Blog, :count).to(0)
         end # it
       end # context
     end # describe

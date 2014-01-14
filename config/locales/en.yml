@@ -3,7 +3,11 @@
 en:
   admin:
     blog:
+      delete:
+        action: 'delete Blog'
+        submit: 'Delete Blog'
       edit:
+        action: 'edit Blog'
         breadcrumb: 'Edit Blog'
         submit: 'Edit Blog'
         title: 'Edit Blog'
@@ -11,6 +15,7 @@ en:
         blog_already_exists: '%{icon:alert} Unable to %{action} because a blog already exists.'
         blog_does_not_exist: '%{icon:alert} Unable to %{action} because there are no blogs created.'
       new:
+        action: 'create Blog'
         breadcrumb: 'Create Blog'
         submit: 'Create Blog'
         title: 'Create Blog'

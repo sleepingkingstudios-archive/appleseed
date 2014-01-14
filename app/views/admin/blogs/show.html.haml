@@ -18,7 +18,8 @@
       %span.small-9.columns
         = 0
 
-  = link_to I18n.t('admin.blog.edit.submit'), edit_admin_blog_path, :class => 'button radius'
+  = link_to I18n.t('admin.blog.edit.submit'), edit_admin_blog_path, :class => 'button radius thin'
+  = link_to I18n.t('admin.blog.delete.submit'), admin_blog_path, :method => :delete, :class => 'button radius thin'
 - else
   %p
     %i.fi-alert

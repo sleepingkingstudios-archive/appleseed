@@ -2,7 +2,7 @@
 
 class Admin::BlogsController < Admin::AdminController
   before_action :build_resource, :only => %i(new create)
-  before_action :load_resource,  :only => %i(show edit update)
+  before_action :load_resource,  :only => %i(show edit update destroy)
 
   # POST /admin/blog
   def create
@@ -17,10 +17,21 @@ class Admin::BlogsController < Admin::AdminController
     end # if-elsif-else
   end # action create
 
+  # DELETE /admin/blog
+  def destroy
+    if 0 == Blog.count
+      flash[:notice] = I18n.t('admin.blog.failure.blog_does_not_exist', :action => t('admin.blog.delete.action'))
+    else
+      @blog.destroy
+    end # if
+
+    redirect_to admin_blog_path
+  end # action destroy
+
   # GET /admin/blog/edit
   def edit
     if 0 == Blog.count
-      flash[:notice] = I18n.t('admin.blog.failure.blog_does_not_exist', :action => t('admin.blog.edit.title').downcase)
+      flash[:notice] = I18n.t('admin.blog.failure.blog_does_not_exist', :action => t('admin.blog.edit.action'))
       redirect_to admin_blog_path
     else
       breadcrumbs_for :edit
@@ -31,7 +42,7 @@ class Admin::BlogsController < Admin::AdminController
   # GET /admin/blog/new
   def new
     if 0 < Blog.count
-      flash[:notice] = I18n.t('admin.blog.failure.blog_already_exists', :action => t('admin.blog.new.title').downcase)
+      flash[:notice] = I18n.t('admin.blog.failure.blog_already_exists', :action => t('admin.blog.new.action'))
       redirect_to admin_blog_path and return
     end # if
 

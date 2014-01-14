@@ -2,18 +2,12 @@
   %ul.small-block-grid-4.large-block-grid-1{ :class => "small-block-grid-#{current_user ? 5 : 4}"}
     %li
       = link_to :root do
-        %h4 Home
-    %li
-      = link_to :root do
-        %h4 Articles
+        %h4= I18n.t('navigation.home')
     %li
       = link_to blog_path do
-        %h4 Blog
-    %li
-      = link_to :root do
-        %h4 About
+        %h4= I18n.t('navigation.blog')
     - if current_user
       %li
-        = link_to admin_settings_path do
-          %h4 Settings
+        = link_to admin_path do
+          %h4= I18n.t('navigation.admin')
   %hr

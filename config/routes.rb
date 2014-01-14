@@ -9,7 +9,9 @@ Appleseed::Application.routes.draw do
     resource :settings, :only => %i(show update)
   end # namespace
 
+  get :admin, :to => 'admin/pages#index', :as => :admin
+
   resource :blog, :only => %i(show)
 
-  root 'root#home'
+  root 'pages#index'
 end # routes

@@ -3,6 +3,7 @@
 en:
   admin:
     blog:
+      breadcrumb: 'Blog'
       delete:
         action: 'delete Blog'
         confirm:
@@ -28,6 +29,17 @@ en:
         title: 'Create Blog'
       resource_not_found: 'There are no blogs created.'
     breadcrumb: 'Admin'
+    index:
+      blog:
+        description: |
+          Create or destroy the attached blog.
+        link: '%{icon:arrow-right} Go To Blog'
+      control_panel: 'Control Panel'
+      settings:
+        description: |
+          Change the application settings, such as the displayed title and
+          whether new users are allowed to register.
+        link: '%{icon:arrow-right} Go To Settings'
     settings:
       breadcrumb: 'Settings'
   blog:
@@ -40,6 +52,10 @@ en:
       unauthorized_action: '%{icon:alert} You are not authorized to perform that action.'
   home:
     breadcrumb: 'Home'
+  navigation:
+    home:  'Home'
+    blog:  'Blog'
+    admin: 'Admin'
   shared:
     cancel: 'Cancel'
     warning: 'Warning'

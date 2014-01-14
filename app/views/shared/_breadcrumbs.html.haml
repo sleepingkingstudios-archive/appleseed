@@ -3,7 +3,9 @@
 - unless @breadcrumbs.blank?
   %nav.breadcrumbs
     - @breadcrumbs.each_with_index do |(name, path), index|
-      - if path.blank?
-        = link_to name, '#', :class => (index == @breadcrumbs.length - 1) ? 'current' : 'unavailable'
+      - if index == @breadcrumbs.length - 1
+        = link_to name, '#', :class => 'current'
+      - elsif path.blank?
+        = link_to name, '#', :class => 'unavailable'
       - else
         = link_to name, path

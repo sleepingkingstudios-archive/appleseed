@@ -1,7 +1,7 @@
 # app/builders/foundation_form_builder.rb
 
 class FoundationFormBuilder < ActionView::Helpers::FormBuilder
-  %i(email_field password_field).each do |field_type|
+  %i(email_field password_field text_field).each do |field_type|
     define_method field_type do |method, options = {}|
       postfix = ''
 

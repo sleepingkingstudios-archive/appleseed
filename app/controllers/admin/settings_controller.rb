@@ -1,7 +1,7 @@
 # app/controllers/admin/settings_controller.rb
 
-class Admin::SettingsController < ApplicationController
-  before_action :authenticate_user!
+class Admin::SettingsController < Admin::AdminController
+  before_action :update_breadcrumbs
   before_action :load_resources, :only => %i(show update)
 
   # GET /admin/settings
@@ -22,11 +22,15 @@ class Admin::SettingsController < ApplicationController
     else
       render :show
     end # if-else
-  end # action
+  end # action update
 
   private
 
   def load_resources
     @settings = Setting.all.to_a
   end # method load_resources
+
+  def update_breadcrumbs
+    @breadcrumbs << [I18n.t('admin.settings.breadcrumb')]
+  end # method update_breadcrumbs
 end # controller

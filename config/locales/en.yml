@@ -1,7 +1,45 @@
 # config/locales/en.yml
 
 en:
+  admin:
+    blog:
+      delete:
+        action: 'delete Blog'
+        confirm:
+          body: 'Are you sure you want to delete blog %{title}? This will delete all blog posts and data associated with this blog.'
+          title: 'Delete Blog'
+          warning: 'This cannot be undone!'
+        submit: '%{icon:skull} Delete Blog'
+        success: '%{icon:skull} Blog successfully deleted.'
+      edit:
+        action: 'edit Blog'
+        breadcrumb: 'Edit Blog'
+        submit: '%{icon:wrench} Edit Blog'
+        success: '%{icon:wrench} Blog successfully updated.'
+        title: 'Edit Blog'
+      failure:
+        blog_already_exists: '%{icon:alert} Unable to %{action} because a blog already exists.'
+        blog_does_not_exist: '%{icon:alert} Unable to %{action} because there are no blogs created.'
+      new:
+        action: 'create Blog'
+        breadcrumb: 'Create Blog'
+        submit: '%{icon:book} Create Blog'
+        success: '%{icon:book} Blog successfully created.'
+        title: 'Create Blog'
+      resource_not_found: 'There are no blogs created.'
+    breadcrumb: 'Admin'
+    settings:
+      breadcrumb: 'Settings'
+  blog:
+    breadcrumb: 'Blog'
+    post_count: 'Post Count'
+    title: 'Title'
   devise:
     failure:
       registration_closed: '%{icon:alert} User registration is currently closed.'
       unauthorized_action: '%{icon:alert} You are not authorized to perform that action.'
+  home:
+    breadcrumb: 'Home'
+  shared:
+    cancel: 'Cancel'
+    warning: 'Warning'

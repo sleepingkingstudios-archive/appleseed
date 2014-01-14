@@ -1,0 +1,33 @@
+-# app/views/admin/blogs/show.html.haml
+
+= content_for :body_class do
+  admin-blogs-show
+
+%h1 Admin Blog
+
+- if @blog
+  = render :partial => 'admin/blogs/show/confirm_delete_modal', :locals => { :blog => @blog }
+
+  %p
+    .row
+      %strong.small-3.columns
+        = succeed(':') do
+          = I18n.t 'blog.title'
+      %span.small-9.columns
+        = @blog.title
+    %br
+    .row
+      %strong.small-3.columns
+        = succeed(':') do
+          = I18n.t 'blog.post_count'
+      %span.small-9.columns
+        = 0
+
+  = link_to render_with_icon(I18n.t 'admin.blog.edit.submit'), edit_admin_blog_path, :class => 'button radius thin'
+  = link_to render_with_icon(I18n.t 'admin.blog.delete.submit'), '#', :id => 'open-confirm-delete-modal-link', :class => 'button radius thin alert hide', :data => { :"reveal-id" => 'confirm-delete-modal' }
+  = link_to render_with_icon(I18n.t 'admin.blog.delete.submit'), admin_blog_path, :method => :delete, :id => 'delete-blog-link', :class => 'button radius thin alert'
+- else
+  %p
+    %i.fi-alert
+    = I18n.t 'admin.blog.resource_not_found'
+  = link_to render_with_icon(I18n.t 'admin.blog.new.submit'), new_admin_blog_path, :class => 'button radius'

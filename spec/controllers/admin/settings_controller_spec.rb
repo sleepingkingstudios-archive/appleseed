@@ -3,15 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Admin::SettingsController do
-  describe "GET /" do
-    before(:each) { get :show }
+  include Appleseed::SharedExamples::AdminControllerAuthenticatesUser
 
-    it 'responds with 302 found' do
-      expect(response.status).to be == 302
-    end # it
-
-    it 'renders the home template' do
-      expect(response).to redirect_to :root
-    end # it
-  end # describe
+  expect_behavior 'authenticates the user', described_class, :only => %i(show update)
 end # describe

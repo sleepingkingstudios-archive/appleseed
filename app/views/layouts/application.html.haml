@@ -19,7 +19,7 @@
 
     = csrf_meta_tag
 
-  %body
+  %body{ :class => yield(:body_class) }
     = render :partial => 'shared/header'
 
     .row
@@ -34,6 +34,8 @@
         = render :partial => 'shared/notices'
 
         = yield
+
+        = render :partial => 'shared/breadcrumbs'
 
       .small-12.columns
         = render :partial => 'shared/footer'

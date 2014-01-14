@@ -21,6 +21,9 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+  # Alias "it should behave like" to 2.13-like syntax.
+  config.alias_it_should_behave_like_to 'expect_behavior', 'has behavior'
+
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean

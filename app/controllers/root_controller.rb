@@ -3,6 +3,6 @@
 class RootController < ApplicationController
   # GET /
   def home
-    
+    @breadcrumbs = []
   end # action home
 end # controller

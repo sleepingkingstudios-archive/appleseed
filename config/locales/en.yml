@@ -3,9 +3,13 @@
 en:
   admin:
     blog:
-      edit: 'Edit Blog'
+      edit:
+        breadcrumb: 'Edit Blog'
+        submit: 'Edit Blog'
+        title: 'Edit Blog'
       failure:
-        blog_already_exists: '%{icon:alert} A blog already exists.'
+        blog_already_exists: '%{icon:alert} Unable to %{action} because a blog already exists.'
+        blog_does_not_exist: '%{icon:alert} Unable to %{action} because there are no blogs created.'
       new:
         breadcrumb: 'Create Blog'
         submit: 'Create Blog'

@@ -1,0 +1,5 @@
+-# app/views/admin/blogs/edit.html.haml
+
+%h1= t('admin.blog.edit.title')
+
+= render :partial => 'form', :locals => { :blog => @blog }

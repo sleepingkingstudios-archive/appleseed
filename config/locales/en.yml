@@ -5,11 +5,13 @@ en:
     blog:
       delete:
         action: 'delete Blog'
-        submit: 'Delete Blog'
+        submit: '%{icon:skull} Delete Blog'
+        success: '%{icon:skull} Blog successfully deleted.'
       edit:
         action: 'edit Blog'
         breadcrumb: 'Edit Blog'
-        submit: 'Edit Blog'
+        submit: '%{icon:wrench} Edit Blog'
+        success: '%{icon:wrench} Blog successfully updated.'
         title: 'Edit Blog'
       failure:
         blog_already_exists: '%{icon:alert} Unable to %{action} because a blog already exists.'
@@ -17,7 +19,8 @@ en:
       new:
         action: 'create Blog'
         breadcrumb: 'Create Blog'
-        submit: 'Create Blog'
+        submit: '%{icon:book} Create Blog'
+        success: '%{icon:book} Blog successfully created.'
         title: 'Create Blog'
       resource_not_found: 'There are no blogs created.'
     breadcrumb: 'Admin'

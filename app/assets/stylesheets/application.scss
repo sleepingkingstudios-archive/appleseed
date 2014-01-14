@@ -72,14 +72,6 @@ hr {
  ***********/
 
 .button {
-  &.cancel {
-    background-color: #cfcfcf;
-
-    &:hover {
-      background-color: #afafaf;
-    }
-  }
-
   &.thin {
     padding: 0.5rem 1.25rem;
   }

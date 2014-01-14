@@ -5,5 +5,5 @@
   = form.text_field :title, :autofocus => true
 
   .text-right
-    = link_to t('shared.cancel'), admin_blog_path, :class => 'button cancel radius'
-    = form.submit (blog.persisted? ? t('admin.blog.edit.submit') : t('admin.blog.new.submit')), :class => 'button radius'
+    = link_to t('shared.cancel'), admin_blog_path, :class => 'button secondary radius'
+    = form.submit render_without_icon(blog.persisted? ? t('admin.blog.edit.submit') : t('admin.blog.new.submit')), :class => 'button success radius'

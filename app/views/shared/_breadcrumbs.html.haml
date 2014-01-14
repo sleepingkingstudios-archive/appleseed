@@ -1,8 +1,9 @@
 -# app/views/shared/_breadcrumbs.html.haml
 
 - unless @breadcrumbs.blank?
-  %p.text-center
+  %nav.breadcrumbs
     - @breadcrumbs.each_with_index do |(name, path), index|
-      - if index > 0
-        %i.fi-arrow-right
-      = path.blank? ? name : link_to(name, path)
+      - if path.blank?
+        = link_to name, '#', :class => (index == @breadcrumbs.length - 1) ? 'current' : 'unavailable'
+      - else
+        = link_to name, path

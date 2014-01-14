@@ -7,9 +7,10 @@ class Admin::BlogsController < Admin::AdminController
   # POST /admin/blog
   def create
     if 0 < Blog.count
-      flash[:alert] = I18n.t('admin.blog.failure.blog_already_exists')
+      flash[:notice] = I18n.t('admin.blog.failure.blog_already_exists')
       redirect_to admin_blog_path
     elsif @blog.save
+      flash[:notice] = I18n.t('admin.blog.new.success')
       redirect_to admin_blog_path
     else
       breadcrumbs_for :new
@@ -22,6 +23,7 @@ class Admin::BlogsController < Admin::AdminController
     if 0 == Blog.count
       flash[:notice] = I18n.t('admin.blog.failure.blog_does_not_exist', :action => t('admin.blog.delete.action'))
     else
+      flash[:alert] = I18n.t('admin.blog.delete.success')
       @blog.destroy
     end # if
 
@@ -60,6 +62,7 @@ class Admin::BlogsController < Admin::AdminController
       flash[:notice] = I18n.t('admin.blog.failure.blog_does_not_exist', :action => t('admin.blog.edit.title').downcase)
       redirect_to admin_blog_path
     elsif @blog.update_attributes params[:blog]
+      flash[:notice] = I18n.t('admin.blog.edit.success')
       redirect_to admin_blog_path
     else
       breadcrumbs_for :edit

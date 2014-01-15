@@ -6,6 +6,11 @@ RSpec.describe User do
   let(:attributes) { {} }
   let(:instance) { FactoryGirl.build :user, attributes }
 
+  describe '#posts' do
+    it { expect(instance).to respond_to(:posts).with(0).arguments }
+    it { expect(instance.posts).to be_a Array }
+  end # describe
+
   describe '#email' do
     it { expect(instance).to have_property(:email) }
   end # describe

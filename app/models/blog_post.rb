@@ -5,6 +5,7 @@ class BlogPost
 
   CONTENT_TYPES = %w(plain)
 
+  belongs_to :author, :class_name => 'User', :inverse_of => :posts
   belongs_to :blog
 
   field :title, :type => String
@@ -12,6 +13,7 @@ class BlogPost
   field :content,      :type => String
   field :content_type, :type => String
 
+  validates :author, :presence => true
   validates :blog, :presence => true
   validates :title, :presence => true
   validates :content_type, :presence => true,

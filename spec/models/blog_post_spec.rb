@@ -14,6 +14,16 @@ RSpec.describe BlogPost do
     end # each
   end # describe
 
+  describe '#author' do
+    it { expect(instance).to respond_to(:author) }
+    it { expect(instance.author).to be_a User }
+  end # describe
+
+  describe '#blog' do
+    it { expect(instance).to respond_to(:blog) }
+    it { expect(instance.blog).to be_a Blog }
+  end # describe
+
   describe '#content' do
     it { expect(instance).to have_property(:content) }
   end # describe
@@ -48,13 +58,14 @@ RSpec.describe BlogPost do
     end # context
   end # describe
 
-  describe '#blog' do
-    it { expect(instance).to respond_to(:blog) }
-    it { expect(instance.blog).to be_a Blog }
-  end # describe
-
   describe 'validation' do
     it { expect(instance).to be_valid }
+
+    describe 'author must be present' do
+      let(:attributes) { super().merge :author => nil }
+
+      it { expect(instance).to have_errors.on(:author).with_message('can\'t be blank') }
+    end # describe
 
     describe 'blog must be present' do
       let(:attributes) { super().merge :blog => nil }

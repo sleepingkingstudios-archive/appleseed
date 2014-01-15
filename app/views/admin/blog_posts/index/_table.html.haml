@@ -7,6 +7,7 @@
     %tr
       %th Title
       %th Content Type
+      %th Author
   %tbody
     - if blog_posts.empty?
       %tr
@@ -15,3 +16,4 @@
       %tr
         %td= post.title
         %td= post.content_type
+        %td= post.author.email

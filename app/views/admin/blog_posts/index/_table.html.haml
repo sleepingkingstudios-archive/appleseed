@@ -1,0 +1,17 @@
+-# app/views/admin/blogs/show/_posts_table.html.haml
+
+%h2= I18n.t('admin.blog.posts.title')
+
+%table.full-width
+  %thead
+    %tr
+      %th Title
+      %th Content Type
+  %tbody
+    - if blog_posts.empty?
+      %tr
+        %td.text-center{ :colspan => 2 }= I18n.t('admin.blog.posts.table.empty')
+    - blog_posts.each do |post|
+      %tr
+        %td= post.title
+        %td= post.content_type

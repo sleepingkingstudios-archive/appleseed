@@ -28,6 +28,14 @@ en:
         success: '%{icon:book} Blog successfully created.'
         title: 'Create Blog'
       resource_not_found: 'There are no blogs created.'
+      posts:
+        delete:
+          submit: 'Delete Post'
+        edit:
+          submit: 'Edit Post'
+        table:
+          empty: 'There are no blog posts.'
+        title: 'Blog Posts'
     breadcrumb: 'Admin'
     index:
       blog:
@@ -58,4 +66,6 @@ en:
     admin: 'Admin'
   shared:
     cancel: 'Cancel'
+    delete: 'Delete'
+    edit: 'Edit'
     warning: 'Warning'

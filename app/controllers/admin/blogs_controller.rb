@@ -3,6 +3,7 @@
 class Admin::BlogsController < Admin::AdminController
   before_action :build_resource, :only => %i(new create)
   before_action :load_resource,  :only => %i(show edit update destroy)
+  before_action :load_associations, :only => %i(show)
 
   # POST /admin/blog
   def create
@@ -88,6 +89,10 @@ class Admin::BlogsController < Admin::AdminController
   def build_resource
     @blog = Blog.new params[:blog]
   end # method build_resource
+
+  def load_associations
+    @blog_posts = @blog.posts if @blog
+  end # method load_associations
 
   def load_resource
     @blog = Blog.first

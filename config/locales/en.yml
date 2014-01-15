@@ -43,6 +43,10 @@ en:
         submit: '%{icon:pencil} Create Post'
         success: '%{icon:pencil} Post successfully created.'
         title: 'Create Post'
+      raw_content: 'Raw Content'
+      show:
+        back:  '%{icon:arrow-left} Back to Blog'
+        title: 'Admin Blog Post'
     breadcrumb: 'Admin'
     index:
       blog:
@@ -66,6 +70,7 @@ en:
     content_types:
       plain: 'Plain Text'
     fields:
+      author: 'Author'
       content: 'Content'
       content_type: 'Content Type'
       title: 'Title'

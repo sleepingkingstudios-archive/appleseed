@@ -3,15 +3,16 @@
 %table.full-width
   %thead
     %tr
-      %th Title
-      %th Content Type
-      %th Author
+      %th= I18n.t('blog_post.fields.title')
+      %th= I18n.t('blog_post.fields.content_type')
+      %th= I18n.t('blog_post.fields.author')
   %tbody
     - if blog_posts.empty?
       %tr
         %td.text-center{ :colspan => 2 }= I18n.t('admin.blog.posts.table.empty')
-    - blog_posts.each do |post|
+    - blog_posts.each do |blog_post|
+      - blog_post_presenter = BlogPostPresenter.new blog_post
       %tr
-        %td= post.title
-        %td= post.content_type
-        %td= post.author.email
+        %td= link_to blog_post.title, admin_blog_post_path(blog_post)
+        %td= blog_post_presenter.localized_content_type
+        %td= blog_post.author.email

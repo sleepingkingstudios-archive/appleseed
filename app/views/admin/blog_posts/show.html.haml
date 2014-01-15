@@ -1,0 +1,22 @@
+-# app/views/admin/blog_posts/show.html.haml
+
+%h1= I18n.t('admin.blog_posts.show.title')
+
+%p
+  = succeed(':') do
+    %strong= I18n.t('blog_post.fields.title')
+  = @blog_post.title
+  %br
+  = succeed(':') do
+    %strong= I18n.t('blog_post.fields.content_type')
+  = @blog_post_presenter.localized_content_type
+
+%p
+  = succeed(':') do
+    %strong= I18n.t('admin.blog_posts.raw_content')
+  %br
+  = @blog_post_presenter.raw_content
+
+%p
+  = link_to admin_blog_path do
+    = render_with_icon(I18n.t 'admin.blog_posts.show.back')

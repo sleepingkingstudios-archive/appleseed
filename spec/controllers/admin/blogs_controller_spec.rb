@@ -5,54 +5,30 @@ require 'spec_helper'
 RSpec.describe Admin::BlogsController do
   include Appleseed::SharedExamples::AdminControllerAuthenticatesUser
 
-  expect_behavior 'authenticates the user', described_class, :only => %i(show new create)
+  expect_behavior 'authenticates the user for singular resource', described_class, :only => %i(show new create)
 
   context 'with no authenticated user' do
     describe 'GET /admin/blog/edit' do
-      context 'with no existing blog' do
-        it 'redirects to root' do
-          get :edit
-          expect(response.status).to be == 302
-          expect(response).to redirect_to :root
-        end # it
-      end # context
-
       context 'with an existing blog' do
         before(:each) { FactoryGirl.create :blog }
 
-        expect_behavior 'authenticates the user', described_class, :only => :edit
+        expect_behavior 'authenticates the user for singular resource', described_class, :only => :edit
       end # context
     end # describe
 
     describe 'PATCH /admin/blog' do
-      context 'with no existing blog' do
-        it 'redirects to root' do
-          patch :update
-          expect(response.status).to be == 302
-          expect(response).to redirect_to :root
-        end # it
-      end # context
-
       context 'with an existing blog' do
         before(:each) { FactoryGirl.create :blog }
 
-        expect_behavior 'authenticates the user', described_class, :only => :update
+        expect_behavior 'authenticates the user for singular resource', described_class, :only => :update
       end # context
     end # describe
 
     describe 'DELETE /admin/blog' do
-      context 'with no existing blog' do
-        it 'redirects to root' do
-          delete :destroy
-          expect(response.status).to be == 302
-          expect(response).to redirect_to :root
-        end # it
-      end # context
-
       context 'with an existing blog' do
         before(:each) { FactoryGirl.create :blog }
 
-        expect_behavior 'authenticates the user', described_class, :only => :destroy
+        expect_behavior 'authenticates the user for singular resource', described_class, :only => :destroy
       end # context
     end # describe
   end # context

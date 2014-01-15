@@ -5,14 +5,37 @@ require 'spec_helper'
 RSpec.describe Admin::BlogPostsController do
   include Appleseed::SharedExamples::AdminControllerAuthenticatesUser
 
-  expect_behavior 'authenticates the user', described_class, :only => %i(new create)
+  context 'with a blog post' do
+    let(:blog_post)   { FactoryGirl.create :blog_post }
+    let(:resource_id) { blog_post.id }
+
+    expect_behavior 'authenticates the user for resources', described_class, :only => %i(create new show)
+  end # context
+
+  context 'with no authenticated user' do
+    describe 'GET /admin/blog/posts' do
+      it 'redirects to root' do
+        get :index
+        expect(response.status).to be == 302
+        expect(response).to redirect_to :root
+      end # it
+    end # describe
+  end # context
 
   context 'with an authenticated user' do
     let(:user) { FactoryGirl.create :user }
 
     before(:each) { sign_in user }
 
-    describe 'POST' do
+    describe 'GET /admin/blog/posts' do
+      it 'redirects to admin blog' do
+        get :index
+        expect(response.status).to be == 302
+        expect(response).to redirect_to admin_blog_path
+      end # it
+    end # describe
+
+    describe 'POST /admin/blog/posts' do
       let!(:blog) { FactoryGirl.create :blog }
       let(:attributes) do
         attrs = FactoryGirl.attributes_for(:blog_post)

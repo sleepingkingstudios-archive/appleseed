@@ -1,3 +1,5 @@
+# app/helpers/admin/settings_helper.rb
+
 module Admin::SettingsHelper
   def boolean_setting_tag name, options = {}
     raw_value = value_for_name(name)

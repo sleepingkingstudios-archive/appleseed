@@ -27,6 +27,10 @@
   = link_to render_with_icon(I18n.t 'admin.blog.delete.submit'), '#', :id => 'open-confirm-delete-modal-link', :class => 'button radius thin alert hide', :data => { :"reveal-id" => 'confirm-delete-modal' }
   = link_to render_with_icon(I18n.t 'admin.blog.delete.submit'), admin_blog_path, :method => :delete, :id => 'delete-blog-link', :class => 'button radius thin alert'
 
+  .clear
+    .right
+      = link_to render_with_icon(I18n.t 'admin.blog_posts.new.submit'), new_admin_blog_post_path, :class => 'button thin radius success'
+    %h2= I18n.t('admin.blog.posts.title')
   = render :partial => 'admin/blog_posts/index/table', :locals => { :blog => @blog, :blog_posts => @blog_posts }
 - else
   %p

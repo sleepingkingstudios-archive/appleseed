@@ -36,6 +36,13 @@ en:
         table:
           empty: 'There are no blog posts.'
         title: 'Blog Posts'
+    blog_posts:
+      breadcrumb: 'Posts'
+      new:
+        breadcrumb: 'Create Post'
+        submit: '%{icon:pencil} Create Post'
+        success: '%{icon:pencil} Post successfully created.'
+        title: 'Create Post'
     breadcrumb: 'Admin'
     index:
       blog:
@@ -54,6 +61,14 @@ en:
     breadcrumb: 'Blog'
     post_count: 'Post Count'
     title: 'Title'
+  blog_post:
+    breadcrumb: 'Post'
+    content_types:
+      plain: 'Plain Text'
+    fields:
+      content: 'Content'
+      content_type: 'Content Type'
+      title: 'Title'
   devise:
     failure:
       registration_closed: '%{icon:alert} User registration is currently closed.'

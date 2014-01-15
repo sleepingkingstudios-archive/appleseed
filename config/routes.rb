@@ -4,7 +4,9 @@ Appleseed::Application.routes.draw do
   end # scope
 
   namespace :admin do
-    resource :blog
+    resource :blog do
+      resources :blog_posts, :as => :posts, :only => %i(new create)
+    end # resource
 
     resource :settings, :only => %i(show update)
   end # namespace

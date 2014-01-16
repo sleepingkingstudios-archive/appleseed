@@ -38,6 +38,11 @@ en:
         title: 'Blog Posts'
     blog_posts:
       breadcrumb: 'Posts'
+      edit:
+        breadcrumb: 'Edit Post'
+        submit: '%{icon:wrench} Edit Post'
+        success: '%{icon:wrench} Post successfully updated.'
+        title: 'Edit Post'
       new:
         breadcrumb: 'Create Post'
         submit: '%{icon:pencil} Create Post'

@@ -9,3 +9,11 @@ $ ->
 
   # Enable autosize for the content field.
   $root.find('#blog_post_content').autosize()
+
+# Admin::Blogs#edit
+$ ->
+  $root = $('body.admin-blog-posts-edit')
+  return unless $root?
+
+  # Enable autosize for the content field.
+  $root.find('#blog_post_content').autosize()

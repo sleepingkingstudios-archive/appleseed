@@ -1,0 +1,8 @@
+-# app/views/admin/blog_posts/edit.html.haml
+
+= content_for :body_class do
+  admin-blog-posts-edit
+
+%h1= I18n.t('admin.blog_posts.edit.title')
+
+= render :partial => 'admin/blog_posts/form', :locals => { :blog => @blog, :post => @blog_post }

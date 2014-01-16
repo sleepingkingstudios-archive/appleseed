@@ -5,7 +5,7 @@ Appleseed::Application.routes.draw do
 
   namespace :admin do
     resource :blog do
-      resources :blog_posts, :as => :posts, :only => %i(index create new show edit update)
+      resources :blog_posts, :as => :posts
     end # resource
 
     resource :settings, :only => %i(show update)

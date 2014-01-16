@@ -3,6 +3,7 @@
 .clear
   .right
     = link_to render_with_icon(I18n.t 'admin.blog_posts.edit.submit'), edit_admin_blog_post_path(@blog_post), :class => 'button radius thin'
+    = link_to render_with_icon(I18n.t 'admin.blog_posts.delete.submit'), admin_blog_post_path(@blog_post), :method => :delete, :id => 'delete-blog-post-link', :class => 'button radius thin alert'
 
 %h1= I18n.t('admin.blog_posts.show.title')
 

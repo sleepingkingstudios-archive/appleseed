@@ -29,15 +29,14 @@ en:
         title: 'Create Blog'
       resource_not_found: 'There are no blogs created.'
       posts:
-        delete:
-          submit: 'Delete Post'
-        edit:
-          submit: 'Edit Post'
         table:
           empty: 'There are no blog posts.'
         title: 'Blog Posts'
     blog_posts:
       breadcrumb: 'Posts'
+      delete:
+        submit: '%{icon:skull} Delete Post'
+        success: '%{icon:skull} Post successfully deleted.'
       edit:
         breadcrumb: 'Edit Post'
         submit: '%{icon:wrench} Edit Post'

@@ -9,7 +9,7 @@ RSpec.describe Admin::BlogPostsController do
     let(:blog_post)   { FactoryGirl.create :blog_post }
     let(:resource_id) { blog_post.id }
 
-    expect_behavior 'authenticates the user for resources', described_class, :only => %i(create new show edit update)
+    expect_behavior 'authenticates the user for resources', described_class, :except => :index
   end # context
 
   context 'with no authenticated user' do
@@ -85,14 +85,15 @@ RSpec.describe Admin::BlogPostsController do
     end # describe
 
     context 'with a blog post' do
-      let(:blog_post) { FactoryGirl.create :blog_post }
-      let(:attributes) { {} }
-
-      def perform_action
-        patch :update, :id => blog_post.id, :blog_post => attributes
-      end # method perform_action
-
+      let!(:blog_post) { FactoryGirl.create :blog_post }
+      
       describe 'PATCH /admin/blog/posts/:id' do
+        let(:attributes) { {} }
+
+        def perform_action
+          patch :update, :id => blog_post.id, :blog_post => attributes
+        end # method perform_action
+
         context 'with invalid parameters' do
           let(:attributes) { { :content_type => nil } }
 
@@ -127,6 +128,24 @@ RSpec.describe Admin::BlogPostsController do
             }.to change(blog_post, :title).to(title)
           end # it
         end # context
+      end # describe
+
+      describe 'DELETE /admin/blog/posts/:id' do
+        def perform_action
+          delete :destroy, :id => blog_post.id
+        end # method perform_action
+
+        it 'redirects to the admin blog path' do
+          perform_action
+          expect(response.status).to be == 302
+          expect(response).to redirect_to admin_blog_path
+        end # it
+
+        it 'destroys the blog post' do
+          expect {
+            perform_action
+          }.to change(BlogPost, :count).to(0)
+        end # it
       end # describe
     end # context
   end # context

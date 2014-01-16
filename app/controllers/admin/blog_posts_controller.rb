@@ -3,7 +3,7 @@
 class Admin::BlogPostsController < Admin::AdminController
   before_action :load_dependent_resources
   before_action :build_resource, :only => %i(new create)
-  before_action :load_resource, :only => %i(show edit update)
+  before_action :load_resource, :only => %i(show edit update destroy)
 
   # POST /admin/blog/posts
   def create
@@ -15,6 +15,14 @@ class Admin::BlogPostsController < Admin::AdminController
       render :new
     end # if-else
   end # action create
+
+  # DELETE /admin/blog/posts/:id
+  def destroy
+    @blog_post.destroy
+
+    flash[:alert] = I18n.t('admin.blog_posts.delete.success')
+    redirect_to admin_blog_path
+  end # action destroy
 
   # GET /admin/blog/posts/:id/edit
   def edit

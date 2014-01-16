@@ -1,11 +1,19 @@
 -# app/views/admin/blog_posts/show.html.haml
 
-.clear
-  .right
-    = link_to render_with_icon(I18n.t 'admin.blog_posts.edit.submit'), edit_admin_blog_post_path(@blog_post), :class => 'button radius thin'
-    = link_to render_with_icon(I18n.t 'admin.blog_posts.delete.submit'), admin_blog_post_path(@blog_post), :method => :delete, :id => 'delete-blog-post-link', :class => 'button radius thin alert'
+= content_for :body_class do
+  admin-blog-posts-show
 
-%h1= I18n.t('admin.blog_posts.show.title')
+= render :partial => 'admin/shared/modals/confirm_delete', :locals => { :title => I18n.t('admin.blog_posts.delete.confirm.title'), :body => I18n.t('admin.blog_posts.delete.confirm.body', :title => @blog_post.title), :submit => render_with_icon(I18n.t 'admin.blog_posts.delete.submit') }
+
+.row
+  .large-6.columns
+    %h1= I18n.t('admin.blog_posts.show.title')
+  .large-6.columns
+    .heading-buttons.tall
+      = link_to render_with_icon(I18n.t 'admin.blog_posts.edit.submit'), edit_admin_blog_post_path(@blog_post), :class => 'button radius thin'
+      = link_to render_with_icon(I18n.t 'admin.blog_posts.delete.submit'), '#', :id => 'open-confirm-delete-modal-link', :class => 'button radius thin alert hide', :data => { :"reveal-id" => 'confirm-delete-modal' }
+      = link_to render_with_icon(I18n.t 'admin.blog_posts.delete.submit'), admin_blog_post_path(@blog_post), :method => :delete, :id => 'delete-blog-post-link', :class => 'button radius thin alert'
+
 
 %p
   = succeed(':') do

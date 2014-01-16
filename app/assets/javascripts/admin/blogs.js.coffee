@@ -12,8 +12,8 @@ $ ->
 
   $delete_button  = $root.find('#delete-blog-link')
   $hidden_button  = $root.find('#open-confirm-delete-modal-link')
-  $confirm_button = $modal.find('#confirm-delete-blog-link')
-  $cancel_button  = $modal.find('#cancel-delete-blog-link')
+  $confirm_button = $modal.find('#confirm-delete-link')
+  $cancel_button  = $modal.find('#cancel-delete-link')
 
   # Hide the actual button and show the modal popup button.
   $delete_button.hide()

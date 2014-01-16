@@ -88,6 +88,19 @@ p, span {
   }
 }
 
+
+
+@media #{$large-up} {
+  .heading-buttons {
+    margin-top: 0.25rem;
+    text-align: right;
+
+    &.tall {
+      margin-top: 0.5rem;
+    }
+  }
+}
+
 form.new_user {
   margin-top: rem-calc(20);
 }

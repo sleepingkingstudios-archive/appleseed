@@ -9,7 +9,7 @@
   %tbody
     - if blog_posts.empty?
       %tr
-        %td.text-center{ :colspan => 2 }= I18n.t('admin.blog.posts.table.empty')
+        %td.text-center{ :colspan => 3 }= I18n.t('admin.blog.posts.table.empty')
     - blog_posts.each do |blog_post|
       - blog_post_presenter = BlogPostPresenter.new blog_post
       %tr

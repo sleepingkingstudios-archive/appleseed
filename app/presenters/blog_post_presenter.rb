@@ -7,6 +7,13 @@ class BlogPostPresenter < Struct.new(:blog_post)
     I18n.t(content_type, :scope => 'blog_post.content_types', :locale => locale)
   end # method localized_content_type
 
+  def formatted_content
+    case content_type
+    when 'plain'
+      PlainTextFormatter.new(content).format
+    end # case
+  end # method formatted_content
+
   def raw_content
     RawContentFormatter.new(content).format
   end # method raw_content
@@ -22,6 +29,12 @@ class BlogPostPresenter < Struct.new(:blog_post)
 
     def format
       html_escape(content).gsub(/\r\n|\n|\r/, '<br />').html_safe
+    end # method format
+  end # class
+
+  class PlainTextFormatter < RawContentFormatter
+    def format
+      "<p>#{content.blank? ? I18n.t('blog_post.empty_content') : super}</p>".html_safe
     end # method format
   end # class
 end # class

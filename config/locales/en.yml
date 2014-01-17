@@ -78,12 +78,14 @@ en:
       breadcrumb: 'Settings'
   blog:
     breadcrumb: 'Blog'
+    empty: 'There are no posts in this blog.'
     post_count: 'Post Count'
     title: 'Title'
   blog_post:
     breadcrumb: 'Post'
     content_types:
       plain: 'Plain Text'
+    empty_content: '(no content)'
     fields:
       author: 'Author'
       content: 'Content'

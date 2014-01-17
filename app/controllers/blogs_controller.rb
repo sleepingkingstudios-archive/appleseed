@@ -1,7 +1,7 @@
 # app/controllers/blogs_controller.rb
 
 class BlogsController < ApplicationController
-  before_action :load_resource
+  before_action :load_resources
 
   # GET /blog
   def show
@@ -16,7 +16,8 @@ class BlogsController < ApplicationController
 
   private
 
-  def load_resource
+  def load_resources
     @blog = Blog.first
-  end # method load_resource
+    @blog_posts = @blog ? @blog.posts : []
+  end # method load_resources
 end # controller

@@ -1,3 +1,14 @@
 -# app/views/blogs/show.html.haml
 
 %h1= @blog.title
+
+- if @blog_posts.blank?
+  %p= I18n.t('blog.empty')
+- else
+  - @blog_posts.each do |blog_post|
+    - blog_post_presenter = BlogPostPresenter.new blog_post
+    %section
+      %h2= blog_post.title
+
+      = blog_post_presenter.formatted_content
+  

@@ -54,6 +54,34 @@ RSpec.describe BlogPostPresenter do
     end # context
   end # describe
 
+  describe '#formatted_content' do
+    let(:content)      { nil }
+    let(:content_type) { nil }
+    let(:attributes) do
+      super().merge :content => content, :content_type => content_type
+    end # let
+
+    it { expect(instance).to respond_to(:formatted_content).with(0).arguments }
+
+    context 'as plain text' do
+      let(:content_type) { 'plain' }
+
+      context 'with a simple string content' do
+        let(:content)   { 'My name is Ozymandias, king of kings!' }
+        let(:formatted) { "<p>#{content}</p>" }
+
+        it { expect(instance.formatted_content).to be == formatted }
+      end # context
+
+      context 'with an empty string' do
+        let(:content)   { '' }
+        let(:formatted) { "<p>#{I18n.t('blog_post.empty_content')}</p>" }
+
+        it { expect(instance.formatted_content).to be == formatted }
+      end # context
+    end # context
+  end # describe
+
   describe '#raw_content' do
     let(:content)    { nil }
     let(:attributes) { super().merge :content => content }

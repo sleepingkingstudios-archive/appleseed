@@ -1,7 +1,10 @@
 # app/models/blog_post.rb
 
+require 'mongoid/sleeping_king_studios/orderable'
+
 class BlogPost
   include Mongoid::Document
+  include Mongoid::SleepingKingStudios::Orderable
 
   CONTENT_TYPES = %w(plain)
 
@@ -15,13 +18,19 @@ class BlogPost
 
   field :published_at, :type => DateTime
 
-  scope :published, -> { where(:published_at.lte => DateTime.current) }
+  scope :published, -> {
+    where(:published_at.lte => DateTime.current).asc(:published_order)
+  }
 
   validates :author, :presence => true
   validates :blog, :presence => true
   validates :title, :presence => true
   validates :content_type, :presence => true,
     :inclusion => { :in => CONTENT_TYPES }
+
+  cache_ordering :created_at.desc,   :as => :most_recent_order
+  cache_ordering :published_at.desc, :as => :published_order,
+    :filter => { :published_at.ne => nil }
 
   def publish
     self.published_at = DateTime.current

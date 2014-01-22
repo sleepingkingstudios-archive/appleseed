@@ -56,7 +56,9 @@ en:
         success: '%{icon:book} Post successfully published.'
       raw_content: 'Raw Content'
       show:
-        back:  '%{icon:arrow-left} Back to Blog'
+        back:  '%{icon:arrow-down} Back to Blog'
+        next:  '%{icon:arrow-right} Next Post'
+        prev:  '%{icon:arrow-left} Previous Post'
         title: 'Admin Blog Post'
     breadcrumb: 'Admin'
     index:

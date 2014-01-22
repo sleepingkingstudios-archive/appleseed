@@ -95,7 +95,7 @@ class Admin::BlogsController < Admin::AdminController
   end # method build_resource
 
   def load_associations
-    @blog_posts = @blog.posts if @blog
+    @blog_posts = @blog ? @blog.posts.asc(:most_recent_order) : []
   end # method load_associations
 
   def load_resource

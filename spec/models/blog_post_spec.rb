@@ -57,9 +57,27 @@ RSpec.describe BlogPost do
     it { expect(instance).to have_property(:content_type) }
   end # describe
 
-  describe '#published_at?' do
-    it { expect(instance).to respond_to(:published_at) }
+  describe '#most_recent_order' do
+    it { expect(instance).to have_reader(:most_recent_order) }
+    it { expect(instance.most_recent_order).to be nil }
+
+    describe '#save' do
+      it 'adds the record to the most recent ordering' do
+        expect {
+          instance.save
+        }.to change(instance, :most_recent_order).to(be_a Integer)
+      end # it
+    end # describe
+  end # describe
+
+  describe '#published_at' do
+    it { expect(instance).to have_property(:published_at) }
     it { expect(instance.published_at).to be nil }
+  end # describe
+
+  describe '#published_order' do
+    it { expect(instance).to have_reader(:published_order) }
+    it { expect(instance.published_order).to be nil }
   end # describe
 
   describe '#title' do
@@ -98,7 +116,13 @@ RSpec.describe BlogPost do
         expect {
           instance.publish
         }.to change(instance, :persisted?).to(true)
-      end # it'
+      end # it
+
+      it 'adds the record to the published ordering' do
+        expect {
+          instance.publish
+        }.to change(instance, :published_order).to(be_a Integer)
+      end # it
     end # context
   end # describe
 

@@ -62,7 +62,7 @@ class Admin::BlogsController < Admin::AdminController
     if 0 == Blog.count
       flash[:notice] = I18n.t('admin.blog.failure.blog_does_not_exist', :action => t('admin.blog.edit.title').downcase)
       redirect_to admin_blog_path
-    elsif @blog.update_attributes params[:blog]
+    elsif @blog.update_attributes blog_params
       flash[:notice] = I18n.t('admin.blog.edit.success')
       redirect_to admin_blog_path
     else
@@ -72,6 +72,10 @@ class Admin::BlogsController < Admin::AdminController
   end # action update
 
   private
+
+  def blog_params
+    params.fetch(:blog, {}).permit(:title)
+  end # method blog_params
 
   def breadcrumbs_for action
     case action
@@ -87,7 +91,7 @@ class Admin::BlogsController < Admin::AdminController
   end # method breadcrumbs_for
 
   def build_resource
-    @blog = Blog.new params[:blog]
+    @blog = Blog.new blog_params
   end # method build_resource
 
   def load_associations

@@ -59,7 +59,7 @@ class Admin::BlogPostsController < Admin::AdminController
 
   # PATCH /admin/blog/posts/:id
   def update
-    if @blog_post.update_attributes params[:blog_post]
+    if @blog_post.update_attributes blog_post_params
       flash[:notice] = I18n.t('admin.blog_posts.edit.success')
       redirect_to admin_blog_post_path(@blog_post)
     else
@@ -69,6 +69,10 @@ class Admin::BlogPostsController < Admin::AdminController
   end # action update
 
   private
+
+  def blog_post_params
+    params.fetch(:blog_post, {}).permit(:title, :content, :content_type)
+  end # method blog_post_params
 
   def breadcrumbs_for action
     @breadcrumbs << [I18n.t('admin.blog.breadcrumb'), admin_blog_path]
@@ -87,7 +91,7 @@ class Admin::BlogPostsController < Admin::AdminController
   end # method breadcrumbs_for
 
   def build_resource
-    @blog_post = BlogPost.new params[:blog_post]
+    @blog_post = BlogPost.new blog_post_params
     @blog_post.author = current_user
     @blog_post.blog   = @blog
     @blog_post

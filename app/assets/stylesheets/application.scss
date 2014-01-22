@@ -75,18 +75,14 @@ hr {
   }
 }
 
-p, span {
+p, span, i {
   &.alert {
     color: $font-color-orange;
   }
-}
 
-.green {
-  color: $font-color-green;
-}
-
-.orange {
-  color: $font-color-orange;
+  &.success {
+    color: $font-color-green;
+  }
 }
 
 /***********

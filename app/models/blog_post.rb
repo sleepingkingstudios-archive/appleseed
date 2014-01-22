@@ -4,6 +4,7 @@ require 'mongoid/sleeping_king_studios/orderable'
 
 class BlogPost
   include Mongoid::Document
+  include Mongoid::Timestamps
   include Mongoid::SleepingKingStudios::Orderable
 
   CONTENT_TYPES = %w(plain)
@@ -16,10 +17,10 @@ class BlogPost
   field :content,      :type => String
   field :content_type, :type => String
 
-  field :published_at, :type => DateTime
+  field :published_at, :type => Time
 
   scope :published, -> {
-    where(:published_at.lte => DateTime.current).asc(:published_order)
+    where(:published_at.lte => Time.now.utc).asc(:published_order)
   }
 
   validates :author, :presence => true
@@ -33,11 +34,17 @@ class BlogPost
     :filter => { :published_at.ne => nil }
 
   def publish
-    self.published_at = DateTime.current
-    self.save
+    self.published_at = Time.now.utc
+
+    if self.save
+      true
+    else
+      self.published_at = nil
+      false
+    end # if-else
   end # method publish
 
   def published?
-    !self.published_at.blank? && self.published_at <= DateTime.now
+    !self.published_at.blank? && self.published_at <= Time.now.utc
   end # method published?
 end # model

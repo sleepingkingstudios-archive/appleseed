@@ -9,7 +9,7 @@ gem 'rails', '4.0.2'
 gem 'mongoid',  '4.0.0.alpha2', github: 'mongoid/mongoid'
 gem 'devise',   '~> 3.2.2'
 
-gem 'mongoid-sleeping_king_studios', '~> 0.7.4'
+gem 'mongoid-sleeping_king_studios', '~> 0.7.6', :github => 'sleepingkingstudios/mongoid-sleeping_king_studios'
 
 ### Assets ###
 gem 'haml-rails',        '~> 0.4'

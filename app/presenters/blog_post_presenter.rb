@@ -1,7 +1,10 @@
 # app/presenters/blog_post_presenter.rb
 
 class BlogPostPresenter < Struct.new(:blog_post)
-  delegate :author, :blog, :content, :content_type, :title, :to => :blog_post
+  include ActionView::Helpers::TagHelper
+
+  delegate :author, :blog, :content, :content_type, :published_at, :published?,
+    :title, :to => :blog_post
 
   def localized_content_type locale = I18n.locale
     I18n.t(content_type, :scope => 'blog_post.content_types', :locale => locale)

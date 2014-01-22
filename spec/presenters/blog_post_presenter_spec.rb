@@ -32,6 +32,16 @@ RSpec.describe BlogPostPresenter do
     it { expect(instance.content_type).to be == blog_post.content_type }
   end # describe
 
+  describe '#published_at' do
+    it { expect(instance).to have_reader(:published_at) }
+    it { expect(instance.published_at).to be == blog_post.published_at }
+  end # describe
+
+  describe '#published?' do
+    it { expect(instance).to respond_to(:published?).with(0).arguments }
+    it { expect(instance.published?).to be == blog_post.published? }
+  end # describe
+
   describe '#title' do
     it { expect(instance).to have_reader(:title) }
     it { expect(instance.title).to be == blog_post.title }

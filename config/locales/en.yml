@@ -56,7 +56,7 @@ en:
         success: '%{icon:book} Post successfully published.'
       raw_content: 'Raw Content'
       show:
-        back:  '%{icon:arrow-down} Back to Blog'
+        back:  '%{icon:arrow-up} Back to Blog'
         next:  '%{icon:arrow-right} Next Post'
         prev:  '%{icon:arrow-left} Previous Post'
         title: 'Admin Blog Post'
@@ -95,6 +95,7 @@ en:
       author: 'Author'
       content: 'Content'
       content_type: 'Content Type'
+      published_at: 'Date Published'
       title: 'Title'
     published: 'Published'
   devise:

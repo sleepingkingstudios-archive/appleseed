@@ -52,7 +52,7 @@ class Admin::BlogPostsController < Admin::AdminController
 
   # GET /admin/blog/posts/:id
   def show
-    @blog_post_presenter = BlogPostPresenter.new @blog_post
+    @blog_post_presenter = Admin::BlogPostPresenter.new @blog_post
 
     breadcrumbs_for :show
   end # action show

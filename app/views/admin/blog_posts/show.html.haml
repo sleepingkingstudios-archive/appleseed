@@ -13,7 +13,7 @@
 = link_to render_with_icon(I18n.t 'admin.blog_posts.delete.submit'), '#', :id => 'open-confirm-delete-modal-link', :class => 'button radius thin alert hide', :data => { :"reveal-id" => 'confirm-delete-modal' }
 = link_to render_with_icon(I18n.t 'admin.blog_posts.delete.submit'), admin_blog_post_path(@blog_post), :method => :delete, :id => 'delete-blog-post-link', :class => 'button radius thin alert'
 
-= render :partial => 'admin/blog_posts/show/navigation', :locals => { :next_post => @blog_post.next_most_recent, :prev_post => @blog_post.prev_most_recent}
+= render :partial => 'admin/blog_posts/show/navigation', :locals => { :next_post => @blog_post.prev_most_recent, :prev_post => @blog_post.next_most_recent}
 
 %p
   = succeed(':') do
@@ -23,6 +23,11 @@
   = succeed(':') do
     %strong= I18n.t('blog_post.fields.content_type')
   = @blog_post_presenter.localized_content_type
+  %br
+  = succeed(':') do
+    %strong= I18n.t('blog_post.published')
+  = @blog_post_presenter.published_mark
+  = @blog_post_presenter.published_date
 
 %p
   = succeed(':') do
@@ -30,4 +35,4 @@
   %br
   = @blog_post_presenter.raw_content
 
-= render :partial => 'admin/blog_posts/show/navigation', :locals => { :next_post => @blog_post.next_most_recent, :prev_post => @blog_post.prev_most_recent}
+= render :partial => 'admin/blog_posts/show/navigation', :locals => { :next_post => @blog_post.prev_most_recent, :prev_post => @blog_post.next_most_recent}

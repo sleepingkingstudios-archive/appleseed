@@ -57,6 +57,20 @@ RSpec.describe BlogPost do
     it { expect(instance).to have_property(:content_type) }
   end # describe
 
+  describe '#created_at' do
+    it { expect(instance).to have_property(:created_at) }
+    it { expect(instance.created_at).to be nil }
+
+    describe '#save' do
+      it 'updates the value' do
+        expect {
+          instance.save
+          instance.reload
+        }.to change(instance, :created_at).to(be_a ActiveSupport::TimeWithZone)
+      end # it
+    end # describe
+  end # describe
+
   describe '#most_recent_order' do
     it { expect(instance).to have_reader(:most_recent_order) }
     it { expect(instance.most_recent_order).to be nil }
@@ -87,17 +101,17 @@ RSpec.describe BlogPost do
   describe '#publish' do
     it { expect(instance).to respond_to(:publish).with(0).arguments }
 
-    it 'sets the value of published_at' do
-      expect {
-        instance.publish
-      }.to change(instance, :published_at).to(be_a(DateTime))
-    end # it
-
     context 'with an invalid record' do
       let(:attributes) { super().merge :content_type => nil }
 
       it 'returns false' do
         expect(instance.publish).to be false
+      end # it
+
+      it 'does not update the published_at date' do
+        expect {
+          instance.publish
+        }.not_to change(instance, :published_at)
       end # it
 
       it 'does not save the record' do
@@ -116,6 +130,12 @@ RSpec.describe BlogPost do
         expect {
           instance.publish
         }.to change(instance, :persisted?).to(true)
+      end # it
+
+      it 'updates the published_at date' do
+        expect {
+          instance.publish
+        }.to change(instance, :published_at).to(be_a ActiveSupport::TimeWithZone)
       end # it
 
       it 'adds the record to the published ordering' do

@@ -5,7 +5,11 @@ Appleseed::Application.routes.draw do
 
   namespace :admin do
     resource :blog do
-      resources :posts, :controller => 'blog_posts'
+      resources :posts, :controller => 'blog_posts' do
+        member do
+          patch :publish
+        end # member
+      end # resources
     end # resource
 
     resource :settings, :only => %i(show update)

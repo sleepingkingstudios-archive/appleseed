@@ -18,6 +18,6 @@ class BlogsController < ApplicationController
 
   def load_resources
     @blog = Blog.first
-    @blog_posts = @blog ? @blog.posts : []
+    @blog_posts = @blog ? @blog.posts.published : []
   end # method load_resources
 end # controller

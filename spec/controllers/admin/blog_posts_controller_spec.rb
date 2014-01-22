@@ -10,6 +10,12 @@ RSpec.describe Admin::BlogPostsController do
     let(:resource_id) { blog_post.id }
 
     expect_behavior 'authenticates the user for resources', described_class, :except => :index
+
+    context do
+      let(:params) { { :id => blog_post.id } }
+
+      expect_behavior 'authenticates the user for action', described_class, :publish, :method => :patch
+    end # context
   end # context
 
   context 'with no authenticated user' do
@@ -146,6 +152,44 @@ RSpec.describe Admin::BlogPostsController do
             perform_action
           }.to change(BlogPost, :count).to(0)
         end # it
+      end # describe
+
+      describe 'PATCH /admin/blog/posts/:id/publish' do
+        def perform_action
+          patch :publish, :id => blog_post.id
+        end # method perform_action
+
+        context 'with an invalid record' do
+          before(:each) { blog_post.update_attribute :content_type, nil }
+
+          it 'responds with 200 ok and renders the edit template' do
+            perform_action
+            expect(response.status).to be == 200
+            expect(response).to render_template 'edit'
+          end # it
+
+          it 'does not publish the post' do
+            expect {
+              perform_action
+              blog_post.reload
+            }.not_to change(blog_post, :published?)
+          end # it
+        end # context
+
+        context 'with a valid record' do
+          it 'redirects to the admin show post path' do
+            perform_action
+            expect(response.status).to be == 302
+            expect(response).to redirect_to admin_blog_post_path(blog_post)
+          end # it
+
+          it 'publishes the post' do
+            expect {
+              perform_action
+              blog_post.reload
+            }.to change(blog_post, :published?).to true
+          end # it
+        end # context
       end # describe
     end # context
   end # context

@@ -14,6 +14,31 @@ RSpec.describe BlogPost do
     end # each
   end # describe
 
+  describe '::published scope' do
+    let(:records) { described_class.published.to_a }
+
+    before(:each) { instance.save! }
+
+    it { expect(described_class).to respond_to(:published) }
+    it { expect(described_class.published).to be_a Mongoid::Criteria }
+
+    context 'with an unpublished post' do
+      it { expect(records).not_to include instance }
+    end # context
+
+    context 'with a post published in the past' do
+      let(:attributes) { super().merge :published_at => 1.day.ago }
+
+      it { expect(records).to include instance }
+    end # context
+
+    context 'with a post published in the future' do
+      let(:attributes) { super().merge :published_at => 1.day.from_now }
+
+      it { expect(records).not_to include instance }
+    end # context
+  end # describe
+
   describe '#author' do
     it { expect(instance).to respond_to(:author) }
     it { expect(instance.author).to be_a User }
@@ -32,29 +57,65 @@ RSpec.describe BlogPost do
     it { expect(instance).to have_property(:content_type) }
   end # describe
 
+  describe '#published_at?' do
+    it { expect(instance).to respond_to(:published_at) }
+    it { expect(instance.published_at).to be nil }
+  end # describe
+
   describe '#title' do
     it { expect(instance).to have_property(:title) }
   end # describe
 
-  describe '#render_content' do
-    it { expect(instance).to respond_to(:render_content).with(0).arguments }
+  describe '#publish' do
+    it { expect(instance).to respond_to(:publish).with(0).arguments }
 
-    context 'with a plain text content' do
-      let(:content_type) { 'plain' }
-      let(:content) do
-        "It little profits that an idle king,\n" +
-        "By this still hearth, among these barren crags,\n" +
-        "Match'd with an aged wife I mete and dole\n" +
-        "Unequal laws unto a savage race\n" +
-        "That hoard, and sleep, and feed, and know not me."
-      end # let
-      let(:attributes) do
-        super().merge :content_type => content_type, :content => content
-      end # let
+    it 'sets the value of published_at' do
+      expect {
+        instance.publish
+      }.to change(instance, :published_at).to(be_a(DateTime))
+    end # it
 
-      it 'returns the content unfiltered' do
-        expect(instance.render_content).to be == content
+    context 'with an invalid record' do
+      let(:attributes) { super().merge :content_type => nil }
+
+      it 'returns false' do
+        expect(instance.publish).to be false
       end # it
+
+      it 'does not save the record' do
+        expect {
+          instance.publish
+        }.not_to change(instance, :persisted?)
+      end # it'
+    end # context
+
+    context 'with a valid record' do
+      it 'returns true' do
+        expect(instance.publish).to be true
+      end # it
+
+      it 'saves the record' do
+        expect {
+          instance.publish
+        }.to change(instance, :persisted?).to(true)
+      end # it'
+    end # context
+  end # describe
+
+  describe '#published?' do
+    it { expect(instance).to respond_to(:published?).with(0).arguments }
+    it { expect(instance.published?).to be false }
+
+    context 'with a post published in the past' do
+      let(:attributes) { super().merge :published_at => 1.day.ago }
+
+      it { expect(instance.published?).to be true }
+    end # context
+
+    context 'with a post published in the future' do
+      let(:attributes) { super().merge :published_at => 1.day.from_now }
+
+      it { expect(instance.published?).to be false }
     end # context
   end # describe
 

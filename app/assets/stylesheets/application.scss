@@ -6,6 +6,9 @@
 
 $header-font-family: Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic, "Apple Gothic", AppleGothic, "URW Gothic L", "Avant Garde", sans-serif;
 
+$font-color-green:  #43ac6a;
+$font-color-orange: #ea2f10;
+
 .hide {
   display: none;
 }
@@ -74,8 +77,16 @@ hr {
 
 p, span {
   &.alert {
-    color: #ea2f10;
+    color: $font-color-orange;
   }
+}
+
+.green {
+  color: $font-color-green;
+}
+
+.orange {
+  color: $font-color-orange;
 }
 
 /***********
@@ -87,8 +98,6 @@ p, span {
     padding: 0.5rem 1.25rem;
   }
 }
-
-
 
 @media #{$large-up} {
   .heading-buttons {

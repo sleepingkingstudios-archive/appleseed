@@ -3,7 +3,7 @@
 class Admin::BlogPostsController < Admin::AdminController
   before_action :load_dependent_resources
   before_action :build_resource, :only => %i(new create)
-  before_action :load_resource, :only => %i(show edit update destroy)
+  before_action :load_resource, :only => %i(show edit update destroy publish)
 
   # POST /admin/blog/posts
   def create
@@ -38,6 +38,17 @@ class Admin::BlogPostsController < Admin::AdminController
   def new
     breadcrumbs_for :new
   end # action new
+
+  # PATCH /admin/blog/posts/:id/publish
+  def publish
+    if @blog_post.publish
+      flash[:notice] = I18n.t('admin.blog_posts.publish.success')
+      redirect_to admin_blog_post_path(@blog_post)
+    else
+      breadcrumbs_for :edit
+      render :edit
+    end # if-else
+  end # action publish
 
   # GET /admin/blog/posts/:id
   def show

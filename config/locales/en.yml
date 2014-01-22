@@ -27,11 +27,11 @@ en:
         submit: '%{icon:book} Create Blog'
         success: '%{icon:book} Blog successfully created.'
         title: 'Create Blog'
-      resource_not_found: 'There are no blogs created.'
       posts:
         table:
           empty: 'There are no blog posts.'
         title: 'Blog Posts'
+      resource_not_found: 'There are no blogs created.'
       title: 'Admin Blog'
     blog_posts:
       breadcrumb: 'Posts'
@@ -51,6 +51,9 @@ en:
         submit: '%{icon:pencil} Create Post'
         success: '%{icon:pencil} Post successfully created.'
         title: 'Create Post'
+      publish:
+        submit:  '%{icon:book} Publish Post'
+        success: '%{icon:book} Post successfully published.'
       raw_content: 'Raw Content'
       show:
         back:  '%{icon:arrow-left} Back to Blog'
@@ -91,6 +94,7 @@ en:
       content: 'Content'
       content_type: 'Content Type'
       title: 'Title'
+    published: 'Published'
   devise:
     failure:
       registration_closed: '%{icon:alert} User registration is currently closed.'

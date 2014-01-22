@@ -6,13 +6,16 @@
       %th= I18n.t('blog_post.fields.title')
       %th= I18n.t('blog_post.fields.content_type')
       %th= I18n.t('blog_post.fields.author')
+      %th.text-center= I18n.t('blog_post.published')
   %tbody
     - if blog_posts.empty?
       %tr
-        %td.text-center{ :colspan => 3 }= I18n.t('admin.blog.posts.table.empty')
+        %td.text-center{ :colspan => 4 }= I18n.t('admin.blog.posts.table.empty')
     - blog_posts.each do |blog_post|
       - blog_post_presenter = BlogPostPresenter.new blog_post
       %tr
         %td= link_to blog_post.title, admin_blog_post_path(blog_post)
         %td= blog_post_presenter.localized_content_type
         %td= blog_post.author.email
+        %td.text-center
+          %i{ :class => blog_post.published? ? 'fi-check green' : 'fi-x orange' }

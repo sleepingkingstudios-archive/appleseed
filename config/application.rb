@@ -32,5 +32,6 @@ module Appleseed
 
     # Precompile assets from /vendor/assets.
     config.assets.precompile << 'foundation-icons.css'
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
   end
 end

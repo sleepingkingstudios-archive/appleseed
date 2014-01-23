@@ -1,0 +1,13 @@
+#confirm-delete-modal{ :data => { :reveal => true } }
+  %h2= defined?(title) ? title : I18n.t('admin.shared.modals.confirm_delete.title')
+  %p= defined?(body) ? body : I18n.t('admin.shared.modals.confirm_delete.body')
+  %p.alert
+    %strong
+      = succeed(':') do
+        = I18n.t('shared.warning')
+    = defined?(warning) ? warning : I18n.t('admin.shared.modals.confirm_delete.warning')
+  = link_to '#', :class => 'close-reveal-modal' do
+    %i.fi-x
+  .text-right
+    = link_to I18n.t('shared.cancel'), '#', :id => 'cancel-delete-link', :class => 'button radius thin secondary'
+    = link_to (defined?(submit) ? submit : render_with_icon(I18n.t 'admin.shared.modals.confirm_delete.submit')), '#', :id => 'confirm-delete-link', :class => 'button radius thin alert'

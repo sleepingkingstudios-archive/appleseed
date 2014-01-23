@@ -5,5 +5,5 @@ require 'spec_helper'
 RSpec.describe Admin::PagesController do
   include Appleseed::SharedExamples::AdminControllerAuthenticatesUser
 
-  expect_behavior 'authenticates the user', described_class, :only => :index
+  expect_behavior 'authenticates the user for action', described_class, :index
 end # describe

@@ -6,6 +6,9 @@
 
 $header-font-family: Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic, "Apple Gothic", AppleGothic, "URW Gothic L", "Avant Garde", sans-serif;
 
+$font-color-green:  #43ac6a;
+$font-color-orange: #ea2f10;
+
 .hide {
   display: none;
 }
@@ -72,9 +75,13 @@ hr {
   }
 }
 
-p, span {
+p, span, i {
   &.alert {
-    color: #ea2f10;
+    color: $font-color-orange;
+  }
+
+  &.success {
+    color: $font-color-green;
   }
 }
 
@@ -85,6 +92,17 @@ p, span {
 .button {
   &.thin {
     padding: 0.5rem 1.25rem;
+  }
+}
+
+@media #{$large-up} {
+  .heading-buttons {
+    margin-top: 0.25rem;
+    text-align: right;
+
+    &.tall {
+      margin-top: 0.5rem;
+    }
   }
 }
 

@@ -8,7 +8,7 @@ en:
         action: 'delete Blog'
         confirm:
           body: 'Are you sure you want to delete blog %{title}? This will delete all blog posts and data associated with this blog.'
-          title: 'Delete Blog'
+          title: 'Delete Blog?'
           warning: 'This cannot be undone!'
         submit: '%{icon:skull} Delete Blog'
         success: '%{icon:skull} Blog successfully deleted.'
@@ -27,7 +27,39 @@ en:
         submit: '%{icon:book} Create Blog'
         success: '%{icon:book} Blog successfully created.'
         title: 'Create Blog'
+      posts:
+        table:
+          empty: 'There are no blog posts.'
+        title: 'Blog Posts'
       resource_not_found: 'There are no blogs created.'
+      title: 'Admin Blog'
+    blog_posts:
+      breadcrumb: 'Posts'
+      delete:
+        confirm:
+          body: 'Are you sure you want to delete post %{title}?'
+          title: 'Delete Post?'
+        submit: '%{icon:skull} Delete Post'
+        success: '%{icon:skull} Post successfully deleted.'
+      edit:
+        breadcrumb: 'Edit Post'
+        submit: '%{icon:wrench} Edit Post'
+        success: '%{icon:wrench} Post successfully updated.'
+        title: 'Edit Post'
+      new:
+        breadcrumb: 'Create Post'
+        submit: '%{icon:pencil} Create Post'
+        success: '%{icon:pencil} Post successfully created.'
+        title: 'Create Post'
+      publish:
+        submit:  '%{icon:book} Publish Post'
+        success: '%{icon:book} Post successfully published.'
+      raw_content: 'Raw Content'
+      show:
+        back:  '%{icon:arrow-up} Back to Blog'
+        next:  '%{icon:arrow-right} Next Post'
+        prev:  '%{icon:arrow-left} Previous Post'
+        title: 'Admin Blog Post'
     breadcrumb: 'Admin'
     index:
       blog:
@@ -40,12 +72,39 @@ en:
           Change the application settings, such as the displayed title and
           whether new users are allowed to register.
         link: '%{icon:arrow-right} Go To Settings'
+    shared:
+      modals:
+        confirm_delete:
+          body: 'Are you sure you want to delete this object?'
+          submit: 'Delete'
+          title: 'Confirm Delete?'
+          warning: 'This cannot be undone!'
     settings:
       breadcrumb: 'Settings'
   blog:
     breadcrumb: 'Blog'
+    empty: 'There are no posts in this blog.'
     post_count: 'Post Count'
     title: 'Title'
+  blog_post:
+    breadcrumb: 'Post'
+    content_types:
+      plain: 'Plain Text'
+    empty_content: '(no content)'
+    fields:
+      author: 'Author'
+      content: 'Content'
+      content_type: 'Content Type'
+      published_at: 'Date Published'
+      title: 'Title'
+    published: 'Published'
+    show:
+      back:  '%{icon:arrow-up} Back to Blog'
+      first: '%{icon:arrow-left} First'
+      last:  '%{icon:arrow-right} Last'
+      next:  '%{icon:arrow-right} Next'
+      prev:  '%{icon:arrow-left} Previous'
+      published_by: 'Published %{date} by %{author}.'
   devise:
     failure:
       registration_closed: '%{icon:alert} User registration is currently closed.'
@@ -58,4 +117,6 @@ en:
     admin: 'Admin'
   shared:
     cancel: 'Cancel'
+    delete: 'Delete'
+    edit: 'Edit'
     warning: 'Warning'

@@ -1,3 +1,9 @@
 -# app/views/blogs/show.html.haml
 
 %h1= @blog.title
+
+- if @blog_posts.blank?
+  %p= I18n.t('blog.empty')
+- else
+  - @blog_posts.each do |blog_post|
+    = render :partial => 'blogs/show/post', :locals => { :blog_post => blog_post }

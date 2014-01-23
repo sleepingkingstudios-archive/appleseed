@@ -3,31 +3,42 @@
 = content_for :body_class do
   admin-blogs-show
 
-%h1 Admin Blog
+.row
+  .large-4.columns
+    %h1= I18n.t('admin.blog.title')
+  .large-8.columns
+    - if @blog
+      .heading-buttons.tall
+        = link_to render_with_icon(I18n.t 'admin.blog.edit.submit'), edit_admin_blog_path, :class => 'button radius thin'
+        = link_to render_with_icon(I18n.t 'admin.blog.delete.submit'), '#', :id => 'open-confirm-delete-modal-link', :class => 'button radius thin alert hide', :data => { :"reveal-id" => 'confirm-delete-modal' }
+        = link_to render_with_icon(I18n.t 'admin.blog.delete.submit'), admin_blog_path, :method => :delete, :id => 'delete-blog-link', :class => 'button radius thin alert'
+    - else
+      .heading-buttons.tall
+        = link_to render_with_icon(I18n.t 'admin.blog.new.submit'), new_admin_blog_path, :class => 'button radius success thin'
 
 - if @blog
-  = render :partial => 'admin/blogs/show/confirm_delete_modal', :locals => { :blog => @blog }
+  = render :partial => 'admin/shared/modals/confirm_delete', :locals => { :title => I18n.t('admin.blog.delete.confirm.title'), :body => I18n.t('admin.blog.delete.confirm.body', :title => @blog.title), :submit => render_with_icon(I18n.t 'admin.blog.delete.submit') }
 
   %p
-    .row
-      %strong.small-3.columns
-        = succeed(':') do
-          = I18n.t 'blog.title'
-      %span.small-9.columns
-        = @blog.title
+    %strong
+      = succeed(':') do
+        = I18n.t 'blog.title'
+    = @blog.title
     %br
-    .row
-      %strong.small-3.columns
-        = succeed(':') do
-          = I18n.t 'blog.post_count'
-      %span.small-9.columns
-        = 0
+    %strong
+      = succeed(':') do
+        = I18n.t 'blog.post_count'
+    = @blog.posts.count
 
-  = link_to render_with_icon(I18n.t 'admin.blog.edit.submit'), edit_admin_blog_path, :class => 'button radius thin'
-  = link_to render_with_icon(I18n.t 'admin.blog.delete.submit'), '#', :id => 'open-confirm-delete-modal-link', :class => 'button radius thin alert hide', :data => { :"reveal-id" => 'confirm-delete-modal' }
-  = link_to render_with_icon(I18n.t 'admin.blog.delete.submit'), admin_blog_path, :method => :delete, :id => 'delete-blog-link', :class => 'button radius thin alert'
+  .row
+    .large-4.columns
+      %h2= I18n.t('admin.blog.posts.title')
+    .large-8.columns
+      .heading-buttons
+        = link_to render_with_icon(I18n.t 'admin.blog_posts.new.submit'), new_admin_blog_post_path, :class => 'button thin radius success'
+    
+  = render :partial => 'admin/blog_posts/index/table', :locals => { :blog => @blog, :blog_posts => @blog_posts }
 - else
   %p
     %i.fi-alert
     = I18n.t 'admin.blog.resource_not_found'
-  = link_to render_with_icon(I18n.t 'admin.blog.new.submit'), new_admin_blog_path, :class => 'button radius'

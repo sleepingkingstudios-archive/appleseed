@@ -18,5 +18,7 @@ FactoryGirl.define do
 
     password { generate :user_password }
     password_confirmation { password }
+
+    factory :author do; end
   end # factory
 end # define

@@ -6,9 +6,10 @@ gem 'rails', '4.0.2'
 # gem 'unicorn'
 
 ### Datastore ###
-gem 'mongoid',  '~> 4.0.0.alpha1', github: 'mongoid/mongoid'
-gem 'bson_ext', '~> 1.5.1'
+gem 'mongoid',  '4.0.0.alpha2', github: 'mongoid/mongoid'
 gem 'devise',   '~> 3.2.2'
+
+gem 'mongoid-sleeping_king_studios', '~> 0.7.6'
 
 ### Assets ###
 gem 'haml-rails',        '~> 0.4'
@@ -37,7 +38,7 @@ end # group
 ### Testing ###
 group :test do
   gem 'rspec-rails',                 '~> 2.14.0'
-  gem 'rspec-sleeping_king_studios', '>= 1.0.0.rc.3'
+  gem 'rspec-sleeping_king_studios', '>= 1.0.1'
   gem 'fuubar',                      '~> 1.2.1'
   gem 'factory_girl_rails',          '~> 4.2.0'
   gem 'database_cleaner',            '~> 1.2.0'

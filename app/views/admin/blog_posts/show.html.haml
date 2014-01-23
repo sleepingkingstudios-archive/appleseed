@@ -1,0 +1,38 @@
+-# app/views/admin/blog_posts/show.html.haml
+
+= content_for :body_class do
+  admin-blog-posts-show
+
+= render :partial => 'admin/shared/modals/confirm_delete', :locals => { :title => I18n.t('admin.blog_posts.delete.confirm.title'), :body => I18n.t('admin.blog_posts.delete.confirm.body', :title => @blog_post.title), :submit => render_with_icon(I18n.t 'admin.blog_posts.delete.submit') }
+
+%h1= I18n.t('admin.blog_posts.show.title')
+
+- unless @blog_post.published?
+  = link_to render_with_icon(I18n.t 'admin.blog_posts.publish.submit'), publish_admin_blog_post_path(@blog_post), :method => :patch, :class => 'button radius thin success'
+= link_to render_with_icon(I18n.t 'admin.blog_posts.edit.submit'), edit_admin_blog_post_path(@blog_post), :class => 'button radius thin'
+= link_to render_with_icon(I18n.t 'admin.blog_posts.delete.submit'), '#', :id => 'open-confirm-delete-modal-link', :class => 'button radius thin alert hide', :data => { :"reveal-id" => 'confirm-delete-modal' }
+= link_to render_with_icon(I18n.t 'admin.blog_posts.delete.submit'), admin_blog_post_path(@blog_post), :method => :delete, :id => 'delete-blog-post-link', :class => 'button radius thin alert'
+
+= render :partial => 'admin/blog_posts/show/navigation', :locals => { :next_post => @blog_post.prev_most_recent, :prev_post => @blog_post.next_most_recent}
+
+%p
+  = succeed(':') do
+    %strong= I18n.t('blog_post.fields.title')
+  = @blog_post.title
+  %br
+  = succeed(':') do
+    %strong= I18n.t('blog_post.fields.content_type')
+  = @blog_post_presenter.localized_content_type
+  %br
+  = succeed(':') do
+    %strong= I18n.t('blog_post.published')
+  = @blog_post_presenter.published_mark
+  = @blog_post_presenter.published_date
+
+%p
+  = succeed(':') do
+    %strong= I18n.t('admin.blog_posts.raw_content')
+  %br
+  = @blog_post_presenter.raw_content
+
+= render :partial => 'admin/blog_posts/show/navigation', :locals => { :next_post => @blog_post.prev_most_recent, :prev_post => @blog_post.next_most_recent}

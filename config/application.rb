@@ -29,5 +29,8 @@ module Appleseed
     config.action_view.field_error_proc = Proc.new do |html_tag, instance|
       html_tag
     end # field error proc
+
+    # Precompile assets from /vendor/assets.
+    config.assets.precompile << 'foundation-icons.css'
   end
 end

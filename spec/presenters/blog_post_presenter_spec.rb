@@ -47,6 +47,14 @@ RSpec.describe BlogPostPresenter do
     it { expect(instance.title).to be == blog_post.title }
   end # describe
 
+  describe '#author_name' do
+    let(:author)     { FactoryGirl.create :user }
+    let(:attributes) { super().merge :author => author }
+
+    it { expect(instance).to respond_to(:author_name).with(0).arguments }
+    it { expect(instance.author_name).to be == author.email }
+  end # describe
+
   describe '#localized_content_type' do
     let(:i18n_scope) { "blog_post.content_types" }
 
@@ -88,6 +96,31 @@ RSpec.describe BlogPostPresenter do
         let(:formatted) { "<p>#{I18n.t('blog_post.empty_content')}</p>" }
 
         it { expect(instance.formatted_content).to be == formatted }
+      end # context
+    end # context
+  end # describe
+
+  describe '#published_date' do
+    it { expect(instance).to respond_to(:published_date).with(0, :format).arguments }
+
+    context 'with an unpublished post' do
+      it { expect(instance.published_date).to be nil }
+    end # context
+
+    context 'with a published post' do
+      let(:published_at) { Time.now.utc }
+
+      before(:each) do
+        allow(instance).to receive(:published?).and_return(true)
+        allow(instance).to receive(:published_at).and_return(published_at)
+      end # before each
+
+      it { expect(instance.published_date).to be == I18n.l(published_at, :format => :long) }
+
+      context 'with a format argument' do
+        let(:format) { :short }
+
+        it { expect(instance.published_date format: format).to be == I18n.l(published_at, :format => format) }
       end # context
     end # context
   end # describe

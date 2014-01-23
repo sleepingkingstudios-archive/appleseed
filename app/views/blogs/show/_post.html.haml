@@ -1,0 +1,8 @@
+-# app/views/blogs/show/_post.html.haml
+
+- blog_post_presenter = BlogPostPresenter.new blog_post
+
+%section
+  %h2= link_to blog_post.title, blog_post_path(blog_post)
+
+  = blog_post_presenter.formatted_content

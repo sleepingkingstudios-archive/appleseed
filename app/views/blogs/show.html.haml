@@ -6,8 +6,4 @@
   %p= I18n.t('blog.empty')
 - else
   - @blog_posts.each do |blog_post|
-    - blog_post_presenter = BlogPostPresenter.new blog_post
-    %section
-      %h2= blog_post.title
-
-      = blog_post_presenter.formatted_content
+    = render :partial => 'blogs/show/post', :locals => { :blog_post => blog_post }

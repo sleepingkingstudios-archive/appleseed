@@ -1,0 +1,9 @@
+-# app/views/blog_posts/show.html.haml
+
+%h1= @blog_post.title
+
+%p= I18n.t('blog_post.show.published_by', :author => @blog_post_presenter.author_name, :date => @blog_post_presenter.published_date)
+
+= render :partial => 'blog_posts/show/navigation', :locals => { :current_post => @blog_post, :first_post => @blog_post.first_published, :prev_post => @blog_post.prev_published, :next_post => @blog_post.next_published, :last_post => @blog_post.last_published }
+
+= @blog_post_presenter.formatted_content

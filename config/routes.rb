@@ -17,7 +17,9 @@ Appleseed::Application.routes.draw do
 
   get :admin, :to => 'admin/pages#index', :as => :admin
 
-  resource :blog, :only => %i(show)
+  resource :blog, :only => %i(show) do
+    resources :posts, :controller => 'blog_posts', :only => %i(show)
+  end # resource
 
   root 'pages#index'
 end # routes

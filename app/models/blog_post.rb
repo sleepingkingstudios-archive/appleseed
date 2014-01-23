@@ -20,7 +20,7 @@ class BlogPost
   field :published_at, :type => Time
 
   scope :published, -> {
-    where(:published_at.lte => Time.now.utc).asc(:published_order)
+    where(:published_at.lte => Time.now.utc).desc(:published_order)
   }
 
   validates :author, :presence => true
@@ -29,8 +29,8 @@ class BlogPost
   validates :content_type, :presence => true,
     :inclusion => { :in => CONTENT_TYPES }
 
-  cache_ordering :created_at.desc,   :as => :most_recent_order
-  cache_ordering :published_at.desc, :as => :published_order,
+  cache_ordering :created_at.desc,  :as => :most_recent_order
+  cache_ordering :published_at.asc, :as => :published_order,
     :filter => { :published_at.ne => nil }
 
   def publish
@@ -47,4 +47,24 @@ class BlogPost
   def published?
     !self.published_at.blank? && self.published_at <= Time.now.utc
   end # method published?
+
+  ########################
+  ### ORDERING HELPERS ###
+  ########################
+
+  def first_published
+    BlogPost.first_published(BlogPost.where(:blog_id => blog.id))
+  end # method first_published
+
+  def last_published
+    BlogPost.last_published(BlogPost.where(:blog_id => blog.id))
+  end # method first_published
+
+  def next_published
+    super BlogPost.where(:blog_id => blog.id)
+  end # method next_published
+
+  def prev_published
+    super BlogPost.where(:blog_id => blog.id)
+  end # method prev_published
 end # model

@@ -6,6 +6,10 @@ class BlogPostPresenter < Struct.new(:blog_post)
   delegate :author, :blog, :content, :content_type, :published_at, :published?,
     :title, :to => :blog_post
 
+  def author_name
+    author.email
+  end # method author_name
+
   def localized_content_type locale = I18n.locale
     I18n.t(content_type, :scope => 'blog_post.content_types', :locale => locale)
   end # method localized_content_type
@@ -16,6 +20,10 @@ class BlogPostPresenter < Struct.new(:blog_post)
       PlainTextFormatter.new(content).format
     end # case
   end # method formatted_content
+  
+  def published_date format: :long
+    published? ? I18n.l(published_at, :format => format) : nil
+  end # method published_date
 
   def raw_content
     RawContentFormatter.new(content).format

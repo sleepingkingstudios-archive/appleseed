@@ -98,6 +98,13 @@ en:
       published_at: 'Date Published'
       title: 'Title'
     published: 'Published'
+    show:
+      back:  '%{icon:arrow-up} Back to Blog'
+      first: '%{icon:arrow-left} First'
+      last:  '%{icon:arrow-right} Last'
+      next:  '%{icon:arrow-right} Next'
+      prev:  '%{icon:arrow-left} Previous'
+      published_by: 'Published %{date} by %{author}.'
   devise:
     failure:
       registration_closed: '%{icon:alert} User registration is currently closed.'

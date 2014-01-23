@@ -3,7 +3,7 @@
 class Blog
   include Mongoid::Document
 
-  has_many :posts, :class_name => 'BlogPost'
+  has_many :posts, :class_name => 'BlogPost', :dependent => :destroy
 
   field :title, :type => String
 

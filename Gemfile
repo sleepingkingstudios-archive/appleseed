@@ -43,3 +43,11 @@ group :test do
   gem 'factory_girl_rails',          '~> 4.2.0'
   gem 'database_cleaner',            '~> 1.2.0'
 end # group
+
+### Production ###
+group :production do
+  # Required for Heroku deployment.
+  gem 'rails_12factor', '~> 0.0.2'
+end # group
+
+ruby "2.1.0"

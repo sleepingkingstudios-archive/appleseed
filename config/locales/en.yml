@@ -81,6 +81,9 @@ en:
           warning: 'This cannot be undone!'
     settings:
       breadcrumb: 'Settings'
+      edit:
+        failure:
+          bootstrap: '%{icon:alert} Run `rake appleseed:bootstrap` before you can update your settings.'
   blog:
     breadcrumb: 'Blog'
     empty: 'There are no posts in this blog.'

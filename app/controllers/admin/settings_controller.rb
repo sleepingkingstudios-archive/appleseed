@@ -5,10 +5,19 @@ class Admin::SettingsController < Admin::AdminController
   before_action :load_resources, :only => %i(show update)
 
   # GET /admin/settings
-  def show; end
+  def show
+    if @settings.blank?
+      flash.now[:alert] = I18n.t('admin.settings.edit.failure.bootstrap')
+    end # if
+  end # action show
 
-  # POST /admin/settings
+  # PATCH /admin/settings
   def update
+    if @settings.blank?
+      flash.now[:alert] = I18n.t('admin.settings.edit.failure.bootstrap')
+      render :show and return
+    end # if
+
     result = @settings.inject(true) do |memo, setting|
       if params['settings'].has_key? setting.name
         memo &&= setting.update_attributes :value => setting.cast_value(params['settings'][setting.name])

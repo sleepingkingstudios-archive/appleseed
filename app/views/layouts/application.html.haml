@@ -21,22 +21,27 @@
     = csrf_meta_tag
 
   %body{ :class => yield(:body_class) }
-    = render :partial => 'shared/header'
+    #page-wrapper
+      = render :partial => 'shared/header'
 
-    .row
-      #sidebar.small-12.large-4.columns
-        %hr.show-for-medium-up
-        
-        = render :partial => 'shared/navigation'
+      .row
+        #sidebar.small-12.large-4.columns
+          %hr.show-for-medium-up
+          
+          = render :partial => 'shared/navigation'
 
-      #content-area.small-12.large-8.columns
-        %hr.show-for-medium-up
+        #content-area.small-12.large-8.columns
+          %hr.show-for-medium-up
 
-        = render :partial => 'shared/notices'
+          = render :partial => 'shared/notices'
 
-        = yield
+          = yield
 
-        = render :partial => 'shared/breadcrumbs'
+          = render :partial => 'shared/breadcrumbs'
 
-      .small-12.columns
-        = render :partial => 'shared/footer'
+      #page-footer-push
+
+    #page-footer
+      .row
+        .small-12.columns
+          = render :partial => 'shared/footer'

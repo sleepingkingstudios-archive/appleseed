@@ -4,12 +4,26 @@
 @import "foundation/components/visibility";
 @import "admin/blogs";
 
+// Sticky Footer, Breadcrumbs.
+$footer-height:      rem-calc(90);
+
 $header-font-family: Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic, "Apple Gothic", AppleGothic, "URW Gothic L", "Avant Garde", sans-serif;
 
 $font-color-dark-black: #000000;
 $font-color-black:      #222222;
 $font-color-green:      #43ac6a;
 $font-color-orange:     #ea2f10;
+
+html, body {
+  height: 100%;
+}
+
+body > #page-wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto 0-$footer-height;
+}
 
 .hide {
   display: none;
@@ -19,7 +33,7 @@ $font-color-orange:     #ea2f10;
  ** HEADER AND TITLE **
  **********************/
 
-body > header {
+#page-wrapper > header {
   .site-title {
     margin-bottom: 0px;
     // Font Styles
@@ -44,15 +58,13 @@ body > header {
 
 #sidebar nav {
   ul > li {
-    margin-top: rem-calc(10);
+    margin-top: 0px;
     padding-bottom: 0px;
 
     font-family: $header-font-family;
     font-size: 1.125rem;
     font-weight: bold;
     text-align: center;
-
-    &:first-child { margin-top: 0px; }
 
     a {
       color: $font-color-black;
@@ -66,7 +78,13 @@ body > header {
 
 @media #{$large-up} {
   #sidebar nav {
-    ul > li { text-align: left; }
+    ul > li {
+      margin-top: rem-calc(10);
+
+      text-align: left;
+
+      &:first-child { margin-top: 0px; }
+    }
 
     & > hr { margin-top: rem-calc(20); }
   }
@@ -77,6 +95,14 @@ body > header {
  ******************/
 
 #content-area hr:first-child { margin-top: 0px; }
+
+/************
+ ** FOOTER **
+ ************/
+
+#page-footer, #page-footer-push {
+  height: $footer-height;
+}
 
 /**************
  ** HEADINGS **

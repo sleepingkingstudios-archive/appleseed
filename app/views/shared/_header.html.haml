@@ -1,4 +1,4 @@
 %header.row
   .small-12.columns
-    = link_to :root do
-      %h1= Setting.fetch 'title', 'Appleseed CMS'
+    %p.site-title
+      = link_to Setting.fetch('title', 'Appleseed CMS'), :root

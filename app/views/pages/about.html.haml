@@ -1,0 +1,36 @@
+-# app/views/pages/about.html.haml
+
+%h1= I18n.t('pages.about.title')
+
+%p
+  Sleeping King Studios is being developed using a custom-built Content Management System named
+  = succeed '.' do
+    = link_to 'Appleseed', 'https://github.com/sleepingkingstudios/appleseed'
+  
+%p
+  The core technology is
+  = succeed ',' do
+    = link_to 'Rails 4', 'http://rubyonrails.org/'
+  with a customized design built on
+  = succeed('.') do
+    = link_to render_with_icon('%{icon:social-zurb} Foundation'), 'http://foundation.zurb.com/'
+
+%h2= I18n.t('pages.about.legal')
+
+%p Unless otherwise indicated, all content is &copy;2014 Robert Smith.
+
+%p Licensing information for Appleseed will be forthcoming.
+
+%h3 Fonts
+
+%p
+  Sleeping King Studios uses the
+  = link_to render_with_icon('%{icon:social-zurb} Foundation Icon Fonts'), 'http://zurb.com/playground/foundation-icon-fonts-3'
+  pack.
+
+%p
+  The title is displayed in Riesling
+  = surround '(', ').' do
+    = link_to 'source', 'http://www.fontsquirrel.com/fonts/Riesling'
+    and
+    = link_to 'license', 'http://www.fontsquirrel.com/license/Riesling'

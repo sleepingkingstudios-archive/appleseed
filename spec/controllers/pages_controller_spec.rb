@@ -10,4 +10,12 @@ RSpec.describe PagesController do
       expect(response).to render_template 'index'
     end # it
   end # describe
+
+  describe "GET /about" do
+    it 'responds with 200 ok and renders the about template' do
+      get :about
+      expect(response.status).to be == 200
+      expect(response).to render_template 'about'
+    end # it
+  end # describe
 end # describe

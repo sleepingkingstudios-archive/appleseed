@@ -44,12 +44,15 @@ body > header {
 
 #sidebar nav {
   ul > li {
+    margin-top: rem-calc(10);
     padding-bottom: 0px;
 
     font-family: $header-font-family;
     font-size: 1.125rem;
     font-weight: bold;
     text-align: center;
+
+    &:first-child { margin-top: 0px; }
 
     a {
       color: $font-color-black;

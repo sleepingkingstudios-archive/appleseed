@@ -1,8 +1,8 @@
 %nav
-  %ul.small-block-grid-4.large-block-grid-1{ :class => "small-block-grid-#{current_user ? 4 : 3}"}
+  %ul.large-block-grid-1{ :class => "small-block-grid-#{current_user ? 4 : 3}"}
     %li= link_to I18n.t('navigation.home'), :root
     %li= link_to I18n.t('navigation.blog'), blog_path
-    %li= link_to I18n.t('navigation.about'), :root
+    %li= link_to I18n.t('navigation.about'), about_path
     - if current_user
       %li= link_to I18n.t('navigation.admin'), admin_path
   %hr

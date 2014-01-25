@@ -3,6 +3,7 @@
   %head
     -# @font-face declarations at the top for loading purposes.
     = stylesheet_link_tag "foundation-icons"
+    = stylesheet_link_tag "webfonts"
 
     %meta{ :charset => "utf-8" }
 
@@ -28,7 +29,7 @@
         
         = render :partial => 'shared/navigation'
 
-      .small-12.large-8.columns
+      #content-area.small-12.large-8.columns
         %hr.show-for-medium-up
 
         = render :partial => 'shared/notices'

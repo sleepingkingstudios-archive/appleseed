@@ -115,9 +115,10 @@ en:
   home:
     breadcrumb: 'Home'
   navigation:
-    home:  'Home'
-    blog:  'Blog'
+    about: 'About'
     admin: 'Admin'
+    blog:  'Blog'
+    home:  'Home'
   shared:
     cancel: 'Cancel'
     delete: 'Delete'

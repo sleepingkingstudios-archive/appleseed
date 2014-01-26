@@ -7,7 +7,7 @@ class BlogPost
   include Mongoid::Timestamps
   include Mongoid::SleepingKingStudios::Orderable
 
-  CONTENT_TYPES = %w(plain)
+  CONTENT_TYPES = %w(plain redcarpet)
 
   belongs_to :author, :class_name => 'User', :inverse_of => :posts
   belongs_to :blog
@@ -21,7 +21,7 @@ class BlogPost
 
   scope :published, -> {
     where(:published_at.lte => Time.now.utc).desc(:published_order)
-  }
+  } # end scope
 
   validates :author, :presence => true
   validates :blog, :presence => true

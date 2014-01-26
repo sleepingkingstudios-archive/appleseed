@@ -98,6 +98,24 @@ RSpec.describe BlogPostPresenter do
         it { expect(instance.formatted_content).to be == formatted }
       end # context
     end # context
+
+    context 'as redcarpet markdown' do
+      let(:content_type) { 'redcarpet' }
+
+      context 'with a simple string content' do
+        let(:content)   { 'My name is Ozymandias, king of kings!' }
+        let(:formatted) { "<p>#{content}</p>" }
+
+        it { expect(instance.formatted_content).to be == formatted }
+      end # context
+
+      context 'with a header and content' do
+        let(:content)   { "# Header\n\nContent paragraph here." }
+        let(:formatted) { "<h1>Header</h1>\n\n<p>Content paragraph here.</p>" }
+
+        it { expect(instance.formatted_content).to be == formatted }
+      end # context
+    end # context
   end # describe
 
   describe '#published_date' do

@@ -18,6 +18,8 @@ class BlogPostPresenter < Struct.new(:blog_post)
     case content_type
     when 'plain'
       PlainTextFormatter.new(content).format
+    when 'redcarpet'
+      RedcarpetFormatter.new(content).format
     end # case
   end # method formatted_content
   
@@ -47,5 +49,31 @@ class BlogPostPresenter < Struct.new(:blog_post)
     def format
       "<p>#{content.blank? ? I18n.t('blog_post.empty_content') : super}</p>".html_safe
     end # method format
+  end # class
+
+  class RedcarpetFormatter < ContentFormatter
+    EXTENSIONS = {
+      :fenced_code_blocks  => true,
+      :footnotes           => true,
+      :no_intra_emphasis   => true,
+      :space_after_headers => true,
+      :strikethrough       => true,
+      :tables              => true,
+      :underline           => true,
+    } # end hash
+
+    def format
+      parser.render(content).strip.html_safe
+    end # method format
+
+    private
+
+    def parser
+      ::Redcarpet::Markdown.new(renderer, EXTENSIONS)
+    end # method parser
+
+    def renderer
+      ::Redcarpet::Render::HTML.new
+    end # method renderer
   end # class
 end # class

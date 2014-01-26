@@ -9,7 +9,7 @@ RSpec.describe BlogPost do
   describe '::CONTENT_TYPES' do
     it { expect(described_class::CONTENT_TYPES).to be_a Array }
 
-    %w(plain).each do |type|
+    %w(plain redcarpet).each do |type|
       it { expect(described_class::CONTENT_TYPES).to include type }
     end # each
   end # describe

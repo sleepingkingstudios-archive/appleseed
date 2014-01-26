@@ -93,6 +93,7 @@ en:
     breadcrumb: 'Post'
     content_types:
       plain: 'Plain Text'
+      redcarpet: 'Redcarpet'
     empty_content: '(no content)'
     fields:
       author: 'Author'

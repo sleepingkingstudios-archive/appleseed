@@ -20,6 +20,9 @@ gem 'uglifier',          '>= 1.3.0' # Compressor for JavaScript assets
 gem 'compass-rails',     '~> 1.1.2'
 gem 'foundation-rails',  '~> 5.0.3'
 
+### Content ###
+gem 'redcarpet', '~> 3.0.0'
+
 ### Support ###
 # gem 'debugger', group: [:development, :test]
 # gem 'jbuilder', '~> 1.2' # Build JSON APIs. Read more: https://github.com/rails/jbuilder

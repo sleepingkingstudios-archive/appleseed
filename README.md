@@ -13,6 +13,7 @@ The following features are planned to be added in the near future:
 * JSON import/export for blog posts.
 * Human-readable post urls, based on the post title.
 * Tags for blog posts.
+* Features using Cucumber.
 
 The following features are planned to be added during development:
 

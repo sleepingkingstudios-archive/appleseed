@@ -2,13 +2,4 @@
 
 %h1= @blog.title
 
-%h2= @blog_post.title
-
-%p= I18n.t('blog_post.show.published_by', :author => @blog_post_presenter.author_name, :date => @blog_post_presenter.published_date)
-
-- nav_options = { :current_post => @blog_post, :first_post => @blog_post.first_published, :prev_post => @blog_post.prev_published, :next_post => @blog_post.next_published, :last_post => @blog_post.last_published }
-= render :partial => 'blog_posts/show/navigation', :locals => nav_options
-
-= @blog_post_presenter.formatted_content
-
-= render :partial => 'blog_posts/show/navigation', :locals => nav_options
+= render :partial => 'blog_posts/show/post', :locals => { :blog_post => @blog_post, :blog_post_presenter => @blog_post_presenter }

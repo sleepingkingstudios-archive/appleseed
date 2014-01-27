@@ -52,6 +52,22 @@ class BlogPost
   ### ORDERING HELPERS ###
   ########################
 
+  def first_most_recent
+    BlogPost.first_most_recent(BlogPost.where(:blog_id => blog.id))
+  end # method first_most_recent
+
+  def last_most_recent
+    BlogPost.last_most_recent(BlogPost.where(:blog_id => blog.id))
+  end # method last_most_recent
+
+  def next_most_recent
+    super BlogPost.where(:blog_id => blog.id)
+  end # method next_most_recent
+
+  def prev_most_recent
+    super BlogPost.where(:blog_id => blog.id)
+  end # method prev_most_recent
+
   def first_published
     BlogPost.first_published(BlogPost.where(:blog_id => blog.id))
   end # method first_published

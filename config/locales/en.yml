@@ -91,8 +91,6 @@ en:
       raw_content: 'Raw Content'
       show:
         back:  '%{icon:arrow-up} Back to Blog'
-        next:  '%{icon:arrow-right} Next Post'
-        prev:  '%{icon:arrow-left} Previous Post'
         title: 'Admin Blog Post'
     breadcrumb: 'Admin'
     index:

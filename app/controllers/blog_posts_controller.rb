@@ -14,7 +14,7 @@ class BlogPostsController < ApplicationController
   private
 
   def breadcrumbs_for action
-    @breadcrumbs << [I18n.t('blog.breadcrumb'), admin_blog_path]
+    @breadcrumbs << [I18n.t('blog.breadcrumb'), blog_path]
     case action
     when :show
       @breadcrumbs << [@blog_post.title]

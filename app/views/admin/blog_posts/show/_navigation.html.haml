@@ -1,18 +1,30 @@
 -# app/views/admin/blog_posts/show/_navigation.html.haml
 
 .row{ :style => 'margin-bottom:1rem;' }
-  .large-4.columns
+  .large-2.columns
+    - if first_post.blank? || first_post == current_post
+      &nbsp;
+    - else
+      = link_to admin_blog_post_path(first_post) do
+        = render_with_icon(I18n.t 'blog_post.show.first')
+  .large-2.columns
     - if prev_post.blank?
       &nbsp;
     - else
       = link_to admin_blog_post_path(prev_post) do
-        = render_with_icon(I18n.t 'admin.blog_posts.show.prev')
+        = render_with_icon(I18n.t 'blog_post.show.prev')
   .large-4.columns.text-center
     = link_to admin_blog_path do
       = render_with_icon(I18n.t 'admin.blog_posts.show.back')
-  .large-4.columns.text-right
+  .large-2.columns.text-right
     - if next_post.blank?
       &nbsp;
     - else
       = link_to admin_blog_post_path(next_post) do
-        = render_with_icon(I18n.t 'admin.blog_posts.show.next')
+        = render_with_icon(I18n.t 'blog_post.show.next')
+  .large-2.columns.text-right
+    - if last_post.blank? || last_post == current_post
+      &nbsp;
+    - else
+      = link_to admin_blog_post_path(last_post) do
+        = render_with_icon(I18n.t 'blog_post.show.last')

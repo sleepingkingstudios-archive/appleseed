@@ -1,6 +1,8 @@
 -# app/views/blog_posts/show.html.haml
 
-%h1= @blog_post.title
+%h1= @blog.title
+
+%h2= @blog_post.title
 
 %p= I18n.t('blog_post.show.published_by', :author => @blog_post_presenter.author_name, :date => @blog_post_presenter.published_date)
 

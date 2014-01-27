@@ -1,5 +1,36 @@
 # config/locales/en.yml
 
+# CONVENTIONS FOR TRANSLATION KEYS:
+# 
+# Translation keys should be lower-case, with words separated by underscores
+# as per snake_case convention.
+# 
+# For models and resources, always use the plural form of the name (even for
+# singular resources), e.g. 'Blogs' instead of 'Blog'.
+# 
+# Commonly used translations such as verbs 'Create', 'Update', 'Cancel' should
+# be placed under the 'shared' namespace.
+# 
+# CONTROLLERS:
+# For translations associated with a controller action or resource, the key
+# should match the routing structure, e.g.
+# 
+#   namespace:
+#     controller:
+#       action:
+#         key: 'Value'
+# 
+# MODELS:
+# For models, to prevent confusion with top-level controllers for that
+# resource, place model-specific translations inside a models namespace. For
+# each model, translations for individual fields should go inside a nested
+# fields resource, e.g.
+# 
+#   models:
+#     model_name:
+#       fields:
+#         field_name: 'Field Name'
+
 en:
   admin:
     blog:
@@ -51,6 +82,9 @@ en:
         submit: '%{icon:pencil} Create Post'
         success: '%{icon:pencil} Post successfully created.'
         title: 'Create Post'
+      preview:
+        breadcrumb: 'Preview Post'
+        submit: '%{icon:magnifying-glass} Preview Post'
       publish:
         submit:  '%{icon:book} Publish Post'
         success: '%{icon:book} Post successfully published.'

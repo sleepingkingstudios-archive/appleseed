@@ -9,6 +9,7 @@
 
 - unless @blog_post.published?
   = link_to render_with_icon(I18n.t 'admin.blog_posts.publish.submit'), publish_admin_blog_post_path(@blog_post), :method => :patch, :class => 'button radius thin success'
+= link_to render_with_icon(I18n.t 'admin.blog_posts.preview.submit'), preview_admin_blog_post_path(@blog_post), :class => 'button radius thin'
 = link_to render_with_icon(I18n.t 'admin.blog_posts.edit.submit'), edit_admin_blog_post_path(@blog_post), :class => 'button radius thin'
 = link_to render_with_icon(I18n.t 'admin.blog_posts.delete.submit'), '#', :id => 'open-confirm-delete-modal-link', :class => 'button radius thin alert hide', :data => { :"reveal-id" => 'confirm-delete-modal' }
 = link_to render_with_icon(I18n.t 'admin.blog_posts.delete.submit'), admin_blog_post_path(@blog_post), :method => :delete, :id => 'delete-blog-post-link', :class => 'button radius thin alert'

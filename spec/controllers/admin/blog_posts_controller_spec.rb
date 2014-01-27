@@ -11,8 +11,12 @@ RSpec.describe Admin::BlogPostsController do
 
     expect_behavior 'authenticates the user for resources', described_class, :except => :index
 
+    expect_behavior 'authenticates the user for action',    described_class, :preview, :method => :post
+
     context do
       let(:params) { { :id => blog_post.id } }
+
+      expect_behavior 'authenticates the user for action', described_class, :preview
 
       expect_behavior 'authenticates the user for action', described_class, :publish, :method => :patch
     end # context
@@ -88,6 +92,16 @@ RSpec.describe Admin::BlogPostsController do
           expect(blog_post.author).to be == user
         end # it
       end # context
+    end # describe
+
+    describe 'POST /admin/blog/posts/preview' do
+      let(:attributes) { FactoryGirl.attributes_for :blog_post }
+
+      it 'responds with 200 ok and renders the preview template' do
+        post :preview, :blog_post => attributes
+        expect(response.status).to be == 200
+        expect(response).to render_template 'preview'
+      end # it
     end # describe
 
     context 'with a blog post' do

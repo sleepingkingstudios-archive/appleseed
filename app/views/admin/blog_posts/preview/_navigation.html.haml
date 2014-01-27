@@ -1,0 +1,17 @@
+-# app/views/admin/blog_posts/preview/_navigation.html.haml
+
+.row{ :style => 'margin-bottom:1rem;' }
+  .large-2.columns
+    = link_to '#' do
+      = render_with_icon(I18n.t 'blog_post.show.first')
+  .large-2.columns
+    = link_to '#' do
+      = render_with_icon(I18n.t 'blog_post.show.prev')
+  .large-4.columns.text-center
+    &nbsp;
+  .large-2.columns.text-right
+    = link_to '#' do
+      = render_with_icon(I18n.t 'blog_post.show.next')
+  .large-2.columns.text-right
+    = link_to '#' do
+      = render_with_icon(I18n.t 'blog_post.show.last')

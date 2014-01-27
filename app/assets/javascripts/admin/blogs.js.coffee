@@ -5,7 +5,7 @@
 # Admin::Blogs#show
 $ ->
   $root = $('body.admin-blogs-show')
-  return unless $root?
+  return unless $root.length > 0
 
   # Set up the Confirm Delete Blog modal.
   $modal = $root.find('#confirm-delete-modal')

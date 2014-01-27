@@ -6,7 +6,12 @@ Appleseed::Application.routes.draw do
   namespace :admin do
     resource :blog do
       resources :posts, :controller => 'blog_posts' do
+        collection do
+          post :preview
+        end # collection
+
         member do
+          get   :preview
           patch :publish
         end # member
       end # resources

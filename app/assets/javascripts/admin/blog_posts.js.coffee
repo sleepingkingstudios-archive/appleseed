@@ -5,7 +5,7 @@
 # Admin::BlogPosts#show
 $ ->
   $root = $('body.admin-blog-posts-show')
-  return unless $root?
+  return unless $root.length > 0
 
   # Set up the Confirm Delete Blog modal.
   $modal = $root.find('#confirm-delete-modal')
@@ -22,18 +22,44 @@ $ ->
   $cancel_button.click (event) -> $modal.foundation 'reveal', 'close'
   $confirm_button.click (event) -> $delete_button.click()
 
-# Admin::Blogs#new
+# Admin::BlogPosts#new
 $ ->
   $root = $('body.admin-blog-posts-new')
-  return unless $root?
+  return unless $root.length > 0
 
   # Enable autosize for the content field.
   $root.find('#blog_post_content').autosize()
 
-# Admin::Blogs#edit
+# Admin::BlogPosts#edit
 $ ->
   $root = $('body.admin-blog-posts-edit')
-  return unless $root?
+  return unless $root.length > 0
 
   # Enable autosize for the content field.
   $root.find('#blog_post_content').autosize()
+
+# Admin::BlogPosts#_form
+$ ->
+  $root = $('.admin-blog-posts-form')
+  return unless $root.length > 0
+
+  $preview_button = $root.find('#preview-blog-post-link')
+  $preview_button.show()
+  $preview_button.click (event) ->
+    event.preventDefault()
+
+    $method_field = $root.find('[name="_method"]')
+
+    form_action = $root.attr('action')
+    form_method = $method_field.val()
+
+    # Modify the form to use the preview action.
+    $root.attr('target', '_blank')
+    $root.attr('action', $preview_button.data('path'))
+    $method_field.val('')
+    $root.submit()
+
+    # Reset the form to its prior configuration.
+    $root.removeAttr('target')
+    $root.attr('action', form_action)
+    $method_field.val(form_method)

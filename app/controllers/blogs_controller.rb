@@ -5,6 +5,7 @@ class BlogsController < ApplicationController
 
   # GET /blog
   def show
+    @blog_post_presenter = BlogPostPresenter.new @blog_post
     @breadcrumbs << [I18n.t('blog.breadcrumb')]
     
     if @blog
@@ -18,6 +19,6 @@ class BlogsController < ApplicationController
 
   def load_resources
     @blog = Blog.first
-    @blog_posts = @blog ? @blog.posts.published.limit(3) : []
+    @blog_post = @blog ? @blog.posts.published.limit(1).first : nil
   end # method load_resources
 end # controller

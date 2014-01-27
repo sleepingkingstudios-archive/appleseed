@@ -39,6 +39,15 @@ class Admin::BlogPostsController < Admin::AdminController
     breadcrumbs_for :new
   end # action new
 
+  # POST /admin/blog/posts/preview
+  # GET  /admin/blog/posts/:id/preview
+  def preview
+    params[:id] ? load_resource : build_resource
+
+    @blog_post_presenter = Admin::BlogPostPresenter.new @blog_post
+    breadcrumbs_for :preview
+  end # action preview
+
   # PATCH /admin/blog/posts/:id/publish
   def publish
     if @blog_post.publish
@@ -80,6 +89,9 @@ class Admin::BlogPostsController < Admin::AdminController
     when :new
       @breadcrumbs << [I18n.t('admin.blog_posts.breadcrumb')]
       @breadcrumbs << [I18n.t('admin.blog_posts.new.breadcrumb')]
+    when :preview
+      @breadcrumbs << [I18n.t('admin.blog_posts.breadcrumb')]
+      @breadcrumbs << [I18n.t('admin.blog_posts.preview.breadcrumb')]
     when :show
       @breadcrumbs << [I18n.t('admin.blog_posts.breadcrumb')]
       @breadcrumbs << [@blog_post.title]

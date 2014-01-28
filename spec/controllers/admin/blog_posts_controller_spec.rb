@@ -106,6 +106,18 @@ RSpec.describe Admin::BlogPostsController do
 
     context 'with a blog post' do
       let!(:blog_post) { FactoryGirl.create :blog_post }
+
+      describe 'GET /admin/blog/posts/:id.json' do
+        def perform_action
+          get :show, :id => blog_post.id, :format => :json
+        end # method perform_action
+
+        it 'returns the post encoded as JSON' do
+          perform_action
+          expect(response.status).to be == 200
+          expect(response.body).to be == blog_post.to_builder.target!
+        end # it
+      end # describe
       
       describe 'PATCH /admin/blog/posts/:id' do
         let(:attributes) { {} }

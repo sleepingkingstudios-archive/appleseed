@@ -65,6 +65,12 @@ en:
       resource_not_found: 'There are no blogs created.'
       title: 'Admin Blog'
     blog_posts:
+      actions:
+        delete: '%{icon:skull} Delete'
+        edit: '%{icon:wrench} Update'
+        export: '%{icon:page-export} Export'
+        preview: '%{icon:magnifying-glass} Preview'
+        publish: '%{icon:book} Publish'
       breadcrumb: 'Posts'
       delete:
         confirm:
@@ -158,6 +164,7 @@ en:
       legal: 'Legal'
       title: 'About This Site'
   shared:
+    actions: 'Actions'
     cancel: 'Cancel'
     delete: 'Delete'
     edit: 'Edit'

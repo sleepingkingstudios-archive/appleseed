@@ -7,21 +7,28 @@
 
 %h1= I18n.t('admin.blog_posts.show.title')
 
-- unless @blog_post.published?
-  = link_to render_with_icon(I18n.t 'admin.blog_posts.publish.submit'), publish_admin_blog_post_path(@blog_post), :method => :patch, :class => 'button radius thin success'
-= link_to render_with_icon(I18n.t 'admin.blog_posts.preview.submit'), preview_admin_blog_post_path(@blog_post), :class => 'button radius thin'
-= link_to render_with_icon(I18n.t 'admin.blog_posts.edit.submit'), edit_admin_blog_post_path(@blog_post), :class => 'button radius thin'
-= link_to render_with_icon(I18n.t 'admin.blog_posts.delete.submit'), '#', :id => 'open-confirm-delete-modal-link', :class => 'button radius thin alert hide', :data => { :"reveal-id" => 'confirm-delete-modal' }
-= link_to render_with_icon(I18n.t 'admin.blog_posts.delete.submit'), admin_blog_post_path(@blog_post), :method => :delete, :id => 'delete-blog-post-link', :class => 'button radius thin alert'
+%p
+  %strong
+    = succeed(':') do
+      = I18n.t('shared.actions')
+  - unless @blog_post.published?
+    = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.publish'), publish_admin_blog_post_path(@blog_post), :method => :patch, :class => ' success'
+    &mdash;
+  = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.preview'), preview_admin_blog_post_path(@blog_post)
+  &mdash;
+  = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.edit'), edit_admin_blog_post_path(@blog_post)
+  &mdash;
+  = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.export'), admin_blog_post_path(@blog_post, :format => :json), :target => :blank
+  &mdash;
+  = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.delete'), '#', :id => 'open-confirm-delete-modal-link', :class => 'alert hide', :data => { :"reveal-id" => 'confirm-delete-modal' }
+  = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.delete'), admin_blog_post_path(@blog_post), :method => :delete, :id => 'delete-blog-post-link', :class => 'alert'
 
 - nav_options = { :current_post => @blog_post, :first_post => @blog_post.last_most_recent, :prev_post => @blog_post.next_most_recent, :next_post => @blog_post.prev_most_recent, :last_post => @blog_post.first_most_recent }
 = render :partial => 'admin/blog_posts/show/navigation', :locals => nav_options
 
+%h2= @blog_post.title
+
 %p
-  = succeed(':') do
-    %strong= I18n.t('blog_post.fields.title')
-  = @blog_post.title
-  %br
   = succeed(':') do
     %strong= I18n.t('blog_post.fields.content_type')
   = @blog_post_presenter.localized_content_type

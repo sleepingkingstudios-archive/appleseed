@@ -8,4 +8,10 @@ class Blog
   field :title, :type => String
 
   validates :title, :presence => true
+
+  def to_builder
+    Jbuilder.new do |blog|
+      blog.title title
+    end # builder
+  end # method to_builder
 end # class

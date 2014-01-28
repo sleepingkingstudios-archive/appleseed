@@ -64,6 +64,11 @@ class Admin::BlogPostsController < Admin::AdminController
     @blog_post_presenter = Admin::BlogPostPresenter.new @blog_post
 
     breadcrumbs_for :show
+
+    respond_to do |format|
+      format.json { render :json => @blog_post.to_builder.target! }
+      format.html { render 'show' }
+    end # respond to
   end # action show
 
   # PATCH /admin/blog/posts/:id

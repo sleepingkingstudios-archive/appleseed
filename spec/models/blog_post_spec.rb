@@ -163,6 +163,37 @@ RSpec.describe BlogPost do
     end # context
   end # describe
 
+  describe '#to_builder' do
+    it { expect(instance).to respond_to(:to_builder).with(0).arguments }
+    it { expect(instance.to_builder).to be_a Jbuilder }
+    it 'generates parsable JSON' do
+      expect { JSON.parse instance.to_builder.target! }.not_to raise_error
+    end # it
+
+    context 'with generated JSON' do
+      let(:json) { instance.to_builder.target! }
+      let(:hsh)  { JSON.parse json }
+
+      it { expect(hsh['author']).to be_a Hash }
+      it { expect(hsh['author']['email']).to be == instance.author.email }
+
+      it { expect(hsh['blog']).to be_a Hash }
+      it { expect(hsh['blog']['title']).to be == instance.blog.title }
+
+      %w(title content content_type).each do |field|
+        it { expect(hsh[field]).to be == instance.send(field) }
+      end # each
+
+      it { expect(hsh['published_at']).to be == 'null' }
+
+      context 'with a published post' do
+        before(:each) { instance.publish }
+
+        it { expect(hsh['published_at']).to be == instance.published_at.utc.iso8601 }
+      end # context
+    end # context
+  end # describe
+
   describe 'validation' do
     it { expect(instance).to be_valid }
 

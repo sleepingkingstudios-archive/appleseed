@@ -30,6 +30,21 @@ RSpec.describe Blog do
     end # context
   end # describe
 
+  describe '#to_builder' do
+    it { expect(instance).to respond_to(:to_builder).with(0).arguments }
+    it { expect(instance.to_builder).to be_a Jbuilder }
+    it 'generates parsable JSON' do
+      expect { JSON.parse instance.to_builder.target! }.not_to raise_error
+    end # it
+
+    context 'with generated JSON' do
+      let(:json) { instance.to_builder.target! }
+      let(:hsh)  { JSON.parse json }
+
+      it { expect(hsh['title']).to be == instance.title }
+    end # context
+  end # describe
+
   describe 'validation' do
     it { expect(instance).to be_valid }
 

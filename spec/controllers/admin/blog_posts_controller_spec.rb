@@ -13,6 +13,10 @@ RSpec.describe Admin::BlogPostsController do
 
     expect_behavior 'authenticates the user for action',    described_class, :preview, :method => :post
 
+    expect_behavior 'authenticates the user for action',    described_class, :import
+
+    expect_behavior 'authenticates the user for action',    described_class, :import, :method => :post
+
     context do
       let(:params) { { :id => blog_post.id } }
 
@@ -45,55 +49,6 @@ RSpec.describe Admin::BlogPostsController do
       end # it
     end # describe
 
-    describe 'POST /admin/blog/posts' do
-      let(:blog) { FactoryGirl.create :blog }
-      let(:attributes) do
-        attrs = FactoryGirl.attributes_for(:blog_post)
-        attrs.merge :author_id => user.id, :blog_id => blog.id
-      end # let
-
-      def perform_action
-        post :create, :blog_post => attributes
-      end # method perform_action
-
-      context 'with an invalid post' do
-        let(:attributes) { {} }
-
-        it 'responds with 200 ok and renders the new template' do
-          perform_action
-          expect(response.status).to be == 200
-          expect(response).to render_template 'new'
-        end # it
-
-        it 'does not create a new post' do
-          expect {
-            perform_action
-          }.not_to change(BlogPost, :count)
-        end # it
-      end # context
-
-      context 'with a valid post' do
-        let(:blog_post) { BlogPost.last }
-
-        it 'redirects to the admin show post path' do
-          perform_action
-          expect(response.status).to be == 302
-          expect(response).to redirect_to admin_blog_post_path(blog_post)
-        end # it
-
-        it 'creates a new post' do
-          expect {
-            perform_action
-          }.to change(BlogPost, :count).to(1)
-        end # it
-
-        it 'sets the post\'s author to the current user' do
-          perform_action
-          expect(blog_post.author).to be == user
-        end # it
-      end # context
-    end # describe
-
     describe 'POST /admin/blog/posts/preview' do
       let(:attributes) { FactoryGirl.attributes_for :blog_post }
 
@@ -105,7 +60,7 @@ RSpec.describe Admin::BlogPostsController do
     end # describe
 
     context 'with a blog' do
-      before(:each) { FactoryGirl.create :blog }
+      let!(:blog) { FactoryGirl.create :blog }
 
       describe 'GET /admin/blog/posts.json' do
         render_views
@@ -115,6 +70,110 @@ RSpec.describe Admin::BlogPostsController do
           expect(response.status).to be == 200
           expect(response.body).to be == '[]'
         end # it
+      end # describe
+
+      describe 'POST /admin/blog/posts' do
+        let(:attributes) do
+          attrs = FactoryGirl.attributes_for(:blog_post)
+          attrs.merge :author_id => user.id, :blog_id => blog.id
+        end # let
+
+        def perform_action
+          post :create, :blog_post => attributes
+        end # method perform_action
+
+        context 'with an invalid post' do
+          let(:attributes) { {} }
+
+          it 'responds with 200 ok and renders the new template' do
+            perform_action
+            expect(response.status).to be == 200
+            expect(response).to render_template 'new'
+          end # it
+
+          it 'does not create a new post' do
+            expect {
+              perform_action
+            }.not_to change(BlogPost, :count)
+          end # it
+        end # context
+
+        context 'with a valid post' do
+          let(:blog_post) { BlogPost.last }
+
+          it 'redirects to the admin show post path' do
+            perform_action
+            expect(response.status).to be == 302
+            expect(response).to redirect_to admin_blog_post_path(blog_post)
+          end # it
+
+          it 'creates a new post' do
+            expect {
+              perform_action
+            }.to change(BlogPost, :count).to(1)
+          end # it
+
+          it 'sets the post\'s author to the current user' do
+            perform_action
+            expect(blog_post.author).to be == user
+          end # it
+        end # context
+      end # describe
+
+      describe 'POST /admin/blog/posts/import' do
+        let(:attributes) do
+          [*0..2].map { FactoryGirl.attributes_for(:blog_post) }
+        end # let
+        let(:data) { attributes.to_json }
+
+        def perform_action
+          post :import, :blog_posts => { :data => data }
+        end # method perform_action
+
+        context 'with invalid JSON' do
+          let(:data) { '{}{}' }
+
+          it 'responds with 200 ok and renders the import template' do
+            perform_action
+            expect(response.status).to be == 200
+            expect(response).to render_template :import
+          end # it
+        end # context
+
+        context 'with valid JSON but invalid posts' do
+          let(:attributes) do
+            super().tap do |ary|
+              ary[0].update :title => nil
+              ary[2].update :content_type => nil
+            end # tap
+          end # let
+
+          it 'responds with 200 ok and renders the import template' do
+            perform_action
+            expect(response.status).to be == 200
+            expect(response).to render_template :import
+          end # it
+
+          it 'does not create any posts' do
+            expect {
+              perform_action
+            }.not_to change(BlogPost, :count)
+          end # it
+        end # context
+
+        context 'with valid JSON' do
+          it 'redirects to the blog path' do
+            perform_action
+            expect(response.status).to be == 302
+            expect(response).to redirect_to admin_blog_path
+          end # it
+
+          it 'creates new posts' do
+            expect {
+              perform_action
+            }.to change(BlogPost, :count).to(attributes.count)
+          end # it
+        end # context
       end # describe
     end # context
 

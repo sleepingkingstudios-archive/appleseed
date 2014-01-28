@@ -69,6 +69,8 @@ en:
         delete: '%{icon:skull} Delete'
         edit: '%{icon:wrench} Update'
         export: '%{icon:page-export} Export'
+        import: '%{icon:page} Import Posts'
+        new: '%{icon:pencil} Create Post'
         preview: '%{icon:magnifying-glass} Preview'
         publish: '%{icon:book} Publish'
       breadcrumb: 'Posts'
@@ -83,6 +85,14 @@ en:
         submit: '%{icon:wrench} Edit Post'
         success: '%{icon:wrench} Post successfully updated.'
         title: 'Edit Post'
+      import:
+        breadcrumb: 'Import Posts'
+        errors: 'The following error(s) have prevented post %{index} of %{count} from being saved:'
+        failure:
+          invalid_posts: '%{icon:alert} Unable to import posts because one or more posts are invalid.'
+          malformed_json: '%{icon:alert} Unable to import posts because the JSON data is not properly formed.'
+        submit: '%{icon:page} Import Posts'
+        success: '%{icon:page} Posts successfully imported.'
       new:
         breadcrumb: 'Create Post'
         submit: '%{icon:pencil} Create Post'

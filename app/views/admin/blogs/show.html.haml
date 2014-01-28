@@ -35,7 +35,8 @@
       %h2= I18n.t('admin.blog.posts.title')
     .large-8.columns
       .heading-buttons
-        = link_to render_with_icon(I18n.t 'admin.blog_posts.new.submit'), new_admin_blog_post_path, :class => 'button thin radius success'
+        = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.import'), import_admin_blog_posts_path, :class => 'button thin radius'
+        = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.new'), new_admin_blog_post_path, :class => 'button thin radius success'
     
   = render :partial => 'admin/blog_posts/index/table', :locals => { :blog => @blog, :blog_posts => @blog_posts }
 - else

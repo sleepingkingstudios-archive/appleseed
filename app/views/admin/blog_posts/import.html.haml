@@ -1,0 +1,21 @@
+-# app/views/admin/blog_posts/import.html.haml
+
+= content_for :body_class do
+  admin-blog-posts-import
+
+%h1 Import Posts
+
+= form_for :blog_posts, :url => admin_blog_posts_path do |form|
+  - @blog_posts.each_with_index do |blog_post, index|
+    - unless blog_post.errors.blank?
+      .panel.errors
+        %strong= I18n.t('admin.blog_posts.import.errors', :index => index + 1, :count => @blog_posts.count)
+        %ul
+          - blog_post.errors.full_messages.each do |message|
+            %li= message
+
+  = text_area_tag :blog_posts_data, params.fetch(:blog_posts, {}).fetch(:data, ''), :name => 'blog_posts[data]'
+
+  .text-right
+    = link_to t('shared.cancel'), admin_blog_path, :class => 'button secondary radius'
+    = form.submit render_without_icon(I18n.t 'admin.blog_posts.import.submit'), :class => 'button success radius'

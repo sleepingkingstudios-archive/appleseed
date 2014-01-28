@@ -9,13 +9,13 @@ $footer-height:      rem-calc(90);
 
 $header-font-family: Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic, "Apple Gothic", AppleGothic, "URW Gothic L", "Avant Garde", sans-serif;
 
-$font-color-dark-black:  #000000;
-$font-color-dark-blue:   #007095;
-$font-color-dark-green:  #368a55;
-$font-color-dark-orange: #cf2a0e;
-$font-color-black:       #222222;
-$font-color-green:       #43ac6a;
-$font-color-orange:      #ea2f10;
+$color-dark-black:  #000000;
+$color-dark-blue:   #007095;
+$color-dark-green:  #368a55;
+$color-dark-orange: #cf2a0e;
+$color-black:       #222222;
+$color-green:       #43ac6a;
+$color-orange:      #ea2f10;
 
 html, body {
   height: 100%;
@@ -46,9 +46,9 @@ body > #page-wrapper {
     text-align: center;
 
     a {
-      color: $font-color-black;
+      color: $color-black;
 
-      &:hover { color: $font-color-dark-black; }
+      &:hover { color: $color-dark-black; }
     }
   }
 }
@@ -70,9 +70,9 @@ body > #page-wrapper {
     text-align: center;
 
     a {
-      color: $font-color-black;
+      color: $color-black;
 
-      &:hover { color: $font-color-dark-black; }
+      &:hover { color: $color-dark-black; }
     }
   }
 
@@ -120,26 +120,26 @@ h1, h2, h3, h4, h5, h6, fieldset legend {
  *********************/
 
 @mixin alert-text {
-  color: $font-color-orange;
+  color: $color-orange;
 }
 
 @mixin alert-hover-text {
   @include alert-text;
 
   &:hover {
-    color: $font-color-dark-orange;
+    color: $color-dark-orange;
   }
 }
 
 @mixin success-text {
-  color: $font-color-green;
+  color: $color-green;
 }
 
 @mixin success-hover-text {
   @include success-text;
 
   &:hover {
-    color: $font-color-dark-green;
+    color: $color-dark-green;
   }
 }
 
@@ -197,6 +197,10 @@ a {
 
 form.new_user {
   margin-top: rem-calc(20);
+}
+
+.panel.errors {
+  border-color: $color-orange;
 }
 
 /************

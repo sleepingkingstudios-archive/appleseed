@@ -31,7 +31,15 @@ class Admin::BlogPostsController < Admin::AdminController
 
   # GET /admin/blog/posts
   def index
-    redirect_to admin_blog_path
+    respond_to do |format|
+      format.html { redirect_to admin_blog_path }
+      format.json do
+        load_dependent_resources
+        load_resources
+
+        render :index
+      end # format
+    end # respond_to
   end # action index
 
   # GET /admin/blog/posts/new
@@ -64,11 +72,6 @@ class Admin::BlogPostsController < Admin::AdminController
     @blog_post_presenter = Admin::BlogPostPresenter.new @blog_post
 
     breadcrumbs_for :show
-
-    respond_to do |format|
-      format.json { render :json => @blog_post.to_builder.target! }
-      format.html { render 'show' }
-    end # respond to
   end # action show
 
   # PATCH /admin/blog/posts/:id
@@ -121,4 +124,8 @@ class Admin::BlogPostsController < Admin::AdminController
   def load_resource
     @blog_post = BlogPost.find params[:id]
   end # method load_resource
+
+  def load_resources
+    @blog_posts = @blog ? @blog.posts : []
+  end # method load_resources
 end # class

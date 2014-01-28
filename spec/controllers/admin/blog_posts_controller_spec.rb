@@ -104,10 +104,57 @@ RSpec.describe Admin::BlogPostsController do
       end # it
     end # describe
 
+    context 'with a blog' do
+      before(:each) { FactoryGirl.create :blog }
+
+      describe 'GET /admin/blog/posts.json' do
+        render_views
+
+        it 'returns an empty JSON array' do
+          get :index, :format => :json
+          expect(response.status).to be == 200
+          expect(response.body).to be == '[]'
+        end # it
+      end # describe
+    end # context
+
     context 'with a blog post' do
       let!(:blog_post) { FactoryGirl.create :blog_post }
 
+      def perform_action
+        get :index, :format => :json
+      end # method perform_action
+
+      describe 'GET /admin/blog/posts.json' do
+        render_views
+
+        let(:ary) { JSON.parse(response.body) }
+        let(:hsh) { ary.first }
+        
+        it 'returns a JSON array containing the post encoded as JSON' do
+          perform_action
+          expect(response.status).to be == 200
+          expect(ary.count).to be 1
+
+          expect(hsh['author']).to be_a Hash
+          expect(hsh['author']['email']).to be == blog_post.author.email
+
+          expect(hsh['blog']).to be_a Hash
+          expect(hsh['blog']['title']).to be == blog_post.blog.title
+
+          %w(title content content_type).each do |field|
+            expect(hsh[field]).to be == blog_post.send(field)
+          end # each
+
+          expect(hsh['published_at']).to be == 'null'
+        end # it
+      end # describe
+
       describe 'GET /admin/blog/posts/:id.json' do
+        render_views
+
+        let(:hsh) { JSON.parse response.body }
+
         def perform_action
           get :show, :id => blog_post.id, :format => :json
         end # method perform_action
@@ -115,8 +162,28 @@ RSpec.describe Admin::BlogPostsController do
         it 'returns the post encoded as JSON' do
           perform_action
           expect(response.status).to be == 200
-          expect(response.body).to be == blog_post.to_builder.target!
+          expect(hsh).to be_a Hash
+
+          expect(hsh['author']).to be_a Hash
+          expect(hsh['author']['email']).to be == blog_post.author.email
+
+          expect(hsh['blog']).to be_a Hash
+          expect(hsh['blog']['title']).to be == blog_post.blog.title
+
+          %w(title content content_type).each do |field|
+            expect(hsh[field]).to be == blog_post.send(field)
+          end # each
+
+          expect(hsh['published_at']).to be == 'null'
         end # it
+
+        context 'with a published post' do
+          let(:blog_post) { super().tap &:publish }
+
+          before(:each) { perform_action }
+
+          it { expect(hsh['published_at']).to be == blog_post.published_at.utc.iso8601 }
+        end # context
       end # describe
       
       describe 'PATCH /admin/blog/posts/:id' do
@@ -216,6 +283,23 @@ RSpec.describe Admin::BlogPostsController do
             }.to change(blog_post, :published?).to true
           end # it
         end # context
+      end # describe
+    end # context
+
+    context 'with many blog posts' do
+      let(:blog) { FactoryGirl.create :blog }
+      before(:each) { 3.times { FactoryGirl.create :blog_post, :blog => blog } }
+
+      describe 'GET /admin/blog/posts.json' do
+        render_views
+
+        let(:ary) { JSON.parse(response.body) }
+        
+        it 'returns a JSON array containing one item for each post' do
+          get :index, :format => :json
+          expect(response.status).to be == 200
+          expect(ary.count).to be == blog.posts.count
+        end # it
       end # describe
     end # context
   end # context

@@ -39,10 +39,4 @@ class User
   # field :locked_at,       :type => Time
 
   field :email, :type => String
-
-  def to_builder
-    Jbuilder.new do |user|
-      user.email email
-    end # builder
-  end # method to_builder
 end # model

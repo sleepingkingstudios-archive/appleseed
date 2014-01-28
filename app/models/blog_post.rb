@@ -48,24 +48,6 @@ class BlogPost
     !self.published_at.blank? && self.published_at <= Time.now.utc
   end # method published?
 
-  def to_builder
-    Jbuilder.new do |blog_post|
-      blog_post.author author.to_builder
-
-      blog_post.blog   blog.to_builder
-
-      blog_post.title        title
-      blog_post.content      content
-      blog_post.content_type content_type
-
-      if published?
-        blog_post.published_at published_at.utc.iso8601
-      else
-        blog_post.published_at 'null'
-      end # if-else
-    end # builder
-  end # method to_builder
-
   ########################
   ### ORDERING HELPERS ###
   ########################

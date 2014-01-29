@@ -63,3 +63,11 @@ $ ->
     $root.removeAttr('target')
     $root.attr('action', form_action)
     $method_field.val(form_method)
+
+# Admin::BlogPosts#import
+$ ->
+  $root = $('.admin-blog-posts-import')
+  return unless $root.length > 0
+
+  # Enable autosize for the import field.
+  $root.find('#blog_posts_data').autosize()

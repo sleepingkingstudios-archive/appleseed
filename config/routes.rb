@@ -7,6 +7,8 @@ Appleseed::Application.routes.draw do
     resource :blog do
       resources :posts, :controller => 'blog_posts' do
         collection do
+          get  :import
+          post :import
           post :preview
         end # collection
 

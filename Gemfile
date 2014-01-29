@@ -25,7 +25,7 @@ gem 'redcarpet', '~> 3.0.0'
 
 ### Support ###
 # gem 'debugger', group: [:development, :test]
-# gem 'jbuilder', '~> 1.2' # Build JSON APIs. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 1.2' # Build JSON APIs. Read more: https://github.com/rails/jbuilder
 # gem 'turbolinks' # Read more: https://github.com/rails/turbolinks
 
 ### Documentation ###

@@ -7,30 +7,10 @@ RSpec.describe Admin::BlogsController do
 
   expect_behavior 'authenticates the user for singular resource', described_class, :only => %i(show new create)
 
-  context 'with no authenticated user' do
-    describe 'GET /admin/blog/edit' do
-      context 'with an existing blog' do
-        before(:each) { FactoryGirl.create :blog }
+  context 'with a blog' do
+    before(:each) { FactoryGirl.create :blog }
 
-        expect_behavior 'authenticates the user for singular resource', described_class, :only => :edit
-      end # context
-    end # describe
-
-    describe 'PATCH /admin/blog' do
-      context 'with an existing blog' do
-        before(:each) { FactoryGirl.create :blog }
-
-        expect_behavior 'authenticates the user for singular resource', described_class, :only => :update
-      end # context
-    end # describe
-
-    describe 'DELETE /admin/blog' do
-      context 'with an existing blog' do
-        before(:each) { FactoryGirl.create :blog }
-
-        expect_behavior 'authenticates the user for singular resource', described_class, :only => :destroy
-      end # context
-    end # describe
+    expect_behavior 'authenticates the user for singular resource', described_class, :only => %i(edit update destroy)
   end # context
 
   context 'with an authenticated user' do
@@ -38,7 +18,7 @@ RSpec.describe Admin::BlogsController do
 
     before(:each) { sign_in user }
 
-    describe 'GET /admin/blog/new' do
+    describe 'new' do
       context 'with an existing blog' do
         before(:each) { FactoryGirl.create :blog }
 
@@ -47,10 +27,10 @@ RSpec.describe Admin::BlogsController do
           expect(response.status).to be == 302
           expect(response).to redirect_to admin_blog_path
         end # it
-      end # context      
+      end # context
     end # describe
 
-    describe 'POST /admin/blog' do
+    describe 'create' do
       let(:attributes) { FactoryGirl.attributes_for :blog }
 
       def perform_action
@@ -104,7 +84,7 @@ RSpec.describe Admin::BlogsController do
       end # context
     end # describe
 
-    describe 'GET /admin/blog/edit' do
+    describe 'edit' do
       context 'with no existing blog' do
         it 'redirects to the admin blog path' do
           get :edit
@@ -114,7 +94,7 @@ RSpec.describe Admin::BlogsController do
       end # context
     end # describe
 
-    describe 'PATCH /admin/blog' do
+    describe 'update' do
       let(:title) { nil }
       let(:data)  { { :title => title } }
 
@@ -170,7 +150,7 @@ RSpec.describe Admin::BlogsController do
       end # context
     end # describe
 
-    describe 'DELETE /admin/blog' do
+    describe 'destroy' do
       def perform_action
         delete :destroy
       end # method perform_action

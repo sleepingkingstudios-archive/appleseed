@@ -6,7 +6,7 @@ RSpec.describe BlogPostsController do
   let(:blog)      { FactoryGirl.create :blog }
   let(:blog_post) { FactoryGirl.create :blog_post, :blog => blog }
 
-  describe "GET /blog/posts/:id" do
+  describe 'show' do
     def perform_request
       get :show, :id => blog_post.id
     end # method perform_request

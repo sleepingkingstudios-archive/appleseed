@@ -1,11 +1,13 @@
 # app/models/blog_post.rb
 
 require 'mongoid/sleeping_king_studios/orderable'
+require 'mongoid/sleeping_king_studios/sluggable'
 
 class BlogPost
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::SleepingKingStudios::Orderable
+  include Mongoid::SleepingKingStudios::Sluggable
 
   CONTENT_TYPES = %w(plain redcarpet)
 
@@ -22,6 +24,8 @@ class BlogPost
   scope :published, -> {
     where(:published_at.lte => Time.now.utc).desc(:published_order)
   } # end scope
+
+  slugify :title, :lockable => true
 
   validates :author, :presence => true
   validates :blog, :presence => true

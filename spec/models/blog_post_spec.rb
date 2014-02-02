@@ -94,6 +94,20 @@ RSpec.describe BlogPost do
     it { expect(instance.published_order).to be nil }
   end # describe
 
+  describe '#slug' do
+    it { expect(instance).to have_property(:slug) }
+    it { expect(instance.slug).to be == instance.title.parameterize }
+  end # describe
+
+  describe '#slug_lock' do
+    it { expect(instance).to have_property(:slug_lock) }
+    it 'is set by manually changing the slug' do
+      expect {
+        instance.slug = 'master-control-program'
+      }.to change(instance, :slug_lock).to(true)
+    end # it
+  end # describe
+
   describe '#title' do
     it { expect(instance).to have_property(:title) }
   end # describe
@@ -188,6 +202,12 @@ RSpec.describe BlogPost do
       let(:attributes) { super().merge :content_type => 'gibberish' }
 
       it { expect(instance).to have_errors.on(:content_type).with_message('is not included in the list') }
+    end # describe
+
+    describe 'slug must be present' do
+      before(:each) { instance.slug = nil }
+
+      it { expect(instance).to have_errors.on(:slug).with_message('can\'t be blank') }
     end # describe
 
     describe 'title must be present' do

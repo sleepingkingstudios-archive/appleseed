@@ -31,7 +31,6 @@ Appleseed::Application.routes.draw do
 
   # Static page routes.
   get '/about', :to => 'pages#about', :as => :about
-  get '/about/fonts/freeware-license', :to => 'pages#about_fonts_freeware_license'
 
   root 'pages#index'
 end # routes

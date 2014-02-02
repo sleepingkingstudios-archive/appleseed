@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe BlogsController do
-  describe "GET /blog" do
+  describe 'show' do
     def perform_request
       get :show
     end # method perform_request

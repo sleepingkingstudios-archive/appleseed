@@ -27,7 +27,7 @@ RSpec.describe Admin::BlogPostsController do
   end # context
 
   context 'with no authenticated user' do
-    describe 'GET /admin/blog/posts' do
+    describe 'index' do
       it 'redirects to root' do
         get :index
         expect(response.status).to be == 302
@@ -41,7 +41,7 @@ RSpec.describe Admin::BlogPostsController do
 
     before(:each) { sign_in user }
 
-    describe 'GET /admin/blog/posts' do
+    describe 'index' do
       it 'redirects to admin blog' do
         get :index
         expect(response.status).to be == 302
@@ -49,7 +49,7 @@ RSpec.describe Admin::BlogPostsController do
       end # it
     end # describe
 
-    describe 'POST /admin/blog/posts/preview' do
+    describe 'preview' do
       let(:attributes) { FactoryGirl.attributes_for :blog_post }
 
       it 'responds with 200 ok and renders the preview template' do
@@ -62,7 +62,7 @@ RSpec.describe Admin::BlogPostsController do
     context 'with a blog' do
       let!(:blog) { FactoryGirl.create :blog }
 
-      describe 'GET /admin/blog/posts.json' do
+      describe 'index.json' do
         render_views
 
         it 'returns an empty JSON array' do
@@ -72,7 +72,7 @@ RSpec.describe Admin::BlogPostsController do
         end # it
       end # describe
 
-      describe 'POST /admin/blog/posts' do
+      describe 'create' do
         let(:attributes) do
           attrs = FactoryGirl.attributes_for(:blog_post)
           attrs.merge :author_id => user.id, :blog_id => blog.id
@@ -120,7 +120,7 @@ RSpec.describe Admin::BlogPostsController do
         end # context
       end # describe
 
-      describe 'POST /admin/blog/posts/import' do
+      describe 'import' do
         let(:attributes) do
           [*0..2].map { FactoryGirl.attributes_for(:blog_post) }
         end # let
@@ -184,7 +184,7 @@ RSpec.describe Admin::BlogPostsController do
         get :index, :format => :json
       end # method perform_action
 
-      describe 'GET /admin/blog/posts.json' do
+      describe 'index.json' do
         render_views
 
         let(:ary) { JSON.parse(response.body) }
@@ -209,7 +209,7 @@ RSpec.describe Admin::BlogPostsController do
         end # it
       end # describe
 
-      describe 'GET /admin/blog/posts/:id.json' do
+      describe 'show.json' do
         render_views
 
         let(:hsh) { JSON.parse response.body }
@@ -245,7 +245,7 @@ RSpec.describe Admin::BlogPostsController do
         end # context
       end # describe
       
-      describe 'PATCH /admin/blog/posts/:id' do
+      describe 'update' do
         let(:attributes) { {} }
 
         def perform_action
@@ -288,7 +288,7 @@ RSpec.describe Admin::BlogPostsController do
         end # context
       end # describe
 
-      describe 'DELETE /admin/blog/posts/:id' do
+      describe 'destroy' do
         def perform_action
           delete :destroy, :id => blog_post.id
         end # method perform_action
@@ -306,7 +306,7 @@ RSpec.describe Admin::BlogPostsController do
         end # it
       end # describe
 
-      describe 'PATCH /admin/blog/posts/:id/publish' do
+      describe 'publish' do
         def perform_action
           patch :publish, :id => blog_post.id
         end # method perform_action
@@ -349,7 +349,7 @@ RSpec.describe Admin::BlogPostsController do
       let(:blog) { FactoryGirl.create :blog }
       before(:each) { 3.times { FactoryGirl.create :blog_post, :blog => blog } }
 
-      describe 'GET /admin/blog/posts.json' do
+      describe 'index.json' do
         render_views
 
         let(:ary) { JSON.parse(response.body) }

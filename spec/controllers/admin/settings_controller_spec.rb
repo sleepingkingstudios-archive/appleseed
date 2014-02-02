@@ -12,7 +12,7 @@ RSpec.describe Admin::SettingsController do
 
     before(:each) { sign_in user }
 
-    describe 'PATCH /admin/settings' do
+    describe 'update' do
       let(:attributes) { {} }
 
       def perform_action

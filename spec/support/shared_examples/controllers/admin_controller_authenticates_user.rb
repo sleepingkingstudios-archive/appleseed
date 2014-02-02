@@ -1,11 +1,13 @@
 # spec/support/shared_examples/controllers/admin_controller_authenticates_user.rb
 
+require Rails.root.join('spec/support/shared_examples/action_helpers')
+
 module Appleseed
   module SharedExamples
     module AdminControllerAuthenticatesUser
-      RESTFUL_ACTIONS = %w(index new create show edit update destroy)
-
       module Helpers
+        include Appleseed::SharedExamples::ActionHelpers
+
         def expect_render_for_action action, template = nil
           template ||= action
           describe action do
@@ -30,18 +32,6 @@ module Appleseed
             end # it
           end # describe
         end # class method authenticate_user_for_action
-
-        def filter_actions actions, options
-          if !options[:only].blank?
-            options[:only] = [options[:only]].flatten unless options[:only].is_a?(Array)
-            actions.select { |action| options[:only].include?(action.to_s.intern) }
-          elsif !options[:except].blank?
-            options[:except] = [options[:except]].flatten unless options[:except].is_a?(Array)
-            actions.select { |action| !options[:except].include?(action.to_s.intern) }
-          else
-            actions
-          end # if-elsif-else
-        end # class method filter_actions
       end # module
 
       shared_examples 'authenticates the user for action' do |controller, action, options|
@@ -70,7 +60,7 @@ module Appleseed
         extend Appleseed::SharedExamples::AdminControllerAuthenticatesUser::Helpers
 
         options = {} unless options.is_a?(Hash)
-        actions = filter_actions RESTFUL_ACTIONS, options
+        actions = filter_actions Appleseed::SharedExamples::ActionHelpers::RESTFUL_ACTIONS, options
 
         let(:params)               { defined?(super) ? super() : {} }
         let(:resource_primary_key) { defined?(super) ? super() : :id }
@@ -113,7 +103,7 @@ module Appleseed
         extend Appleseed::SharedExamples::AdminControllerAuthenticatesUser::Helpers
 
         options = {} unless options.is_a?(Hash)
-        actions = filter_actions RESTFUL_ACTIONS, options
+        actions = filter_actions Appleseed::SharedExamples::ActionHelpers::RESTFUL_ACTIONS, options
 
         let(:params) { defined?(super) ? super() : {} }
 

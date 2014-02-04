@@ -117,6 +117,46 @@ RSpec.describe Admin::BlogPostsController do
             perform_action
             expect(blog_post.author).to be == user
           end # it
+
+          it 'sets the post\'s slug to the parameterized title' do
+            perform_action
+            expect(blog_post.slug).to be == blog_post.title.parameterize
+          end # it
+
+          it 'clears the post\'s slug lock' do
+            perform_action
+            expect(blog_post.slug_lock).to be false
+          end # it
+
+          context 'with a custom slug' do
+            let(:slug) { 'custom-slug' }
+            let(:attributes) { super().merge :slug => slug }
+
+            it 'sets the post\'s slug' do
+              perform_action
+              expect(blog_post.slug).to be == slug
+            end # it
+
+            it 'sets the post\'s slug lock' do
+              perform_action
+              expect(blog_post.slug_lock).to be true
+            end # it
+          end # context
+
+          context 'with an empty slug' do
+            let(:slug) { '' }
+            let(:attributes) { super().merge :slug => slug }
+
+            it 'sets the post\'s slug to the parameterized title' do
+              perform_action
+              expect(blog_post.slug).to be == blog_post.title.parameterize
+            end # it
+
+            it 'clears the post\'s slug lock' do
+              perform_action
+              expect(blog_post.slug_lock).to be false
+            end # it
+          end # context
         end # context
       end # describe
 
@@ -285,6 +325,64 @@ RSpec.describe Admin::BlogPostsController do
               blog_post.reload
             }.to change(blog_post, :title).to(title)
           end # it
+
+          it 'updates the slug' do
+            expect {
+              perform_action
+              blog_post.reload
+            }.to change(blog_post, :slug).to(title.parameterize)
+          end # it
+
+          context 'with a slug value' do
+            let(:slug) { 'custom-slug' }
+            let(:attributes) { super().merge :slug => slug }
+
+            it 'updates the slug' do
+              expect {
+                perform_action
+                blog_post.reload
+              }.to change(blog_post, :slug).to(slug)
+            end # it 
+
+            it 'sets the slug lock' do
+              expect {
+                perform_action
+                blog_post.reload
+              }.to change(blog_post, :slug_lock).to(true)
+            end # it
+          end # context
+
+          context 'with a locked slug' do
+            before(:each) do
+              blog_post.slug = 'locked-slug'
+              blog_post.save!
+            end # before each
+
+            it 'does not update the slug' do
+              expect {
+                perform_action
+                blog_post.reload
+              }.not_to change(blog_post, :slug)
+            end # it
+
+            context 'with an empty value for the slug' do
+              let(:attributes) { super().merge :slug => '' }
+
+              it 'sets the slug to the parameterized title' do
+                expect {
+                  perform_action
+                  blog_post.reload
+                }.to change(blog_post, :slug).to(title.parameterize)
+              end # it
+
+              it 'clears the slug lock' do
+                expect {
+                  perform_action
+                  blog_post.reload
+                }.to change(blog_post, :slug_lock).to(false)
+              end # it
+            end # context
+          end # context
         end # context
       end # describe
 

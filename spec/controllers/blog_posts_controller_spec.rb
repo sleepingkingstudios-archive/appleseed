@@ -8,7 +8,7 @@ RSpec.describe BlogPostsController do
 
   describe 'show' do
     def perform_request
-      get :show, :id => blog_post.id
+      get :show, :id => blog_post.slug
     end # method perform_request
 
     it 'responds with 200 ok and renders the show template' do

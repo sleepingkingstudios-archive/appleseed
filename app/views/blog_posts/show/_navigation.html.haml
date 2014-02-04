@@ -5,13 +5,13 @@
     - if first_post.blank? || first_post == current_post
       &nbsp;
     - else
-      = link_to blog_post_path(first_post) do
+      = link_to blog_post_path(first_post.slug) do
         = render_with_icon(I18n.t 'blog_post.show.first')
   .large-2.columns
     - if prev_post.blank?
       &nbsp;
     - else
-      = link_to blog_post_path(prev_post) do
+      = link_to blog_post_path(prev_post.slug) do
         = render_with_icon(I18n.t 'blog_post.show.prev')
   .large-4.columns.text-center
     &nbsp;
@@ -19,11 +19,11 @@
     - if next_post.blank?
       &nbsp;
     - else
-      = link_to blog_post_path(next_post) do
+      = link_to blog_post_path(next_post.slug) do
         = render_with_icon(I18n.t 'blog_post.show.next')
   .large-2.columns.text-right
     - if last_post.blank? || last_post == current_post
       &nbsp;
     - else
-      = link_to blog_post_path(last_post) do
+      = link_to blog_post_path(last_post.slug) do
         = render_with_icon(I18n.t 'blog_post.show.last')

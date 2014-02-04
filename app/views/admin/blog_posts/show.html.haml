@@ -14,7 +14,7 @@
   - unless @blog_post.published?
     = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.publish'), publish_admin_blog_post_path(@blog_post), :method => :patch, :class => ' success'
     &mdash;
-  = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.preview'), preview_admin_blog_post_path(@blog_post)
+  = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.preview'), preview_admin_blog_post_path(@blog_post), :target => '_blank'
   &mdash;
   = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.edit'), edit_admin_blog_post_path(@blog_post)
   &mdash;

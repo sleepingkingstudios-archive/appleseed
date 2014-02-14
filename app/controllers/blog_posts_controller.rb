@@ -26,6 +26,6 @@ class BlogPostsController < ApplicationController
   end # method load_dependent_resources
 
   def load_resource
-    @blog_post = BlogPost.find params[:id]
+    @blog_post = BlogPost.where(:slug => params[:id]).limit(1).first
   end # method load_resource
 end # class

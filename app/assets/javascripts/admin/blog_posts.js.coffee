@@ -64,6 +64,15 @@ $ ->
     $root.attr('action', form_action)
     $method_field.val(form_method)
 
+  parameterizeString = (string) ->
+    string.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '')
+
+  # Auto-update the slug field as the title is changed.
+  $title_field = $root.find('#blog_post_title')
+  $slug_field  = $root.find('#blog_post_slug')
+  $title_field.bind 'keyup', ->
+    $slug_field.attr('placeholder', parameterizeString $title_field.val())
+
 # Admin::BlogPosts#import
 $ ->
   $root = $('.admin-blog-posts-import')

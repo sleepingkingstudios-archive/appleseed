@@ -148,6 +148,7 @@ en:
       content: 'Content'
       content_type: 'Content Type'
       published_at: 'Date Published'
+      slug: 'Slug'
       title: 'Title'
     published: 'Published'
     show:

@@ -3,7 +3,6 @@
 class Admin::BlogPostsController < Admin::AdminController
   before_action :load_dependent_resources
   before_action :build_resource, :only => %i(new create)
-  # before_action :build_resources, :only => %i(import)
   before_action :load_resource, :only => %i(show edit update destroy publish)
 
   # POST /admin/blog/posts
@@ -103,7 +102,13 @@ class Admin::BlogPostsController < Admin::AdminController
 
   # PATCH /admin/blog/posts/:id
   def update
-    if @blog_post.update_attributes blog_post_params
+    post_params = blog_post_params
+    
+    if false == post_params[:slug_lock]
+      post_params[:slug] = BlogPost.value_to_slug(post_params.fetch('title', @blog_post.title))
+    end # if
+
+    if @blog_post.update_attributes post_params
       flash[:notice] = I18n.t('admin.blog_posts.edit.success')
       redirect_to admin_blog_post_path(@blog_post)
     else
@@ -115,7 +120,9 @@ class Admin::BlogPostsController < Admin::AdminController
   private
 
   def blog_post_params
-    params.fetch(:blog_post, {}).permit(:title, :content, :content_type)
+    hsh = params.fetch(:blog_post, {}).permit(:title, :slug, :content, :content_type)
+    hsh[:slug_lock] = !hsh[:slug].blank? if hsh.has_key?(:slug)
+    hsh
   end # method blog_post_params
 
   def blog_posts_data
@@ -151,7 +158,13 @@ class Admin::BlogPostsController < Admin::AdminController
   end # method breadcrumbs_for
 
   def build_resource
-    @blog_post = BlogPost.new blog_post_params
+    post_params = blog_post_params
+
+    if false == post_params[:slug_lock]
+      post_params[:slug] = BlogPost.value_to_slug(post_params.fetch('title', ''))
+    end # if
+
+    @blog_post = BlogPost.new post_params
     @blog_post.author = current_user
     @blog_post.blog   = @blog
     @blog_post

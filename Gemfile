@@ -6,10 +6,10 @@ gem 'rails', '4.0.2'
 # gem 'unicorn'
 
 ### Datastore ###
-gem 'mongoid',  '4.0.0.alpha2', github: 'mongoid/mongoid'
+gem 'mongoid',  '4.0.0.beta1', github: 'mongoid/mongoid'
 gem 'devise',   '~> 3.2.2'
 
-gem 'mongoid-sleeping_king_studios', '~> 0.7.6'
+gem 'mongoid-sleeping_king_studios', '~> 0.7', '>= 0.7.8'
 
 ### Assets ###
 gem 'haml-rails',        '~> 0.4'
@@ -34,6 +34,7 @@ group :doc do
   gem 'sdoc', require: false
 end # group
 
+### Inline Console ###
 group :development, :test do
   gem 'pry', '~> 0.9.12'
 end # group

@@ -1,8 +1,13 @@
 -# app/views/admin/blog_posts/_form.html.haml
 
 = form_for [:admin, post], :builder => FoundationFormBuilder, :html => { :class => 'admin-blog-posts-form' } do |form|
-  = form.label :title, t('blog_post.fields.title')
-  = form.text_field :title, :autofocus => true
+  .row
+    .large-6.columns
+      = form.label :title, t('blog_post.fields.title')
+      = form.text_field :title, :autofocus => true
+    .large-6.columns
+      = form.label :slug, t('blog_posts.fields.slug')
+      = form.text_field :slug, :placeholder => post.to_slug, :value => post.slug_lock ? post.slug : ''
 
   = form.label :content_type, t('blog_post.fields.content_type')
   = select_content_type_tag form, post

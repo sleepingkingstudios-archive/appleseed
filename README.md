@@ -10,7 +10,6 @@ development, and new features will be added on a regular basis.
 
 The following features are planned to be added in the near future:
 
-* Human-readable post urls, based on the post title.
 * Tags for blog posts.
 * JavaScript views to replace per-page JS checks.
 * Features using Cucumber.

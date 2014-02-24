@@ -1,7 +1,16 @@
 # app/assets/javascripts/views/admin/blogs/show.js.coffee
 
-class Appleseed.Views.Admin.Blogs.Show extends Marionette.View
-  initialize: (options) ->
+class Appleseed.Views.Admin.Blogs.Show extends Appleseed.Views.BaseView
+  @selectors: {
+    delete_button:  '.delete-button',
+    modal:
+      sel: '#confirm-delete-modal',
+      action: '.confirm-delete-button'
+  }
+
+  initialize: (root, options) ->
+    super(root, options)
+
     # Define selectors.
     @$orig  = $ '.delete-button'
     @$modal = $ '#confirm-delete-modal'
@@ -11,7 +20,6 @@ class Appleseed.Views.Admin.Blogs.Show extends Marionette.View
 
   bindModalAction: () ->
     @$action = @$modal.find('.confirm-delete-button')
-    console.log @$action
     @$action.bind 'click', => @$orig.click()
 
   mockDeleteButton: () ->

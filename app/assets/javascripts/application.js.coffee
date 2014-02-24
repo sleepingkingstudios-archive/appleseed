@@ -12,7 +12,7 @@
 #= require backbone.marionette
 
 #= require appleseed
-#= require_tree .
+#= require views
 
 $ ->
   # Start the Marionette application.

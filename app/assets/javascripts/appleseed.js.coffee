@@ -20,6 +20,6 @@ Appleseed.application.addInitializer (options) ->
   # Find all elements with declared views and create the corresponding
   # Marionette views.
   for el in $ '[data-appleseed-view]'
-    viewName  = $(el).data('appleseedView')
+    viewName  = ($el = $ el).data('appleseedView')
     viewClass = Appleseed.resolveNamespace("Views.#{viewName}")
-    view      = new viewClass { el: el }
+    view      = new viewClass $el

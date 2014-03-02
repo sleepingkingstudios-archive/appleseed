@@ -9,5 +9,5 @@
   = link_to '#', :class => 'close-reveal-modal' do
     %i.fi-x
   .text-right
-    = link_to I18n.t('shared.cancel'), '#', :id => 'cancel-delete-link', :class => 'button radius thin secondary'
+    = link_to I18n.t('shared.cancel'), '#', :id => 'cancel-delete-button', :class => 'button radius thin secondary'
     = link_to (defined?(submit) ? submit : render_with_icon(I18n.t 'admin.shared.modals.confirm_delete.submit')), '#', :class => 'button radius thin alert confirm-delete-button'

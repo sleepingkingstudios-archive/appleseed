@@ -8,7 +8,7 @@
     %h1= I18n.t('admin.blog.title')
   .large-8.columns
     - if @blog
-      .heading-buttons.tall{ :data => { :"appleseed-view" => "Admin.Blogs.Show" } }
+      .heading-buttons.tall{ :data => { :"appleseed-layout" => "Admin.Blogs.Show" } }
         = render :partial => 'admin/shared/modals/confirm_delete', :locals => { :title => I18n.t('admin.blog.delete.confirm.title'), :body => I18n.t('admin.blog.delete.confirm.body', :title => @blog.title), :submit => render_with_icon(I18n.t 'admin.blog.delete.submit') }
         = link_to render_with_icon(I18n.t 'admin.blog.edit.submit'), edit_admin_blog_path, :class => 'button radius thin'
         = link_to render_with_icon(I18n.t 'admin.blog.delete.submit'), '#', :id => 'open-confirm-delete-modal-link', :class => 'button radius thin alert hide', :data => { :"reveal-id" => 'confirm-delete-modal' }

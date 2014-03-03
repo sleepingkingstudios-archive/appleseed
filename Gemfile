@@ -36,7 +36,8 @@ end # group
 
 ### Inline Console ###
 group :development, :test do
-  gem 'pry', '~> 0.9.12'
+  gem 'pry',           '~> 0.9.12'
+  gem 'jasmine-rails', '~> 0.6'
 end # group
 
 ### Testing ###

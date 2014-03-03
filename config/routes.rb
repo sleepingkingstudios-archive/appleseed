@@ -33,4 +33,6 @@ Appleseed::Application.routes.draw do
   get '/about', :to => 'pages#about', :as => :about
 
   root 'pages#index'
+
+  mount JasmineRails::Engine => '/jasmine' if defined?(JasmineRails)
 end # routes

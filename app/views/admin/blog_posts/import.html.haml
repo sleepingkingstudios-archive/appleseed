@@ -14,7 +14,7 @@
           - blog_post.errors.full_messages.each do |message|
             %li= message
 
-  = text_area_tag :blog_posts_data, params.fetch(:blog_posts, {}).fetch(:data, ''), :name => 'blog_posts[data]'
+  = text_area_tag :blog_posts_data, params.fetch(:blog_posts, {}).fetch(:data, ''), :name => 'blog_posts[data]', :data => { :"appleseed-autosize" => true }
 
   .text-right
     = link_to t('shared.cancel'), admin_blog_path, :class => 'button secondary radius'

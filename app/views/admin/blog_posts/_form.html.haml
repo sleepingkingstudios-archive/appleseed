@@ -1,6 +1,6 @@
 -# app/views/admin/blog_posts/_form.html.haml
 
-= form_for [:admin, post], :builder => FoundationFormBuilder, :html => { :class => 'admin-blog-posts-form' } do |form|
+= form_for [:admin, post], :builder => FoundationFormBuilder, :html => { :class => 'admin-blog-posts-form', :data => { :"appleseed-layout" => 'Admin.BlogPosts.Form'} } do |form|
   .row
     .large-6.columns
       = form.label :title, t('blog_post.fields.title')
@@ -13,9 +13,9 @@
   = select_content_type_tag form, post
 
   = form.label :content, t('blog_post.fields.content')
-  = form.text_area :content
+  = form.text_area :content, :data => { :"appleseed-autosize" => true }
 
   .text-right
     = link_to t('shared.cancel'), post.persisted? ? admin_blog_post_path(post) :admin_blog_path, :class => 'button secondary radius'
-    = link_to render_with_icon(I18n.t 'admin.blog_posts.preview.submit'), '#', :id => 'preview-blog-post-link', :class => 'button radius hide', :data => { :path => preview_admin_blog_posts_path }
+    = link_to render_with_icon(I18n.t 'admin.blog_posts.preview.submit'), '#', :id => 'preview-blog-post-button', :class => 'button radius hide', :data => { :path => preview_admin_blog_posts_path }
     = form.submit render_without_icon(post.persisted? ? t('admin.blog_posts.edit.submit') : t('admin.blog_posts.new.submit')), :class => 'button success radius'

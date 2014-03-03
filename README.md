@@ -11,7 +11,6 @@ development, and new features will be added on a regular basis.
 The following features are planned to be added in the near future:
 
 * Tags for blog posts.
-* JavaScript views to replace per-page JS checks.
 * Features using Cucumber.
 * Proper specs for Admin::Settings.
 

@@ -1,8 +1,8 @@
-# app/assets/javascripts/layouts/admin/blogs/show.js.coffee
+# app/assets/javascripts/layouts/admin/blog_posts/show.js.coffee
 
-class Appleseed.Layouts.Admin.Blogs.Show extends Appleseed.Layouts.BaseLayout
+class Appleseed.Layouts.Admin.BlogPosts.Show extends Appleseed.Layouts.BaseLayout
   @selectors: {
-    delete_button: '.delete-button'
+    delete_link: '.delete-link'
     modal:
       sel:    '#confirm-delete-modal'
       action: '.confirm-delete-button'
@@ -12,19 +12,19 @@ class Appleseed.Layouts.Admin.Blogs.Show extends Appleseed.Layouts.BaseLayout
 
   initialize: (root, options) ->
     super(root, options)
-    
-    @_mockDeleteButton()
+
+    @_mockDeleteLink()
     @_bindModalActions()
 
   _bindModalActions: () =>
     $close = @get('modal.close')
     @get('modal.cancel').bind 'click', => $close.click()
-    @get('modal.action').bind 'click', => @get('delete_button').click()
+    @get('modal.action').bind 'click', => @get('delete_link').click()
 
-  _mockDeleteButton: () =>
-    $mock = @get('delete_button').clone()
+  _mockDeleteLink: () =>
+    $mock = @get('delete_link').clone()
     $mock.removeAttr('id').removeAttr('data-method')
     $mock.attr('href', '#')
     $mock.attr('data-reveal-id', 'confirm-delete-modal')
 
-    @get('delete_button').after($mock).hide()
+    @get('delete_link').after($mock).hide()

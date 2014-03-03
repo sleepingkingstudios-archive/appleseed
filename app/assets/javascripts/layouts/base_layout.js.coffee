@@ -4,12 +4,12 @@ class Appleseed.Layouts.BaseLayout extends Backbone.Marionette.Layout
   initialize: (options) ->
     super(options)
 
-  get: (name) ->
+  get: (name, strict = true) ->
     sel = @selectors()[name]
     throw "Undefined selector \"#{name}\"" unless sel?
 
     $elements = @$ sel
-    unless 0 < $elements.length
+    if strict && (0 == $elements.length)
       throw "No element found for selector \"#{name}\" ('#{sel}')"
 
     $elements

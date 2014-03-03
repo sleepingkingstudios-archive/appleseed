@@ -5,6 +5,7 @@
   Layouts:
     Admin:
       Blogs: {}
+      BlogPosts: {}
 
   resolveNamespace: (string) ->
     module = Appleseed
@@ -23,3 +24,6 @@ Appleseed.application.addInitializer (options) ->
     layoutName  = ($el = $ el).data('appleseedLayout')
     layoutClass = Appleseed.resolveNamespace("Layouts.#{layoutName}")
     layout      = new layoutClass { el: $el }
+
+  # Apply form and other element-specific JS enhancements.
+  $(el).autosize() for el in $ 'textarea[data-appleseed-autosize="true"]'

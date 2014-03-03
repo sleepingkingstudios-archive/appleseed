@@ -3,25 +3,24 @@
 = content_for :body_class do
   admin-blog-posts-show
 
-= render :partial => 'admin/shared/modals/confirm_delete', :locals => { :title => I18n.t('admin.blog_posts.delete.confirm.title'), :body => I18n.t('admin.blog_posts.delete.confirm.body', :title => @blog_post.title), :submit => render_with_icon(I18n.t 'admin.blog_posts.delete.submit') }
-
 %h1= I18n.t('admin.blog_posts.show.title')
 
-%p
-  %strong
-    = succeed(':') do
-      = I18n.t('shared.actions')
-  - unless @blog_post.published?
-    = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.publish'), publish_admin_blog_post_path(@blog_post), :method => :patch, :class => ' success'
+%div{ :data => { :"appleseed-layout" => 'Admin.BlogPosts.Show' } }
+  = render :partial => 'admin/shared/modals/confirm_delete', :locals => { :title => I18n.t('admin.blog_posts.delete.confirm.title'), :body => I18n.t('admin.blog_posts.delete.confirm.body', :title => @blog_post.title), :submit => render_with_icon(I18n.t 'admin.blog_posts.delete.submit') }
+  %p
+    %strong
+      = succeed(':') do
+        = I18n.t('shared.actions')
+    - unless @blog_post.published?
+      = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.publish'), publish_admin_blog_post_path(@blog_post), :method => :patch, :class => ' success'
+      &mdash;
+    = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.preview'), preview_admin_blog_post_path(@blog_post), :target => '_blank'
     &mdash;
-  = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.preview'), preview_admin_blog_post_path(@blog_post), :target => '_blank'
-  &mdash;
-  = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.edit'), edit_admin_blog_post_path(@blog_post)
-  &mdash;
-  = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.export'), admin_blog_post_path(@blog_post, :format => :json), :target => :blank
-  &mdash;
-  = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.delete'), '#', :id => 'open-confirm-delete-modal-link', :class => 'alert hide', :data => { :"reveal-id" => 'confirm-delete-modal' }
-  = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.delete'), admin_blog_post_path(@blog_post), :method => :delete, :id => 'delete-blog-post-link', :class => 'alert'
+    = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.edit'), edit_admin_blog_post_path(@blog_post)
+    &mdash;
+    = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.export'), admin_blog_post_path(@blog_post, :format => :json), :target => :blank
+    &mdash;
+    = link_to render_with_icon(I18n.t 'admin.blog_posts.actions.delete'), admin_blog_post_path(@blog_post), :method => :delete, :class => 'alert delete-link'
 
 - nav_options = { :current_post => @blog_post, :first_post => @blog_post.last_most_recent, :prev_post => @blog_post.next_most_recent, :next_post => @blog_post.prev_most_recent, :last_post => @blog_post.first_most_recent }
 = render :partial => 'admin/blog_posts/show/navigation', :locals => nav_options

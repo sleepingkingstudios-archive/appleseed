@@ -67,6 +67,10 @@ describe 'Appleseed.Layouts.BaseLayout', ->
         it 'throws an error', ->
           expect(-> instance.get 'foo').toThrow('No element found for selector "foo" (\'.foo\')')
 
+        describe 'and strict: false', ->
+          it 'does not throw an error', ->
+            expect(-> instance.get 'foo', false).not.toThrow()
+
       describe 'with an existing element', ->
         $child = null
 

@@ -14,6 +14,8 @@ class BlogPost
   belongs_to :author, :class_name => 'User', :inverse_of => :posts
   belongs_to :blog
 
+  has_many :taggings, :as => :taggable, :dependent => :destroy
+
   field :title, :type => String
 
   field :content,      :type => String

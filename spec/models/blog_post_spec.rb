@@ -177,6 +177,25 @@ RSpec.describe BlogPost do
     end # context
   end # describe
 
+  describe '#taggings' do
+    it { expect(instance).to have_reader :taggings }
+    it { expect(instance.taggings).to be == [] }
+
+    context 'with defined taggings' do
+      let!(:taggings) do
+        [*0..2].map { FactoryGirl.create :tagging, :taggable => instance }
+      end # let
+
+      it { expect(instance.taggings).to be == taggings }
+
+      describe 'destroying the blog post' do
+        it 'destroys the taggings' do
+          expect { instance.destroy }.to change(Tagging, :count).to(0)
+        end # it
+      end # describe
+    end # context
+  end # describe
+
   describe 'validation' do
     it { expect(instance).to be_valid }
 

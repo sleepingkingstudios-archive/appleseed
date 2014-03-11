@@ -1,0 +1,6 @@
+-# app/views/blog_posts/show/_tags.html.haml
+
+%p{ :style => 'margin-bottom:1rem;' }
+  = succeed(':') do
+    %strong= I18n.t('blog_post.tags')
+  = presenter.taggings_list

@@ -4,7 +4,9 @@
 
 %h2= @blog_post.title
 
-%p= I18n.t('blog_post.show.published_by', :author => @blog_post_presenter.author_name, :date => @blog_post_presenter.published_date)
+%p{ :style => 'margin-bottom:1rem;' }= I18n.t('blog_post.show.published_by', :author => @blog_post_presenter.author_name, :date => @blog_post_presenter.published_date)
+
+= render :partial => 'blog_posts/show/tags', :locals => { :blog_post => @blog_post, :presenter => @blog_post_presenter }
 
 = render :partial => 'admin/blog_posts/preview/navigation'
 

@@ -1,5 +1,6 @@
 -# app/views/admin/blog_posts/_form.html.haml
 
+- presenter = Admin::BlogPostPresenter.new(post)
 = form_for [:admin, post], :builder => FoundationFormBuilder, :html => { :class => 'admin-blog-posts-form', :data => { :"appleseed-layout" => 'Admin.BlogPosts.Form'} } do |form|
   .row
     .large-6.columns
@@ -8,6 +9,9 @@
     .large-6.columns
       = form.label :slug, t('blog_posts.fields.slug')
       = form.text_field :slug, :placeholder => post.to_slug, :value => post.slug_lock ? post.slug : ''
+
+  = form.label :taggings, t('models.taggable.tags')
+  = text_field_tag :blog_post_taggings, presenter.tagging_names.join(', '), :name => :'blog_post[taggings]'
 
   = form.label :content_type, t('blog_post.fields.content_type')
   = select_content_type_tag form, post

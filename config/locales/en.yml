@@ -164,6 +164,11 @@ en:
       unauthorized_action: '%{icon:alert} You are not authorized to perform that action.'
   home:
     breadcrumb: 'Home'
+  models:
+    taggable:
+      empty_taggings: '(none)'
+      tags: 'Tags'
+      taggings: 'Taggings'
   navigation:
     about: 'About'
     admin: 'Admin'

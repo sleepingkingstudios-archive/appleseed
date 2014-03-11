@@ -82,7 +82,7 @@ RSpec.describe Admin::BlogPostsController do
           post :create, :blog_post => attributes
         end # method perform_action
 
-        context 'with an invalid post' do
+        describe 'with an invalid post' do
           let(:attributes) { {} }
 
           it 'responds with 200 ok and renders the new template' do
@@ -96,9 +96,9 @@ RSpec.describe Admin::BlogPostsController do
               perform_action
             }.not_to change(BlogPost, :count)
           end # it
-        end # context
+        end # describe
 
-        context 'with a valid post' do
+        describe 'with a valid post' do
           let(:blog_post) { BlogPost.last }
 
           it 'redirects to the admin show post path' do
@@ -128,7 +128,7 @@ RSpec.describe Admin::BlogPostsController do
             expect(blog_post.slug_lock).to be false
           end # it
 
-          context 'with a custom slug' do
+          describe 'with a custom slug' do
             let(:slug) { 'custom-slug' }
             let(:attributes) { super().merge :slug => slug }
 
@@ -141,9 +141,9 @@ RSpec.describe Admin::BlogPostsController do
               perform_action
               expect(blog_post.slug_lock).to be true
             end # it
-          end # context
+          end # describe
 
-          context 'with an empty slug' do
+          describe 'with an empty slug' do
             let(:slug) { '' }
             let(:attributes) { super().merge :slug => slug }
 
@@ -156,8 +156,24 @@ RSpec.describe Admin::BlogPostsController do
               perform_action
               expect(blog_post.slug_lock).to be false
             end # it
-          end # context
-        end # context
+          end # describe
+
+          describe 'with tagging names' do
+            let(:taggings)      { 'foo, bar baz,  wibble   , foo' }
+            let(:tagging_names) { taggings.split(', ').map(&:strip).uniq }
+            let(:attributes)    { super().merge :taggings => taggings }
+
+            it 'creates the taggings' do
+              expect { perform_action }.to change(Tagging, :count).to(tagging_names.count)
+            end # it
+
+            it 'associates the taggings with the blog post' do
+              perform_action
+
+              expect(Set.new blog_post.taggings.map &:name).to be == Set.new(tagging_names)
+            end # it
+          end # describe
+        end # describe
       end # describe
 
       describe 'import' do
@@ -382,6 +398,42 @@ RSpec.describe Admin::BlogPostsController do
                 }.to change(blog_post, :slug_lock).to(false)
               end # it
             end # context
+          end # context
+
+          describe 'with tagging names' do
+            let(:taggings)      { 'foo, bar baz,  wibble   , foo' }
+            let(:tagging_names) { taggings.split(', ').map(&:strip).uniq }
+            let(:attributes)    { super().merge :taggings => taggings }
+
+            it 'creates the taggings' do
+              expect { perform_action }.to change(Tagging, :count).to(tagging_names.count)
+            end # it
+
+            it 'associates the taggings with the blog post' do
+              perform_action
+
+              expect(Set.new blog_post.taggings.map &:name).to be == Set.new(tagging_names)
+            end # it
+          end # describe
+
+          context 'with existing taggings' do
+            before(:each) do
+              %w(foo bar baz).each do |name|
+                blog_post.taggings.create :name => name
+              end
+            end # before each
+
+            describe 'with tagging names' do
+              let(:taggings)      { 'foo, bar baz,  wibble   , foo' }
+              let(:tagging_names) { taggings.split(', ').map(&:strip).uniq }
+              let(:attributes)    { super().merge :taggings => taggings }
+
+              it 'updates the taggings' do
+                perform_action
+
+                expect(Set.new blog_post.reload.taggings.map &:name).to be == Set.new(tagging_names)
+              end # it
+            end # describe
           end # context
         end # context
       end # describe

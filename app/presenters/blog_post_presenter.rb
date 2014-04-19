@@ -31,6 +31,14 @@ class BlogPostPresenter < Struct.new(:blog_post)
     RawContentFormatter.new(content).format
   end # method raw_content
 
+  def taggings_links
+    return I18n.t('models.taggable.empty_taggings') if taggings.blank?
+
+    taggings.map do |tagging|
+      "<a href=\"/blog/tags/#{tagging.slug}\">#{tagging.name}</a>"
+    end.join(', ').html_safe
+  end # method taggings_links
+
   def taggings_list
     taggings.blank? ?
       I18n.t('models.taggable.empty_taggings') :

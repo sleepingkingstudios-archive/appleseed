@@ -197,6 +197,26 @@ RSpec.describe BlogPostPresenter do
     end # context
   end # describe
 
+  describe '#taggings_links' do
+    it { expect(instance).to respond_to(:taggings_links) }
+    it { expect(instance.taggings_links).to be == '(none)' }
+
+    context 'with defined taggings' do
+      def tagging_to_link tagging
+        "<a href=\"/blog/tags/#{tagging.slug}\">#{tagging.name}</a>"
+      end
+
+      let(:tagging_names) { ['Foo', 'Bar', 'Baz', 'Wibble Wobble'] }
+      let!(:taggings) do
+        tagging_names.map { |name| blog_post.taggings.create :name => name }
+      end # let
+      let(:expected)  { taggings.map { |tagging| tagging_to_link(tagging) }.join ', ' }
+      let(:blog_post) { super().tap &:save! }
+
+      it { expect(instance.taggings_links).to be == expected }
+    end # context
+  end # describe
+
   describe '#taggings_list' do
     it { expect(instance).to respond_to(:taggings_list) }
     it { expect(instance.taggings_list).to be == '(none)' }

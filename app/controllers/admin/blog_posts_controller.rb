@@ -7,7 +7,7 @@ class Admin::BlogPostsController < Admin::AdminController
 
   # POST /admin/blog/posts
   def create
-    if @blog_post.save
+    if @blog_post.save && update_taggings
       flash[:notice] = I18n.t('admin.blog_posts.new.success')
       redirect_to admin_blog_post_path(@blog_post)
     else
@@ -78,6 +78,11 @@ class Admin::BlogPostsController < Admin::AdminController
   def preview
     params[:id] ? load_resource : build_resource
 
+    # Stub taggings.
+    @blog_post.taggings = taggings_params.map do |tagging_name|
+      Tagging.new :name => tagging_name
+    end
+
     @blog_post_presenter = Admin::BlogPostPresenter.new @blog_post
     breadcrumbs_for :preview
   end # action preview
@@ -108,7 +113,7 @@ class Admin::BlogPostsController < Admin::AdminController
       post_params[:slug] = BlogPost.value_to_slug(post_params.fetch('title', @blog_post.title))
     end # if
 
-    if @blog_post.update_attributes post_params
+    if @blog_post.update_attributes(post_params) && update_taggings
       flash[:notice] = I18n.t('admin.blog_posts.edit.success')
       redirect_to admin_blog_post_path(@blog_post)
     else
@@ -190,4 +195,32 @@ class Admin::BlogPostsController < Admin::AdminController
   def load_resources
     @blog_posts = @blog ? @blog.posts : []
   end # method load_resources
+
+  def taggings_params
+    params.fetch(:blog_post, {}).fetch(:taggings, '').split(', ').map(&:strip).uniq
+  end # method taggings_params
+
+  def update_taggings
+    names = Set.new(taggings_params)
+
+    # Check for removed taggings.
+    @blog_post.taggings.each do |tagging|
+      if names.include?(tagging.name)
+        # If the tagging exists and is in the set of names, remove the name so
+        # that we do not create a duplicate later.
+        names.delete tagging.name
+      else
+        # If the tagging exists and is not in the set of names, destroy the
+        # tagging (and remove it from the taggings cached on the model object).
+        @blog_post.taggings.delete tagging
+        tagging.destroy
+      end # if-else
+    end # each
+
+    names.each do |name|
+      @blog_post.taggings.create :name => name
+    end # each
+
+    true
+  end # method update_taggings
 end # class

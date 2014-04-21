@@ -34,6 +34,10 @@
   = @blog_post.slug
   %br
   = succeed(':') do
+    %strong= I18n.t('models.taggable.tags')
+  = @blog_post_presenter.taggings_list
+  %br
+  = succeed(':') do
     %strong= I18n.t('blog_post.fields.content_type')
   = @blog_post_presenter.localized_content_type
   %br

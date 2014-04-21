@@ -4,7 +4,7 @@ class BlogPostPresenter < Struct.new(:blog_post)
   include ActionView::Helpers::TagHelper
 
   delegate :author, :blog, :content, :content_type, :published_at, :published?,
-    :title, :to => :blog_post
+    :taggings, :title, :to => :blog_post
 
   def author_name
     author.email
@@ -30,6 +30,24 @@ class BlogPostPresenter < Struct.new(:blog_post)
   def raw_content
     RawContentFormatter.new(content).format
   end # method raw_content
+
+  def taggings_links
+    return I18n.t('models.taggable.empty_taggings') if taggings.blank?
+
+    taggings.map do |tagging|
+      "<a href=\"/blog/tags/#{tagging.slug}\">#{tagging.name}</a>"
+    end.join(', ').html_safe
+  end # method taggings_links
+
+  def taggings_list
+    taggings.blank? ?
+      I18n.t('models.taggable.empty_taggings') :
+      tagging_names.join(', ') + '.'
+  end # method taggings_list
+
+  def tagging_names
+    taggings.map(&:name).sort
+  end # method tagging_names
 
   class ContentFormatter < Struct.new(:content)
     def format

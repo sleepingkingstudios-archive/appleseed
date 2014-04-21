@@ -1,0 +1,13 @@
+-# app/views/blog_tags/show.html.haml
+
+%h1= @blog.title
+
+%p
+  Showing posts tagged with
+  = surround('&ldquo;'.html_safe, '&rdquo;.'.html_safe) do
+    = @taggings.first.name
+
+- @blog_posts.each do |blog_post|
+  - blog_post_presenter = BlogPostPresenter.new blog_post
+
+  = render :partial => 'preview', :locals => { :blog_post => blog_post, :blog_post_presenter => blog_post_presenter }

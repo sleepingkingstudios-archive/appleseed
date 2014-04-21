@@ -42,6 +42,21 @@ RSpec.describe BlogPostPresenter do
     it { expect(instance.published?).to be == blog_post.published? }
   end # describe
 
+  describe '#taggings' do
+    it { expect(instance).to have_reader(:taggings) }
+    it { expect(instance.taggings).to be == blog_post.taggings }
+
+    context 'with defined taggings' do
+      let(:tagging_names) { ['Foo', 'Bar', 'Baz', 'Wibble Wobble'] }
+      let!(:taggings) do
+        tagging_names.map { |name| blog_post.taggings.create :name => name }
+      end # let
+      let(:blog_post) { super().tap &:save! }
+
+      it { expect(instance.taggings).to be == taggings }
+    end # context
+  end # describe
+
   describe '#title' do
     it { expect(instance).to have_reader(:title) }
     it { expect(instance.title).to be == blog_post.title }
@@ -179,6 +194,56 @@ RSpec.describe BlogPostPresenter do
       let(:formatted) { CGI::escapeHTML(content).gsub(/(\r\n|\n)/, '<br />') }
 
       it { expect(instance.raw_content).to be == formatted }
+    end # context
+  end # describe
+
+  describe '#taggings_links' do
+    it { expect(instance).to respond_to(:taggings_links) }
+    it { expect(instance.taggings_links).to be == '(none)' }
+
+    context 'with defined taggings' do
+      def tagging_to_link tagging
+        "<a href=\"/blog/tags/#{tagging.slug}\">#{tagging.name}</a>"
+      end
+
+      let(:tagging_names) { ['Foo', 'Bar', 'Baz', 'Wibble Wobble'] }
+      let!(:taggings) do
+        tagging_names.map { |name| blog_post.taggings.create :name => name }
+      end # let
+      let(:expected)  { taggings.map { |tagging| tagging_to_link(tagging) }.join ', ' }
+      let(:blog_post) { super().tap &:save! }
+
+      it { expect(instance.taggings_links).to be == expected }
+    end # context
+  end # describe
+
+  describe '#taggings_list' do
+    it { expect(instance).to respond_to(:taggings_list) }
+    it { expect(instance.taggings_list).to be == '(none)' }
+
+    context 'with defined taggings' do
+      let(:tagging_names) { ['Foo', 'Bar', 'Baz', 'Wibble Wobble'] }
+      let!(:taggings) do
+        tagging_names.map { |name| blog_post.taggings.create :name => name }
+      end # let
+      let(:blog_post) { super().tap &:save! }
+
+      it { expect(instance.taggings_list).to be == "#{tagging_names.sort.join(', ')}." }
+    end # context
+  end # describe
+
+  describe '#tagging_names' do
+    it { expect(instance).to respond_to(:tagging_names) }
+    it { expect(instance.tagging_names).to be == [] }
+
+    context 'with defined taggings' do
+      let(:tagging_names) { ['Foo', 'Bar', 'Baz', 'Wibble Wobble'] }
+      let!(:taggings) do
+        tagging_names.map { |name| blog_post.taggings.create :name => name }
+      end # let
+      let(:blog_post) { super().tap &:save! }
+
+      it { expect(instance.tagging_names).to be == tagging_names.sort }
     end # context
   end # describe
 end # describe

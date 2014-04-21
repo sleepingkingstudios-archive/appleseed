@@ -27,6 +27,8 @@ Appleseed::Application.routes.draw do
 
   resource :blog, :only => %i(show) do
     resources :posts, :controller => 'blog_posts', :only => %i(show)
+
+    resources :tags,  :controller => 'blog_tags',  :only => %i(show)
   end # resource
 
   # Static page routes.

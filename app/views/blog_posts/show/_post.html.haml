@@ -1,8 +1,12 @@
 -# app/views/blog_posts/show/_post.html.haml
 
+- presenter = BlogPostPresenter.new(blog_post)
+
 %h2= blog_post.title
 
-%p= I18n.t('blog_post.show.published_by', :author => blog_post_presenter.author_name, :date => blog_post_presenter.published_date)
+%p{ :style => 'margin-bottom:1rem;' }= I18n.t('blog_post.show.published_by', :author => blog_post_presenter.author_name, :date => blog_post_presenter.published_date)
+
+= render :partial => 'blog_posts/show/tags', :locals => { :blog_post => blog_post, :presenter => presenter }
 
 - nav_options = { :current_post => blog_post, :first_post => blog_post.first_published, :prev_post => blog_post.prev_published, :next_post => blog_post.next_published, :last_post => blog_post.last_published }
 = render :partial => 'blog_posts/show/navigation', :locals => nav_options

@@ -1,0 +1,9 @@
+-# app/views/blog_posts/_preview.html.haml
+
+- presenter = BlogPostPresenter.new(blog_post)
+
+%h2= link_to blog_post.title, blog_post_path(blog_post.slug)
+
+%p{ :style => 'margin-bottom:1rem;' }= I18n.t('blog_post.show.published_by', :author => blog_post_presenter.author_name, :date => blog_post_presenter.published_date)
+
+= render :partial => 'blog_posts/show/tags', :locals => { :blog_post => blog_post, :presenter => presenter }

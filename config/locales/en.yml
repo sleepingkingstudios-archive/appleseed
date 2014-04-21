@@ -158,12 +158,19 @@ en:
       next:  '%{icon:arrow-right} Next'
       prev:  '%{icon:arrow-left} Previous'
       published_by: 'Published %{date} by %{author}.'
+  blog_tags:
+    breadcrumb: 'Tags'
   devise:
     failure:
       registration_closed: '%{icon:alert} User registration is currently closed.'
       unauthorized_action: '%{icon:alert} You are not authorized to perform that action.'
   home:
     breadcrumb: 'Home'
+  models:
+    taggable:
+      empty_taggings: '(none)'
+      tags: 'Tags'
+      taggings: 'Taggings'
   navigation:
     about: 'About'
     admin: 'Admin'

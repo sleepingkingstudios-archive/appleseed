@@ -1,0 +1,40 @@
+-# app/views/pages/about_me.html.haml
+
+%h1 About The Author
+
+%p
+  With apologies to Sir J.M. Barrie and J. Michael Straczynski...
+
+%h2 Who Are You?
+%p
+  My name is Rob Smith, I am a mechanical engineer by training and a programmer by trade. Not a rocket scientist (unless you count Kerbal Space Program), but I do know a little rocket science. I currently work as a Ruby Developer for Persado, a startup in the content engineering space located in New York City. I also
+  = link_to 'work on a few projects', projects_path
+  in my spare time.
+
+%h2 What Do You Want?
+%p
+  To put smiles on people's faces. To build interesting, useful, and helpful things. To tell stories that entertain, enlighten, and explore the intersections and boundaries of narrative and play. Or, in the words of Sharon Apple:
+
+  %blockquote
+    It's what you want to give to each person. Your feelings, the feelings you believe they should have. To give to the one you love her greatest dreams. To give her the ultimate emotion - the feeling of total life, a vision of all the world's colours at once. That is the reason for my existence.
+
+%h3 Where Do You Come From?
+%p
+  Born in San Francisco, raised in Buffalo, and living in New York City (with a stopover in Singapore along the way). My studies in mechanical engineering are a major influence on me, particularly in the design of complex systems. I've worked in software, game and web development since leaving university using a number of languages, frameworks and systems.
+
+%p
+  I'm also a gamer, both tabletop and computer/console. I've contributed to two published gaming supplements by Blue Devil Games. On the digital side, influential titles for me include
+  = succeed ',' do
+    %em Escape Velocity
+  = succeed ',' do
+    %em Majora's Mask
+  and the
+  %em Final Fantasy
+  franchise.
+
+%h3 Where Are You Going?
+%p
+  Second star to the right, and straight on &lsquo;till morning.
+
+%p
+  = link_to render_with_icon('%{icon:arrow-left} Back To About Sleeping King Studios'), about_path

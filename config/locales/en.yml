@@ -181,6 +181,8 @@ en:
     about:
       breadcrumb: 'About'
       legal: 'Legal'
+      me:
+        breadcrumb: 'Me'
       title: 'About This Site'
     projects:
       breadcrumb: 'Projects'

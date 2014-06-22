@@ -1,6 +1,19 @@
 -# app/views/pages/about.html.haml
 
-%h1= I18n.t('pages.about.title')
+%h1 About Sleeping King Studios
+
+%p
+  My name is Rob Smith, I am a mechanical engineer by training and a programmer by trade. Not a rocket scientist (unless you count Kerbal Space Program), but I do know a little rocket science. I currently work as a Ruby Developer for Persado, a startup in the content engineering space located in New York City. I also
+  = link_to 'work on a few projects', projects_path
+  in my spare time.
+
+%p
+  = link_to render_with_icon('%{icon:arrow-right} More About The Author'), about_me_path
+
+%p
+  You may be thinking that one designer/developer on a laptop does not a &ldquo;studios&rdquo; make. You, sir or ma'am, are absolutely correct. But I like the name, so I'm keeping it.
+
+%h2= I18n.t('pages.about.title')
 
 %p
   Sleeping King Studios is being developed using a custom-built Content Management System named

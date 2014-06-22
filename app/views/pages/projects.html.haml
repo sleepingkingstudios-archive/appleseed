@@ -1,0 +1,40 @@
+-# app/views/pages/projects.html.haml
+
+%h1 Projects
+
+%p The following projects are currently under development and/or in active use.
+
+%h2 Ruby Libraries
+
+%div
+  %h3 RSpec::SleepingKingStudios
+
+  %ul
+    %li
+      %strong Homepage:
+      = link_to 'GitHub', 'https://github.com/sleepingkingstudios/rspec-sleeping_king_studios'
+    %li
+      %strong Documentation:
+      = link_to 'RubyDoc.info', 'http://rubydoc.info/github/sleepingkingstudios/rspec-sleeping_king_studios'
+    %li
+      %strong Rubygems:
+      = link_to 'https://rubygems.org/gems/rspec-sleeping_king_studios', 'https://rubygems.org/gems/rspec-sleeping_king_studios'
+
+
+  %p A collection of matchers and extensions to ease TDD/BDD using RSpec. Extends built-in matchers with new functionality, such as support for Ruby 2.0+ keyword arguments, and adds new matchers for testing boolean-ness, object reader/writer properties, object constructor arguments, ActiveModel validations, and more.
+
+%div
+  %h3 Mongoid::SleepingKingStudios
+
+  %ul
+    %li
+      %strong Homepage:
+      = link_to 'GitHub', 'https://github.com/sleepingkingstudios/mongoid-sleeping_king_studios'
+    %li
+      %strong Documentation:
+      = link_to 'RubyDoc.info', 'http://rubydoc.info/github/sleepingkingstudios/mongoid-sleeping_king_studios'
+    %li
+      %strong Rubygems:
+      = link_to 'https://rubygems.org/gems/mongoid-sleeping_king_studios', 'https://rubygems.org/gems/mongoid-sleeping_king_studios'
+
+  %p A collection of concerns and extensions to add functionality to Mongoid documents and collections. Includes modular concerns for tree-based document lookup including ancestry caching, persistent configurable ordering of documents (e.g. to support next/previous article functionality), and human-readable text slugs from user-specified fields.

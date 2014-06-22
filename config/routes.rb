@@ -32,7 +32,8 @@ Appleseed::Application.routes.draw do
   end # resource
 
   # Static page routes.
-  get '/about', :to => 'pages#about', :as => :about
+  get '/about',    :to => 'pages#about',    :as => :about
+  get '/projects', :to => 'pages#projects', :as => :projects
 
   root 'pages#index'
 

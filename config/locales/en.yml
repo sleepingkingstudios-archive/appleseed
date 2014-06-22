@@ -172,15 +172,18 @@ en:
       tags: 'Tags'
       taggings: 'Taggings'
   navigation:
-    about: 'About'
-    admin: 'Admin'
-    blog:  'Blog'
-    home:  'Home'
+    about:    'About'
+    admin:    'Admin'
+    blog:     'Blog'
+    home:     'Home'
+    projects: 'Projects'
   pages:
     about:
       breadcrumb: 'About'
       legal: 'Legal'
       title: 'About This Site'
+    projects:
+      breadcrumb: 'Projects'
   shared:
     actions: 'Actions'
     cancel: 'Cancel'

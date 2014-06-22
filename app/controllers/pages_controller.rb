@@ -10,4 +10,8 @@ class PagesController < ApplicationController
   def index
     @breadcrumbs = nil
   end # action index
+
+  def projects
+    @breadcrumbs << [I18n.t('pages.projects.breadcrumb')]
+  end # action projects
 end # controller

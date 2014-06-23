@@ -51,6 +51,29 @@ RSpec.describe 'routes for static pages' do
     end # describe
   end # describe
 
+  describe 'GET /about/me' do
+    let(:action) { 'about_me' }
+    let(:path)   { '/about/me' }
+
+    it 'routes to about_me' do
+      expect(get path).to route_to({
+        :controller => controller,
+        :action     => action
+      }) # end expect
+    end # it
+
+    describe 'about_me_path' do
+      let(:path) { about_me_path }
+
+      it 'routes to about_me' do
+        expect(get path).to route_to({
+          :controller => controller,
+          :action     => action
+        }) # end expect
+      end # it
+    end # describe
+  end # describe
+
   describe 'GET /projects' do
     let(:action) { 'projects' }
     let(:path)   { '/projects' }

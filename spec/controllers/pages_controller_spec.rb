@@ -19,6 +19,14 @@ RSpec.describe PagesController do
     end # it
   end # describe
 
+  describe '#about_me' do
+    it 'responds with 200 ok and renders the about_me template' do
+      get :about_me
+      expect(response.status).to be == 200
+      expect(response).to render_template 'about_me'
+    end # describe
+  end
+
   describe '#projects' do
     it 'responds with 200 ok and renders the projects template' do
       get :projects

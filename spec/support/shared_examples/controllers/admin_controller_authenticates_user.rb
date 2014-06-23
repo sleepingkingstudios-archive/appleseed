@@ -10,7 +10,7 @@ module Appleseed
 
         def expect_render_for_action action, template = nil
           template ||= action
-          describe action do
+          describe action.to_s, :type => :controller do
             let(:params) { defined?(super) ? super() : {} }
 
             it "responds with 200 ok and renders the #{template} template" do
@@ -22,7 +22,7 @@ module Appleseed
         end # class method authenticate_user_for_action
 
         def expect_redirect_for_action action, method = :get
-          describe action do
+          describe action.to_s, :type => :controller do
             let(:params) { defined?(super) ? super() : {} }
 
             it 'redirects to root' do

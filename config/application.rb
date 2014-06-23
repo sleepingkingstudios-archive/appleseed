@@ -32,5 +32,7 @@ module Appleseed
     config.assets.precompile << 'foundation-icons.css'
     config.assets.precompile << 'webfonts.scss'
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
+
+    config.i18n.enforce_available_locales = true
   end
 end
